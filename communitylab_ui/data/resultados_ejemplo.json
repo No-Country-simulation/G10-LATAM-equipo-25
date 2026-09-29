@@ -1,0 +1,316 @@
+{
+  "_nota": "ARCHIVO DE EJEMPLO (mock). No lo genera el motor todavia. Define la estructura exacta que el backend debera producir. Si el backend cambia un nombre de campo, debe cambiarse aqui primero y avisar al equipo de UI.",
+  "_version_contrato": "1.0",
+  "origen_comunidad": "Discord_Grupo_ONE_G10",
+  "periodo_referencia": "Semana_04",
+  "procesado_en": "2026-09-28T10:15:00Z",
+  "resumen_comunidad": {
+    "total_interacciones_procesadas": 128,
+    "total_descartadas": 41,
+    "sentimiento_predominante": "positivo",
+    "distribucion_sentimiento": {
+      "muy_positivo": 18,
+      "positivo": 47,
+      "neutro": 39,
+      "negativo": 24
+    },
+    "temas_principales": [
+      {
+        "tema": "LangGraph",
+        "menciones": 31
+      },
+      {
+        "tema": "Autenticacion OCI",
+        "menciones": 22
+      },
+      {
+        "tema": "Variables de entorno",
+        "menciones": 17
+      },
+      {
+        "tema": "Empleabilidad",
+        "menciones": 12
+      },
+      {
+        "tema": "Contenido del curso",
+        "menciones": 9
+      }
+    ],
+    "miembros_que_requieren_apoyo": 3
+  },
+  "dudas_recurrentes_detectadas": [
+    {
+      "grupo_id": "grp_01",
+      "tema": "Nodos condicionales y reintentos en LangGraph",
+      "cantidad_preguntas": 7,
+      "autores_distintos": 6,
+      "canales": [
+        "#dudas-langgraph",
+        "#general"
+      ],
+      "mensajes_origen": [
+        "msg_0012",
+        "msg_0031",
+        "msg_0044",
+        "msg_0058",
+        "msg_0077",
+        "msg_0091",
+        "msg_0103"
+      ],
+      "score_relevancia": 0.94,
+      "es_recurrente": true
+    },
+    {
+      "grupo_id": "grp_02",
+      "tema": "Error 401 al autenticar contra OCI Object Storage",
+      "cantidad_preguntas": 5,
+      "autores_distintos": 5,
+      "canales": [
+        "#dudas-oci"
+      ],
+      "mensajes_origen": [
+        "msg_0019",
+        "msg_0037",
+        "msg_0062",
+        "msg_0084",
+        "msg_0110"
+      ],
+      "score_relevancia": 0.88,
+      "es_recurrente": true
+    },
+    {
+      "grupo_id": "grp_03",
+      "tema": "Como cargar variables de entorno sin subir el .env al repo",
+      "cantidad_preguntas": 4,
+      "autores_distintos": 4,
+      "canales": [
+        "#general",
+        "#dudas-python"
+      ],
+      "mensajes_origen": [
+        "msg_0008",
+        "msg_0055",
+        "msg_0071",
+        "msg_0098"
+      ],
+      "score_relevancia": 0.81,
+      "es_recurrente": true
+    },
+    {
+      "grupo_id": "grp_04",
+      "tema": "Instalacion de Streamlit en Windows",
+      "cantidad_preguntas": 1,
+      "autores_distintos": 1,
+      "canales": [
+        "#dudas-python"
+      ],
+      "mensajes_origen": [
+        "msg_0066"
+      ],
+      "score_relevancia": 0.22,
+      "es_recurrente": false
+    }
+  ],
+  "activos_distribucion_generados": [
+    {
+      "activo_id": "act_001",
+      "tipo_activo": "tip_faq",
+      "titulo": "Tip de la semana: como hacer que un nodo de LangGraph reintente cuando falla",
+      "contenido": "Muchos de ustedes preguntaron esta semana por que su grafo se detiene cuando el modelo devuelve un JSON invalido. La respuesta corta: un nodo que falla no reintenta solo, hay que decirselo.\n\nEn LangGraph se resuelve con una arista condicional que evalua el resultado del nodo y decide si continua o vuelve a entrar. El patron es: el nodo escribe en el estado si tuvo exito, y la funcion de ruteo lee ese campo para mandar el flujo hacia adelante o de regreso.\n\nUna recomendacion practica: pon un contador de intentos en el estado y corta a los 3. Un ciclo sin limite es la forma mas rapida de agotar tu cuota de API.",
+      "canal_sugerido": "Newsletter semanal / Canal #tips",
+      "grupo_origen": "grp_01",
+      "mensajes_origen": [
+        "msg_0012",
+        "msg_0031"
+      ],
+      "score_relevancia": 0.94,
+      "estado_curaduria": "pendiente"
+    },
+    {
+      "activo_id": "act_002",
+      "tipo_activo": "tip_faq",
+      "titulo": "FAQ: 'Me da error 401 al subir archivos a OCI Object Storage'",
+      "contenido": "Es la duda mas repetida del canal #dudas-oci esta semana. En casi todos los casos el problema no es el codigo, es la configuracion.\n\nRevisa en este orden: que el archivo de configuracion apunte al perfil correcto, que la huella digital de la llave coincida con la que registraste en la consola, que la llave privada este en la ruta que declaraste, y que tu usuario tenga una politica que le permita gestionar objetos en ese compartimento.\n\nSi los cuatro puntos estan bien y sigue fallando, casi siempre es que la region del cliente no coincide con la region del bucket.",
+      "canal_sugerido": "Documentacion / Canal #dudas-oci fijado",
+      "grupo_origen": "grp_02",
+      "mensajes_origen": [
+        "msg_0019"
+      ],
+      "score_relevancia": 0.88,
+      "estado_curaduria": "pendiente"
+    },
+    {
+      "activo_id": "act_003",
+      "tipo_activo": "tip_faq",
+      "titulo": "Tip: separa tus secretos del codigo desde el primer commit",
+      "contenido": "Cuatro personas preguntaron esta semana como manejar sus claves de API sin subirlas al repositorio.\n\nLa receta minima son tres archivos. Un .env con los valores reales, que nunca se sube. Una linea en .gitignore que lo excluya. Y un .env.example con los nombres de las variables pero sin valores, que si se sube y le sirve a cualquiera que clone el proyecto para saber que necesita configurar.\n\nSi ya subiste una clave por error, cambiarla es obligatorio: borrarla del repositorio no la borra del historial.",
+      "canal_sugerido": "Newsletter semanal / Canal #tips",
+      "grupo_origen": "grp_03",
+      "mensajes_origen": [
+        "msg_0055"
+      ],
+      "score_relevancia": 0.81,
+      "estado_curaduria": "pendiente"
+    },
+    {
+      "activo_id": "act_004",
+      "tipo_activo": "post_linkedin",
+      "titulo": "Historia de exito: Mariana consiguio su primer puesto como desarrolladora",
+      "contenido": "Hay semanas en las que la comunidad nos recuerda por que hacemos esto.\n\nMariana llego al programa sin experiencia previa en desarrollo. Esta semana nos conto que fue seleccionada para su primer puesto como desarrolladora backend, y que el proyecto que presento en la entrevista fue el que construyo durante el challenge.\n\nNo fue suerte. Fueron meses de aparecer, preguntar en el canal a las once de la noche y entregar aunque no estuviera perfecto.\n\nFelicidades, Mariana. La comunidad te acompana.\n\n#OracleNextEducation #Alura #PrimerEmpleo #Tecnologia",
+      "canal_sugerido": "LinkedIn",
+      "grupo_origen": null,
+      "mensajes_origen": [
+        "msg_0042"
+      ],
+      "score_relevancia": 0.97,
+      "estado_curaduria": "pendiente"
+    },
+    {
+      "activo_id": "act_005",
+      "tipo_activo": "destacado_newsletter",
+      "titulo": "Lo mejor de la comunidad - Semana 4",
+      "contenido": "Esta semana la comunidad proceso 128 interacciones y el animo general fue positivo.\n\nLo que mas se pregunto: nodos condicionales en LangGraph, autenticacion contra OCI y manejo de variables de entorno. Los tres ya tienen tip publicado.\n\nLo que mas se celebro: Mariana consiguio su primer puesto como desarrolladora, y tres personas mas terminaron el challenge de backend.\n\nLo que estamos vigilando: detectamos tres miembros con senales de bloqueo prolongado. El equipo de mentoria ya fue notificado.",
+      "canal_sugerido": "Newsletter semanal",
+      "grupo_origen": null,
+      "mensajes_origen": [
+        "msg_0042",
+        "msg_0012",
+        "msg_0019"
+      ],
+      "score_relevancia": 0.79,
+      "estado_curaduria": "pendiente"
+    }
+  ],
+  "interacciones_muestra": [
+    {
+      "id": "msg_0012",
+      "timestamp": "2026-09-22T23:14:00Z",
+      "autor": "Estudiante_A",
+      "autor_rol": "estudiante",
+      "canal": "#dudas-langgraph",
+      "texto": "Alguien sabe como hacer que un nodo reintente si el modelo devuelve algo que no es JSON? Se me cae todo el grafo",
+      "responde_a": null,
+      "reacciones": 4,
+      "sentimiento_detectado": "neutro",
+      "tema_detectado": "LangGraph",
+      "tipo_detectado": "pregunta_tecnica",
+      "score_relevancia": 0.76,
+      "decision": "agrupado_en_grp_01"
+    },
+    {
+      "id": "msg_0031",
+      "timestamp": "2026-09-23T09:02:00Z",
+      "autor": "Estudiante_B",
+      "autor_rol": "estudiante",
+      "canal": "#dudas-langgraph",
+      "texto": "buenas, como configuran los reintentos en langgraph? el mio se queda pegado cuando falla la llamada",
+      "responde_a": null,
+      "reacciones": 2,
+      "sentimiento_detectado": "neutro",
+      "tema_detectado": "LangGraph",
+      "tipo_detectado": "pregunta_tecnica",
+      "score_relevancia": 0.74,
+      "decision": "agrupado_en_grp_01"
+    },
+    {
+      "id": "msg_0042",
+      "timestamp": "2026-09-23T18:40:00Z",
+      "autor": "Estudiante_C",
+      "autor_rol": "estudiante",
+      "canal": "#logros-y-empleos",
+      "texto": "Comunidad!! quede seleccionada para el puesto de desarrolladora backend. El proyecto del challenge fue lo que ensene en la entrevista. Gracias a todos los que me respondieron dudas a media noche",
+      "responde_a": null,
+      "reacciones": 47,
+      "sentimiento_detectado": "muy_positivo",
+      "tema_detectado": "Empleabilidad",
+      "tipo_detectado": "testimonio",
+      "score_relevancia": 0.97,
+      "decision": "genero_act_004"
+    },
+    {
+      "id": "msg_0019",
+      "timestamp": "2026-09-22T11:20:00Z",
+      "autor": "Estudiante_D",
+      "autor_rol": "estudiante",
+      "canal": "#dudas-oci",
+      "texto": "me sale 401 cuando intento subir el archivo al bucket, ya revise las llaves como 5 veces",
+      "responde_a": null,
+      "reacciones": 6,
+      "sentimiento_detectado": "negativo",
+      "tema_detectado": "Autenticacion OCI",
+      "tipo_detectado": "pregunta_tecnica",
+      "score_relevancia": 0.82,
+      "decision": "agrupado_en_grp_02"
+    },
+    {
+      "id": "msg_0055",
+      "timestamp": "2026-09-24T14:05:00Z",
+      "autor": "Estudiante_E",
+      "autor_rol": "estudiante",
+      "canal": "#general",
+      "texto": "pregunta tonta, donde guardan las api keys? las tengo escritas en el codigo y me dijeron que esta mal",
+      "responde_a": null,
+      "reacciones": 9,
+      "sentimiento_detectado": "neutro",
+      "tema_detectado": "Variables de entorno",
+      "tipo_detectado": "pregunta_tecnica",
+      "score_relevancia": 0.71,
+      "decision": "agrupado_en_grp_03"
+    },
+    {
+      "id": "msg_0066",
+      "timestamp": "2026-09-24T20:11:00Z",
+      "autor": "Estudiante_F",
+      "autor_rol": "estudiante",
+      "canal": "#dudas-python",
+      "texto": "a alguien mas le tarda muchisimo instalar streamlit en windows?",
+      "responde_a": null,
+      "reacciones": 1,
+      "sentimiento_detectado": "neutro",
+      "tema_detectado": "Herramientas",
+      "tipo_detectado": "pregunta_tecnica",
+      "score_relevancia": 0.22,
+      "decision": "no_recurrente_sin_activo"
+    },
+    {
+      "id": "msg_0079",
+      "timestamp": "2026-09-25T08:30:00Z",
+      "autor": "Estudiante_G",
+      "autor_rol": "estudiante",
+      "canal": "#general",
+      "texto": "buenos dias a todos :)",
+      "responde_a": null,
+      "reacciones": 3,
+      "sentimiento_detectado": "positivo",
+      "tema_detectado": "Ninguno",
+      "tipo_detectado": "charla_casual",
+      "score_relevancia": 0.03,
+      "decision": "descartado_sin_valor"
+    },
+    {
+      "id": "msg_0088",
+      "timestamp": "2026-09-25T22:47:00Z",
+      "autor": "Estudiante_H",
+      "autor_rol": "estudiante",
+      "canal": "#general",
+      "texto": "llevo tres dias atorado en el mismo error y ya no se ni que buscar, siento que todos avanzan menos yo",
+      "responde_a": null,
+      "reacciones": 12,
+      "sentimiento_detectado": "negativo",
+      "tema_detectado": "Bloqueo",
+      "tipo_detectado": "frustracion",
+      "score_relevancia": 0.85,
+      "decision": "alerta_apoyo_miembro"
+    }
+  ],
+  "almacenamiento_oci": {
+    "bucket": "communitylab-activos",
+    "namespace": "axxxxxxxxxxxx",
+    "region": "us-ashburn-1",
+    "ruta_objeto": "Discord_Grupo_ONE_G10/Semana_04/activos_20260928_101500.json",
+    "url_objeto": "https://objectstorage.us-ashburn-1.oraclecloud.com/n/axxxxxxxxxxxx/b/communitylab-activos/o/Discord_Grupo_ONE_G10%2FSemana_04%2Factivos_20260928_101500.json",
+    "tamano_bytes": 8432,
+    "status": "simulado",
+    "guardado_en": "2026-09-28T10:15:03Z"
+  }
+}

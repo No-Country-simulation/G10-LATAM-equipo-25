@@ -1,0 +1,23 @@
+# Secretos: NUNCA subir
+.env
+.env.local
+*.pem
+~/.oci/
+oci_api_key*.pem
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+*.egg-info/
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Sistema
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

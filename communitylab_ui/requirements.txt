@@ -1,0 +1,9 @@
+streamlit==1.40.2
+python-dotenv==1.0.1
+
+# Sprint 2 (descomentar cuando toque)
+# oci==2.140.0
+# fastapi==0.115.6
+# uvicorn==0.34.0
+# langchain==0.3.14
+# google-generativeai==0.8.3
