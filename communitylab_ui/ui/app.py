@@ -1,6 +1,6 @@
 """
 CommunityLab - Panel de curaduria
-Hackathon ONE G10
+Hackathon ONE G10 - Equipo 25
 
 QUE ES ESTO
 -----------
@@ -14,6 +14,12 @@ demostrar toda la interfaz antes de que el motor exista.
 
 Cuando el backend este listo, solo cambia la funcion cargar_resultados().
 Nada mas del archivo se toca.
+
+DONDE ESTA CADA COSA
+--------------------
+  ui/app.py         <- LOGICA: cargar datos, estado, aprobar/rechazar, filtros
+  ui/mui_blocks.py  <- DIBUJO con Material UI (streamlit-mui-elements)
+  ui/theme.py       <- Colores y CSS de los widgets nativos de Streamlit
 
 COMO EJECUTARLO
 ---------------
@@ -30,20 +36,10 @@ import streamlit as st
 RAIZ = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(RAIZ))
 
+from ui import theme as T          # noqa: E402
+from ui import mui_blocks as B     # noqa: E402
+
 ARCHIVO_MOCK = RAIZ / "data" / "resultados_ejemplo.json"
-
-ETIQUETAS_ACTIVO = {
-    "tip_faq": "Tip / FAQ",
-    "post_linkedin": "Post LinkedIn",
-    "destacado_newsletter": "Newsletter",
-}
-
-COLOR_SENTIMIENTO = {
-    "muy_positivo": "#1a7f37",
-    "positivo": "#2da44e",
-    "neutro": "#6e7781",
-    "negativo": "#cf222e",
-}
 
 
 # ---------------------------------------------------------------------------
@@ -55,7 +51,7 @@ def cargar_resultados() -> dict:
     Devuelve los resultados del motor.
 
     HOY: lee el archivo de ejemplo.
-    SPRINT 2: UNION BACK
+    SPRINT 2: sera algo como
         import requests
         return requests.post(URL_BACKEND, json=lote).json()
     """
@@ -79,84 +75,61 @@ def marcar(activo_id: str, estado: str) -> None:
     st.session_state.curaduria[activo_id] = estado
 
 
+def html(contenido: str) -> None:
+    st.markdown(contenido, unsafe_allow_html=True)
+
+
+def cabecera(titulo: str, subtitulo: str, pastilla: str = "") -> None:
+    extra = f'<div class="cl-pill">{pastilla}</div>' if pastilla else ""
+    html(f'<div class="cl-head"><div><h1>{titulo}</h1><p>{subtitulo}</p></div>{extra}</div>')
+
+
 # ---------------------------------------------------------------------------
 # Vistas
 # ---------------------------------------------------------------------------
 def vista_resumen(datos: dict) -> None:
     r = datos["resumen_comunidad"]
+    total = r["total_interacciones_procesadas"]
+    descartadas = r["total_descartadas"]
+    aprovechadas = total - descartadas
 
-    st.subheader("Resumen del periodo")
-    st.caption(
-        f"Comunidad: **{datos['origen_comunidad']}**  ·  "
-        f"Periodo: **{datos['periodo_referencia']}**"
+    cabecera(
+        "Resumen del periodo",
+        "Qué pasó en la comunidad y qué decidió el motor con cada interacción.",
+        f'{datos["origen_comunidad"]} &nbsp;·&nbsp; <b>{datos["periodo_referencia"]}</b>',
     )
 
-    c1, c2, c3, c4 = st.columns(4)
-    c1.metric("Interacciones procesadas", r["total_interacciones_procesadas"])
-    c2.metric("Descartadas por el motor", r["total_descartadas"])
-    c3.metric("Activos generados", len(datos["activos_distribucion_generados"]))
-    c4.metric("Miembros que requieren apoyo", r["miembros_que_requieren_apoyo"])
+    B.fila_metricas("resumen", [
+        {"label": "Interacciones procesadas", "valor": total,
+         "icono": "Forum", "grad": "azul",
+         "nota": f"{aprovechadas} con valor comunicacional"},
+        {"label": "Descartadas por el motor", "valor": descartadas,
+         "icono": "FilterAlt", "grad": "naranja",
+         "nota": f"{descartadas / total:.0%} del total" if total else ""},
+        {"label": "Activos generados", "valor": len(datos["activos_distribucion_generados"]),
+         "icono": "AutoAwesome", "grad": "verde",
+         "nota": "Listos para curaduría"},
+        {"label": "Requieren apoyo", "valor": r["miembros_que_requieren_apoyo"],
+         "icono": "VolunteerActivism", "grad": "rojo",
+         "nota": "Señales de bloqueo prolongado"},
+    ])
 
-    st.divider()
-
-    izq, der = st.columns(2)
-
+    izq, der = st.columns(2, gap="large")
     with izq:
-        st.markdown("**Distribucion de sentimiento**")
-        dist = r["distribucion_sentimiento"]
-        total = sum(dist.values()) or 1
-        for clave, valor in dist.items():
-            pct = valor / total
-            st.markdown(
-                f"<span style='color:{COLOR_SENTIMIENTO.get(clave, '#6e7781')}'>"
-                f"● {clave.replace('_', ' ')}</span> — {valor} ({pct:.0%})",
-                unsafe_allow_html=True,
-            )
-            st.progress(pct)
-
+        B.barra_apilada_sentimiento(r["distribucion_sentimiento"])
     with der:
-        st.markdown("**Temas principales**")
-        temas = r["temas_principales"]
-        maximo = max((t["menciones"] for t in temas), default=1)
-        for t in temas:
-            st.markdown(f"{t['tema']} — {t['menciones']} menciones")
-            st.progress(t["menciones"] / maximo)
+        B.panel_temas(r["temas_principales"])
 
-    st.divider()
-
-    st.markdown("**Dudas recurrentes detectadas**")
-    st.caption(
-        "El motor agrupa preguntas que significan lo mismo aunque esten escritas "
-        "distinto. Un grupo se considera recurrente a partir de 3 preguntas de "
-        "autores distintos."
-    )
-
-    for g in datos["dudas_recurrentes_detectadas"]:
-        if g["es_recurrente"]:
-            etiqueta = "RECURRENTE"
-            cuerpo = (
-                f"**{g['tema']}**  \n"
-                f"{g['cantidad_preguntas']} preguntas de {g['autores_distintos']} "
-                f"personas distintas  ·  canales: {', '.join(g['canales'])}  ·  "
-                f"relevancia {g['score_relevancia']:.2f}"
-            )
-            st.success(f"{etiqueta} — genera Tip/FAQ")
-            st.markdown(cuerpo)
-        else:
-            st.info("NO RECURRENTE — no genera activo")
-            st.markdown(
-                f"**{g['tema']}**  \n"
-                f"{g['cantidad_preguntas']} pregunta  ·  "
-                f"relevancia {g['score_relevancia']:.2f}"
-            )
+    B.tabla_grupos(datos["dudas_recurrentes_detectadas"])
 
 
 def vista_ingesta(datos: dict) -> None:
-    st.subheader("Mensajes procesados")
-    st.caption(
-        "Muestra de las interacciones que entraron al motor y que decidio con "
-        "cada una. Sirve para demostrar que el sistema tambien descarta: un "
-        "motor que convierte el 100% de los mensajes en contenido esta roto."
+    cabecera(
+        "Mensajes procesados",
+        "Muestra de las interacciones que entraron al motor y qué decidió con cada "
+        "una. Sirve para demostrar que el sistema también descarta: un motor que "
+        "convierte el 100% de los mensajes en contenido está roto.",
+        f'{len(datos["interacciones_muestra"])} mensajes de muestra',
     )
 
     filtro = st.multiselect(
@@ -169,110 +142,92 @@ def vista_ingesta(datos: dict) -> None:
     if filtro:
         mensajes = [m for m in mensajes if m["tipo_detectado"] in filtro]
 
-    for m in mensajes:
-        descartado = m["decision"].startswith("descartado") or m["decision"].startswith("no_recurrente")
-        with st.container(border=True):
-            cab, sc = st.columns([5, 1])
-            cab.markdown(
-                f"`{m['id']}`  ·  **{m['autor']}**  ·  {m['canal']}  ·  "
-                f"{m['timestamp'][:10]}  ·  {m['reacciones']} reacciones"
-            )
-            sc.markdown(f"**{m['score_relevancia']:.2f}**")
+    if not mensajes:
+        st.info("Ningún mensaje coincide con el filtro.")
+        return
 
-            st.markdown(f"> {m['texto']}")
-
-            a, b, c = st.columns(3)
-            a.markdown(
-                f"Sentimiento: <span style='color:{COLOR_SENTIMIENTO.get(m['sentimiento_detectado'], '#6e7781')}'>"
-                f"**{m['sentimiento_detectado']}**</span>",
-                unsafe_allow_html=True,
-            )
-            b.markdown(f"Tema: **{m['tema_detectado']}**")
-            c.markdown(f"Tipo: **{m['tipo_detectado']}**")
-
-            if descartado:
-                st.caption(f"Decision del motor: {m['decision']}  (sin activo)")
-            else:
-                st.caption(f"Decision del motor: {m['decision']}")
+    B.lista_mensajes(mensajes)
 
 
 def vista_curaduria(datos: dict) -> None:
-    st.subheader("Activos generados")
-    st.caption(
-        "Cada activo muestra el mensaje que lo origino. Ese vinculo es lo que "
-        "permite que marketing confie en lo generado."
-    )
-
     activos = datos["activos_distribucion_generados"]
     estados = st.session_state.curaduria
+    pendientes = sum(1 for v in estados.values() if v == "pendiente")
 
-    a, b, c = st.columns(3)
-    a.metric("Pendientes", sum(1 for v in estados.values() if v == "pendiente"))
-    b.metric("Aprobados", sum(1 for v in estados.values() if v == "aprobado"))
-    c.metric("Rechazados", sum(1 for v in estados.values() if v == "rechazado"))
+    cabecera(
+        "Curaduría de activos",
+        "Cada activo muestra el mensaje que lo originó. Ese vínculo es lo que "
+        "permite que marketing confíe en lo generado.",
+        f"<b>{pendientes}</b> pendientes de revisar",
+    )
 
-    st.divider()
+    B.fila_metricas("curaduria", [
+        {"label": "Pendientes", "valor": pendientes,
+         "icono": "HourglassTop", "grad": "naranja"},
+        {"label": "Aprobados",
+         "valor": sum(1 for v in estados.values() if v == "aprobado"),
+         "icono": "CheckCircle", "grad": "verde"},
+        {"label": "Rechazados",
+         "valor": sum(1 for v in estados.values() if v == "rechazado"),
+         "icono": "Cancel", "grad": "rojo"},
+    ])
 
     solo_pendientes = st.checkbox("Ver solo pendientes", value=False)
 
-    for act in activos:
+    indice_msg = {m["id"]: m for m in datos["interacciones_muestra"]}
+
+    for i, act in enumerate(activos):
         aid = act["activo_id"]
         estado = estados[aid]
         if solo_pendientes and estado != "pendiente":
             continue
 
         with st.container(border=True):
-            top, badge = st.columns([4, 1])
-            top.markdown(
-                f"**{act['titulo']}**  \n"
-                f"{ETIQUETAS_ACTIVO.get(act['tipo_activo'], act['tipo_activo'])}  ·  "
-                f"Canal sugerido: {act['canal_sugerido']}  ·  "
-                f"Relevancia {act['score_relevancia']:.2f}"
-            )
-            if estado == "aprobado":
-                badge.success("Aprobado")
-            elif estado == "rechazado":
-                badge.error("Rechazado")
-            else:
-                badge.warning("Pendiente")
+            # Cabecera dibujada con Material UI
+            B.cabecera_activo(act, estado, i)
 
+            # Widgets nativos: no pueden ir dentro del bloque MUI
             st.text_area(
-                "Contenido",
-                value=act["contenido"],
-                height=200,
-                key=f"txt_{aid}",
-                label_visibility="collapsed",
+                "Contenido", value=act["contenido"], height=190,
+                key=f"txt_{aid}", label_visibility="collapsed",
             )
 
-            with st.expander("Ver de donde salio"):
+            with st.expander("Ver de dónde salió"):
                 if act.get("grupo_origen"):
                     grupo = next(
                         (g for g in datos["dudas_recurrentes_detectadas"]
-                         if g["grupo_id"] == act["grupo_origen"]),
-                        None,
+                         if g["grupo_id"] == act["grupo_origen"]), None,
                     )
                     if grupo:
-                        st.markdown(
-                            f"Grupo de duda recurrente **{grupo['tema']}** — "
-                            f"{grupo['cantidad_preguntas']} preguntas de "
-                            f"{grupo['autores_distintos']} personas."
+                        html(
+                            f'<div class="cl-asset-meta">Grupo de duda recurrente '
+                            f'<b>{grupo["tema"]}</b> — {grupo["cantidad_preguntas"]} '
+                            f'preguntas de {grupo["autores_distintos"]} personas.</div>'
                         )
-                st.markdown("Mensajes de origen:")
-                indice = {m["id"]: m for m in datos["interacciones_muestra"]}
                 for mid in act["mensajes_origen"]:
-                    m = indice.get(mid)
+                    m = indice_msg.get(mid)
                     if m:
-                        st.markdown(f"- `{mid}` ({m['autor']}, {m['canal']}): _{m['texto']}_")
+                        html(
+                            f'<div style="margin:8px 0">'
+                            f'<span class="cl-id">{mid}</span> '
+                            f'<span style="font-size:12.5px;color:{T.INK_SECONDARY}">'
+                            f'{m["autor"]} · {m["canal"]}</span>'
+                            f'<div class="cl-quote" style="margin-top:6px;font-size:13.5px">'
+                            f'{m["texto"]}</div></div>'
+                        )
                     else:
-                        st.markdown(f"- `{mid}`")
+                        html(f'<div style="margin:8px 0">'
+                             f'<span class="cl-id">{mid}</span></div>')
 
-            b1, b2, b3 = st.columns([1, 1, 4])
-            b1.button("Aprobar", key=f"ok_{aid}",
-                      on_click=marcar, args=(aid, "aprobado"))
+            b1, b2, _ = st.columns([1, 1, 4])
+            b1.button("Aprobar", key=f"ok_{aid}", type="primary",
+                      on_click=marcar, args=(aid, "aprobado"),
+                      use_container_width=True)
             b2.button("Rechazar", key=f"no_{aid}",
-                      on_click=marcar, args=(aid, "rechazado"))
+                      on_click=marcar, args=(aid, "rechazado"),
+                      use_container_width=True)
 
-    st.divider()
+    html('<hr class="cl-divider">')
     aprobados = [a for a in activos if estados[a["activo_id"]] == "aprobado"]
     st.download_button(
         f"Descargar {len(aprobados)} activos aprobados (JSON)",
@@ -284,94 +239,77 @@ def vista_curaduria(datos: dict) -> None:
 
 
 def vista_config(datos: dict) -> None:
-    st.subheader("Configuracion y estado")
-
-    st.markdown("**Almacenamiento en OCI Object Storage**")
-    oci = datos["almacenamiento_oci"]
-    if oci["status"] == "simulado":
-        st.warning(
-            "Estado: SIMULADO. Todavia no se sube nada real. "
-            "Esta es la estructura que el backend debera devolver."
-        )
-    else:
-        st.success("Estado: guardado correctamente.")
-    st.code(
-        f"bucket      : {oci['bucket']}\n"
-        f"region      : {oci['region']}\n"
-        f"ruta objeto : {oci['ruta_objeto']}\n"
-        f"tamano      : {oci['tamano_bytes']} bytes\n"
-        f"guardado en : {oci['guardado_en']}",
-        language="text",
+    cabecera(
+        "Configuración y estado",
+        "Estado de la infraestructura y de las credenciales del proyecto.",
     )
 
-    st.divider()
+    B.tarjeta_almacenamiento(datos["almacenamiento_oci"])
 
-    st.markdown("**Secretos**")
-    st.caption(
-        "Nunca se muestra el valor de un secreto, solo si esta configurado. "
-        "Cada integrante puede verificar aqui su entorno sin pedir ayuda."
-    )
     try:
         from core.secretos import diagnostico
-        filas = diagnostico()
-        for f in filas:
-            if f["estado"] == "configurado":
-                st.markdown(f"✅ `{f['secreto']}` — {f['descripcion']}")
-            else:
-                st.markdown(f"⛔ `{f['secreto']}` — FALTA. {f['descripcion']}")
-        st.caption(f"Fuente activa: **{filas[0]['fuente']}**" if filas else "")
+        B.tarjeta_secretos(diagnostico())
     except Exception as e:
-        st.error(f"No se pudo leer el diagnostico de secretos: {e}")
+        st.error(f"No se pudo leer el diagnóstico de secretos: {e}")
 
-    st.info(
-        "Sprint 1: los secretos se leen del archivo .env local.  \n"
-        "Sprint 2: se migran a OCI Vault cambiando FUENTE_SECRETOS=vault. "
-        "Ningun otro archivo del proyecto cambia."
-    )
+    B.tarjeta_origen(str(ARCHIVO_MOCK.relative_to(RAIZ)))
 
-    st.divider()
-    st.markdown("**Origen de los datos de este panel**")
-    st.warning(
-        f"Leyendo de `{ARCHIVO_MOCK.relative_to(RAIZ)}` (datos de ejemplo). "
-        "Cuando el backend este listo, se cambia unicamente la funcion "
-        "`cargar_resultados()` en este archivo."
-    )
     with st.expander("Ver JSON completo (contrato de datos)"):
         st.json(datos)
 
 
 # ---------------------------------------------------------------------------
+def barra_lateral() -> str:
+    with st.sidebar:
+        html(
+            '<div class="cl-marca">'
+            '  <div class="logo">CL</div>'
+            '  <div class="txt"><b>CommunityLab</b>'
+            '  <span>Hackathon ONE G10 · Equipo 25</span></div>'
+            '</div>'
+            '<div class="cl-nav-label">Panel</div>'
+        )
+        seccion = st.radio("Sección", T.SECCIONES, label_visibility="collapsed")
+        html(
+            '<div class="cl-side-pie">'
+            'Motor de FAQ dinámico<br>y contenido educativo<br><br>'
+            'Sprint 1 · datos de ejemplo'
+            '</div>'
+        )
+    return seccion
+
+
 def main() -> None:
     st.set_page_config(
-        page_title="CommunityLab · Panel de curaduria",
+        page_title="CommunityLab · Panel de curaduría",
         page_icon="📋",
         layout="wide",
+        initial_sidebar_state="expanded",
     )
+    html(T.CSS)
 
     datos = cargar_resultados()
     init_estado(datos)
 
-    st.title("CommunityLab")
-    st.caption("Panel de curaduria · Hackathon ONE G10 · Motor de FAQ dinamico y contenido educativo")
+    seccion = barra_lateral()
 
-    st.info(
-        "**Version de prueba (Sprint 1).** Los datos que ves son un ejemplo "
-        "escrito a mano, no salen todavia del motor. El objetivo de esta "
-        "entrega es fijar la estructura de datos y demostrar el flujo completo "
-        "de la interfaz.",
-        icon="ℹ️",
+    html(
+        '<div class="cl-banner">'
+        '  <span style="font-size:16px;line-height:1.2">⚠</span>'
+        '  <span><b>Versión de prueba (Sprint 1).</b> Los datos que ves son un '
+        'ejemplo escrito a mano, no salen todavía del motor. El objetivo de esta '
+        'entrega es fijar la estructura de datos y demostrar el flujo completo '
+        'de la interfaz.</span>'
+        '</div>'
     )
 
-    t1, t2, t3, t4 = st.tabs(
-        ["Resumen", "Mensajes procesados", "Curaduria de activos", "Configuracion"]
-    )
-    with t1:
+    if seccion == "Resumen":
         vista_resumen(datos)
-    with t2:
+    elif seccion == "Mensajes procesados":
         vista_ingesta(datos)
-    with t3:
+    elif seccion == "Curaduría de activos":
         vista_curaduria(datos)
-    with t4:
+    else:
         vista_config(datos)
 
 

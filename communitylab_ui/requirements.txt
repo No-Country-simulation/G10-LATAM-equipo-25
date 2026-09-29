@@ -1,5 +1,10 @@
-streamlit==1.40.2
+streamlit==1.64.0
 python-dotenv==1.0.1
+streamlit-mui-elements==0.0.25
+tornado>=6.4
+
+# Nota: streamlit-mui-elements no declara tornado como dependencia,
+# pero lo necesita. Por eso se fija aqui explicitamente.
 
 # Sprint 2 (descomentar cuando toque)
 # oci==2.140.0
