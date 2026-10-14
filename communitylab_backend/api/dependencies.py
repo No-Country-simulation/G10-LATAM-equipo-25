@@ -11,8 +11,8 @@ from communitylab_backend.application.retrieval import SemanticRetriever
 from communitylab_backend.config.settings import Settings
 from communitylab_backend.domain.errors import ProviderUnavailableError
 from communitylab_backend.infrastructure.cohere_adapters import CohereEmbeddingAdapter, CohereRerankerAdapter
-from communitylab_backend.infrastructure.external_stubs import OCIObjectStorageAdapter
 from communitylab_backend.infrastructure.gemini_adapter import GeminiLLMAdapter
+from communitylab_backend.infrastructure.oci_storage import OCIObjectStorageAdapter
 from communitylab_backend.infrastructure.vector_index import LocalVectorStore
 from communitylab_backend.infrastructure.local import ExistingLocalRagAdapter, ExistingSanitizerAdapter, LocalObjectStorageAdapter, MockLLMProvider, MockRetriever
 
@@ -49,6 +49,21 @@ def build_retriever(settings: Settings):
     return None
 
 
+def build_storage(settings: Settings):
+    """Elige el almacenamiento de paquetes según ``settings.storage_provider``.
+
+    Retorna un ``ObjectStoragePort`` o ``None`` si la selección es desconocida.
+    La opción ``oci`` guarda en un bucket de OCI; produce
+    ``ProviderUnavailableError`` si falta namespace, bucket o la sesión de OCI.
+    """
+
+    if settings.storage_provider == "local":
+        return LocalObjectStorageAdapter(settings.local_storage_dir)
+    if settings.storage_provider == "oci":
+        return OCIObjectStorageAdapter(settings.oci_namespace, settings.oci_bucket, settings.oci_region, settings.oci_object_prefix, settings.oci_auth, settings.oci_config_file, settings.oci_config_profile, settings.provider_timeout_seconds)
+    return None
+
+
 def build_workflow(settings: Settings) -> ProcessingWorkflow:
     """Construye el grafo con los adaptadores elegidos por ``settings``.
 
@@ -59,7 +74,7 @@ def build_workflow(settings: Settings) -> ProcessingWorkflow:
 
     llm = MockLLMProvider(settings.success_keywords, settings.faq_keywords, settings.success_types) if settings.llm_provider == "mock" else GeminiLLMAdapter(settings.gemini_api_key, settings.gemini_model, settings.provider_timeout_seconds) if settings.llm_provider == "gemini" else None
     retriever = build_retriever(settings)
-    storage = LocalObjectStorageAdapter(settings.local_storage_dir) if settings.storage_provider == "local" else OCIObjectStorageAdapter() if settings.storage_provider == "oci" else None
+    storage = build_storage(settings)
     if llm is None or retriever is None or storage is None:
         raise ProviderUnavailableError("Unknown configured provider")
     return ProcessingWorkflow(ExistingSanitizerAdapter(), llm, retriever, storage)
