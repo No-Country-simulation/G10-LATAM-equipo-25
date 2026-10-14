@@ -1,0 +1,8 @@
+# Dependencias para DESARROLLAR y probar el backend.
+# Instalar:  pip install -r communitylab_backend/requirements-dev.txt
+-r requirements.txt
+
+pytest>=8,<10
+httpx>=0.27,<1          # cliente de pruebas de FastAPI
+cryptography>=43        # las pruebas de OCI generan una clave temporal
+requests>=2.32,<3       # las pruebas de OCI usan su interfaz de firma
