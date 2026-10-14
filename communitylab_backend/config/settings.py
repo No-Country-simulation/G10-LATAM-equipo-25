@@ -31,7 +31,7 @@ para construir adaptadores; esta clase no realiza llamadas a proveedores.
     local_storage_dir: Path = Path("output/backend/drafts")
     gemini_api_key: str | None = Field(default=None, repr=False)
     cohere_api_key: str | None = Field(default=None, repr=False)
-    gemini_model: str = "gemini-2.5-flash"
+    gemini_model: str = "gemini-3.8-flash"
     cohere_embed_model: str = "embed-v4.0"
     cohere_rerank_model: str = "rerank-v4.0-pro"
     provider_timeout_seconds: float = 30.0

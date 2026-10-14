@@ -48,7 +48,7 @@ Cada proveedor vive en su propio módulo. `external_stubs.py` no se modificó; s
 | `community_highlight` | `linkedin_post` + `newsletter_highlight` |
 
 - Cada solicitud completa gasta **2 llamadas** a Gemini. Con la cuota gratuita (20 llamadas al día) alcanza para unas 10 solicitudes diarias.
-- Modelo por defecto: `gemini-2.5-flash` (configurable).
+- Modelo por defecto: `gemini-3.8-flash` (configurable).
 
 ### Salvaguardas
 - Las interacciones y las citas se envían dentro de etiquetas como **datos**, y se escapan los caracteres `<` y `>` para frenar intentos de inyección de instrucciones.
@@ -77,7 +77,7 @@ Variables de entorno (se leen de `.env`; **nunca** subas ese archivo al reposito
 ```env
 LLM_PROVIDER=gemini            # mock | gemini
 GEMINI_API_KEY=tu_clave
-GEMINI_MODEL=gemini-2.5-flash
+GEMINI_MODEL=gemini-3.8-flash
 
 EMBEDDING_PROVIDER=cohere      # mock | cohere
 RERANKER_PROVIDER=cohere       # mock | cohere

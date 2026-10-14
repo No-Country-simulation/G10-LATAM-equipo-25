@@ -175,7 +175,7 @@ class GeminiLLMAdapter:
 
     name = "gemini"
 
-    def __init__(self, api_key: str | None, model: str = "gemini-2.5-flash", timeout_seconds: float = 30.0, client=None):
+    def __init__(self, api_key: str | None, model: str = "gemini-3.8-flash", timeout_seconds: float = 30.0, client=None):
         """Configura modelo y tiempo de espera.
 
         ``client`` permite inyectar un cliente falso en pruebas. Produce
