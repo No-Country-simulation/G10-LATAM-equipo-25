@@ -9,7 +9,8 @@ from functools import lru_cache
 from communitylab_backend.application.orchestration import ProcessingWorkflow
 from communitylab_backend.config.settings import Settings
 from communitylab_backend.domain.errors import ProviderUnavailableError
-from communitylab_backend.infrastructure.external_stubs import GeminiLLMAdapter, OCIObjectStorageAdapter
+from communitylab_backend.infrastructure.external_stubs import OCIObjectStorageAdapter
+from communitylab_backend.infrastructure.gemini_adapter import GeminiLLMAdapter
 from communitylab_backend.infrastructure.local import ExistingLocalRagAdapter, ExistingSanitizerAdapter, LocalObjectStorageAdapter, MockLLMProvider, MockRetriever
 
 
@@ -32,7 +33,7 @@ def build_workflow(settings: Settings) -> ProcessingWorkflow:
     ``ProviderUnavailableError`` ante una selección desconocida.
     """
 
-    llm = MockLLMProvider(settings.success_keywords, settings.faq_keywords, settings.success_types) if settings.llm_provider == "mock" else GeminiLLMAdapter() if settings.llm_provider == "gemini" else None
+    llm = MockLLMProvider(settings.success_keywords, settings.faq_keywords, settings.success_types) if settings.llm_provider == "mock" else GeminiLLMAdapter(settings.gemini_api_key, settings.gemini_model, settings.provider_timeout_seconds) if settings.llm_provider == "gemini" else None
     retriever = MockRetriever() if settings.retrieval_provider == "mock" else ExistingLocalRagAdapter() if settings.retrieval_provider == "existing_local" else None
     storage = LocalObjectStorageAdapter(settings.local_storage_dir) if settings.storage_provider == "local" else OCIObjectStorageAdapter() if settings.storage_provider == "oci" else None
     if llm is None or retriever is None or storage is None:
