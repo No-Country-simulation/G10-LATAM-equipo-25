@@ -94,7 +94,8 @@ Por defecto todo usa `mock`, así que el backend arranca sin claves ni red.
 
 - `LLM_PROVIDER=gemini` ya está conectado en `api/dependencies.py`.
 - Los adaptadores de Cohere están implementados y probados, pero **todavía no están conectados al buscador**: hoy el recuperador usa mocks y no consume embeddings ni reranking. Ese es el siguiente paso.
-- Pendiente de confirmar: el nombre exacto del modelo de embeddings en la API directa de Cohere.
+- Verificado con la API real de Cohere: `embed-v4.0` devuelve vectores de 1536 dimensiones y `rerank-v4.0-pro` ordena correctamente.
+- Gemini: `gemini-2.5-flash` ya no está disponible para cuentas nuevas; el modelo por defecto es `gemini-3.8-flash`. Si cambia, usar `GEMINI_MODEL`.
 - Plan B si se agota la cuota de Gemini: generar con Cohere (aún no implementado).
 
 ## Ejemplo de uso
