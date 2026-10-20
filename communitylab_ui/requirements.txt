@@ -7,7 +7,7 @@ tornado>=6.4
 # pero lo necesita. Por eso se fija aqui explicitamente.
 
 # Sprint 2 (descomentar cuando toque)
-# oci==2.140.0
+oci==2.140.0
 # fastapi==0.115.6
 # uvicorn==0.34.0
 # langchain==0.3.14
