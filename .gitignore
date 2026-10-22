@@ -1,0 +1,71 @@
+# ---------------------------------------------------------------
+# Lo que NUNCA se sube al repositorio del motor (backend)
+# Antes de hacer commit: git status --ignored  (lista lo que se queda fuera)
+# ---------------------------------------------------------------
+
+# --- Secretos y credenciales ---
+# Archivo de claves. Solo se sube la plantilla .env.example
+.env
+.env.*
+!.env.example
+# Llaves y configuración de Oracle Cloud (OCI)
+*.pem
+*.key
+*.p12
+*.pfx
+.oci/
+oci_config
+# Por si alguien copia credenciales a la carpeta del proyecto
+credentials.json
+service-account*.json
+secrets.toml
+
+# --- Entorno de Python ---
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# --- Pruebas y herramientas de calidad ---
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# --- Datos que se generan al usar el motor ---
+# Paquetes que guarda la API en cada procesamiento local
+salidas/paquetes/
+# Copias de seguridad de la base al agregar FAQs
+data/respaldos/
+# Historial local de dudas (se arma al procesar lotes)
+data/historial_dudas.db
+# Índice semántico (se genera con build_faq_index; ~2 MB)
+data/faq_index.json
+# Archivos temporales de SQLite mientras la base está abierta
+*.db-journal
+*.db-wal
+*.db-shm
+
+# --- Archivos temporales y registros ---
+*.tmp
+*.bak
+*.log
+*.swp
+*~
+
+# --- Configuración personal de editores, asistentes y sistema ---
+.vscode/
+.idea/
+.claude/
+.cursor/
+.aider*
+CLAUDE.md
+.DS_Store
+Thumbs.db
+desktop.ini

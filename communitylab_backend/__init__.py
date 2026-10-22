@@ -1,5 +1,5 @@
 """Paquete del backend de CommunityLab.
 
 Contiene las capas API, aplicación, dominio, infraestructura y configuración.
-No modifica el pipeline de preparación de datos de ``dataset_builder``.
+Lee la base de FAQs ``data/motor_educativo.db`` que entrega la rama de datos.
 """

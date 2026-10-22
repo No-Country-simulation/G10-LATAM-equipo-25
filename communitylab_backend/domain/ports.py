@@ -7,7 +7,7 @@ controlar sus tiempos de espera y traducir fallos a errores del dominio.
 
 from typing import Protocol
 
-from .models import Analysis, DraftAsset, Evidence, SanitizedInteraction
+from .models import Analysis, ContentBrief, DraftAsset, Evidence, SanitizedInteraction
 
 
 class SanitizationPort(Protocol):
@@ -34,18 +34,32 @@ class LLMProvider(Protocol):
 
     name: str
 
-    def analyze(self, interactions: list[SanitizedInteraction]) -> Analysis:
+    def analyze(self, interactions: list[SanitizedInteraction], known_topics: list[str] | None = None) -> Analysis:
         """Analiza interacciones sanitizadas y retorna señales para routing.
 
-        ``interactions`` contiene el lote seguro. Puede producir
-        ``ProviderUnavailableError`` si el servicio no está disponible.
+        ``interactions`` contiene el lote seguro. ``known_topics`` son temas de
+        dudas ya vistos en lotes anteriores: si una duda trata uno de ellos,
+        conviene reutilizar el mismo nombre para poder contar su frecuencia.
+        Retorna ``Analysis`` con una ``InteractionSignal`` por interacción.
+        Puede producir ``ProviderUnavailableError`` si el servicio no está
+        disponible.
         """
 
     def generate(self, flow: str, analysis: Analysis, interactions: list[SanitizedInteraction], evidence: list[Evidence]) -> list[DraftAsset]:
         """Genera borradores para ``flow`` con señales y citas verificables.
 
         Retorna al menos dos ``DraftAsset`` pendientes. Puede producir
-        ``ProviderUnavailableError`` o ``AssetGenerationError``.
+        ``ProviderUnavailableError`` o ``AssetGenerationError``. El grafo usa
+        ``generate_assets``; este método se conserva por compatibilidad.
+        """
+
+    def generate_assets(self, briefs: list[ContentBrief], analysis: Analysis) -> list[DraftAsset]:
+        """Redacta en una sola operación los activos de todos los ``briefs``.
+
+        Retorna un ``DraftAsset`` en estado ``draft`` por cada tipo pedido en
+        cada encargo (los de la rama ``faq`` llevan su ``topic``). Puede
+        producir ``ProviderUnavailableError`` o ``AssetGenerationError`` si
+        falta algún activo.
         """
 
 
@@ -134,4 +148,75 @@ class SecretProvider(Protocol):
         """Busca el secreto ``name`` y retorna su valor o ``None``.
 
         Puede producir ``ProviderUnavailableError`` ante fallo del servicio.
+        """
+
+
+class DoubtHistoryPort(Protocol):
+    """Guarda las dudas procesadas para saber qué temas se repiten.
+
+    Pertenece al dominio como contrato. La implementación local usa SQLite;
+    otra podría usar una base en la nube sin cambiar la aplicación. Sólo
+    recibe texto ya sanitizado, nunca el autor.
+    """
+
+    def record(self, request_id: str, community: str, doubts: list[dict]) -> int:
+        """Guarda las dudas de un lote y retorna cuántas guardó.
+
+        Puede producir ``StorageError`` si no se puede escribir.
+        """
+
+    def known_topics(self, limit: int = 15) -> list[str]:
+        """Retorna los temas más repetidos, para que el análisis reutilice sus nombres."""
+
+    def attach_faqs(self, topic_key: str, faq_ids: list[str]) -> int:
+        """Marca que el tema ``topic_key`` ya tiene FAQ oficial y retorna cuántas dudas actualizó.
+
+        Puede producir ``StorageError`` si no se puede escribir.
+        """
+
+    def ranking(self, days: int | None = None, limit: int = 20) -> dict:
+        """Retorna el ranking de dudas frecuentes de los últimos ``days`` días (o de todo el historial).
+
+        Puede producir ``StorageError`` si el historial no se puede leer.
+        """
+
+
+class KnowledgeBasePort(Protocol):
+    """Lee y amplía la base de conocimiento (FAQs oficiales y reseñas reales).
+
+    Pertenece al dominio como contrato. La implementación local usa
+    ``motor_educativo.db``. Las reseñas sólo se leen; lo único que se puede
+    escribir son FAQs nuevas.
+    """
+
+    def summary(self) -> dict:
+        """Retorna los totales de la base (FAQs, reseñas, cursos, sentimiento y notas).
+
+        Puede producir ``RetrievalError`` si la base no está disponible.
+        """
+
+    def faqs(self, limit: int) -> list[dict]:
+        """Retorna hasta ``limit`` FAQs oficiales con ``record_id``, ``question``, ``answer`` y ``source``.
+
+        Puede producir ``RetrievalError`` si la base no está disponible.
+        """
+
+    def reviews(self, course: str | None, sentiment: str | None, limit: int) -> list[dict]:
+        """Retorna reseñas reales sin datos personales, filtradas por curso y sentimiento.
+
+        Puede producir ``RetrievalError`` si la base no está disponible.
+        """
+
+    def courses(self) -> list[str]:
+        """Retorna los cursos que tienen reseñas.
+
+        Puede producir ``RetrievalError`` si la base no está disponible.
+        """
+
+    def add_faqs(self, rows: list[dict], dry_run: bool) -> dict:
+        """Agrega FAQs ya validadas (o sólo muestra qué haría si ``dry_run``).
+
+        Antes de escribir guarda una copia de seguridad. Retorna lo agregado,
+        las repetidas, los ids nuevos y la copia. Puede producir
+        ``RetrievalError`` o ``StorageError``.
         """

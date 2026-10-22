@@ -1,0 +1,18 @@
+{
+  "origen_comunidad": "Foro_Alura_Latam",
+  "periodo_referencia": "Semana_05",
+  "interacciones": [
+    {
+      "autor": "Estudiante_D",
+      "canal": "#dudas-python",
+      "tipo": "pregunta_tecnica",
+      "texto": "¿Cómo manejo los valores faltantes en mi dataset? Tengo muchas columnas con nulos en pandas y no sé si borrarlas."
+    },
+    {
+      "autor": "Estudiante_E",
+      "canal": "#dudas-python",
+      "tipo": "pregunta_tecnica",
+      "texto": "Me sale error al entrenar porque el dataset tiene datos faltantes, ¿qué técnicas de preprocesamiento recomiendan?"
+    }
+  ]
+}

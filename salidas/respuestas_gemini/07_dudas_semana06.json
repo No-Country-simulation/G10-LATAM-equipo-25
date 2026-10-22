@@ -1,0 +1,328 @@
+{
+  "entrada": {
+    "community_source": "Discord_Grupo_ONE_G10",
+    "reference_period": "Semana_06",
+    "interactions": [
+      {
+        "id": null,
+        "author": "Valentina R",
+        "channel": "#dudas-langgraph",
+        "type": "pregunta_tecnica",
+        "text": "¿Cómo hago para que mi grafo de LangGraph vuelva a llamar al LLM si la respuesta viene vacía? No entiendo bien cómo se arma el router."
+      },
+      {
+        "id": null,
+        "author": "Diego M",
+        "channel": "#dudas-langgraph",
+        "type": "pregunta_tecnica",
+        "text": "En LangGraph, ¿cuál es la forma correcta de poner un límite de reintentos en un nodo condicional para que no quede en un bucle infinito?"
+      },
+      {
+        "id": null,
+        "author": "Camila T",
+        "channel": "#dudas-machine-learning",
+        "type": "pregunta_tecnica",
+        "text": "Mi modelo tiene 98% en entrenamiento y 65% en prueba. ¿Eso es sobreajuste? ¿Qué hago primero?"
+      },
+      {
+        "id": null,
+        "author": "Andrés P",
+        "channel": "#dudas-python",
+        "type": "pregunta_tecnica",
+        "text": "¿Conviene rellenar los valores faltantes con la media o borrar las filas? Tengo un dataset de ventas con muchos nulos."
+      },
+      {
+        "id": null,
+        "author": "Sofía L",
+        "channel": "#general",
+        "type": "comentario",
+        "text": "Gracias a todos por las respuestas de la semana pasada, me sirvieron mucho para el proyecto."
+      }
+    ]
+  },
+  "respuesta": {
+    "status": "success",
+    "request_id": "13a7e0d3-4dfd-49f2-b8e9-57d0abd6f6eb",
+    "community_summary": {
+      "total_interactions_processed": 5,
+      "predominant_sentiment": "neutral",
+      "main_topics": [
+        "LangGraph",
+        "Sobreajuste",
+        "Datos faltantes"
+      ]
+    },
+    "insights": [
+      "Alta demanda de soporte técnico en flujos de control de LangGraph.",
+      "Los usuarios requieren orientación sobre buenas prácticas en preprocesamiento y evaluación de modelos."
+    ],
+    "routing": {
+      "selected_flow": "faq",
+      "reason": "Señal de pregunta recurrente: 4 duda(s) de la comunidad en 3 tema(s)",
+      "flows": [
+        "faq"
+      ],
+      "reasons": {
+        "faq": "Señal de pregunta recurrente: 4 duda(s) de la comunidad en 3 tema(s)"
+      }
+    },
+    "generated_assets": [
+      {
+        "kind": "quick_tutorial",
+        "title": "Manejo de bucles y reintentos en LangGraph",
+        "body": "Sin FAQ oficial: borrador para validar con un mentor. Para gestionar la lógica de reintentos y evitar bucles infinitos en tus grafos, sigue estos pasos: 1. Define un estado que incluya un contador de intentos. 2. Implementa un nodo condicional que verifique si el contador supera tu límite. 3. Si el límite se alcanza, dirige el flujo a un nodo de salida o error. 4. Si no, incrementa el contador y reintenta la llamada al LLM. Ejemplo: if state['intentos'] > 3: return 'finalizar' else: return 'nodo_llm'.",
+        "status": "draft",
+        "evidence_ids": [],
+        "flow": "faq",
+        "topic": "LangGraph"
+      },
+      {
+        "kind": "weekly_tip",
+        "title": "Evita bucles infinitos",
+        "body": "Tip de la semana: En LangGraph, siempre incluye un contador de intentos en tu estado cuando uses nodos condicionales. Esto evita que tu grafo se quede atrapado en un bucle infinito si el LLM no responde como esperas. ¡Controla tus flujos!",
+        "status": "draft",
+        "evidence_ids": [],
+        "flow": "faq",
+        "topic": "LangGraph"
+      },
+      {
+        "kind": "doc_topic",
+        "title": "Guía de control de flujo y reintentos en LangGraph",
+        "body": "Motivación: 2 dudas detectadas sobre bucles y routers. Secciones: 1. Introducción a los nodos condicionales. 2. Implementación de contadores en el State. 3. Estrategias para evitar bucles infinitos. 4. Patrones de diseño para routers. Respaldo: Contenido nuevo necesario.",
+        "status": "draft",
+        "evidence_ids": [],
+        "flow": "faq",
+        "topic": "LangGraph"
+      },
+      {
+        "kind": "quick_tutorial",
+        "title": "Identificación y mitigación de sobreajuste",
+        "body": "El sobreajuste ocurre cuando el modelo aprende el ruido de los datos de entrenamiento, afectando su desempeño en datos nuevos. Pasos: 1. Compara métricas de entrenamiento vs prueba. 2. Si la diferencia es alta (ej. 98% vs 65%), confirma sobreajuste. 3. Reduce la complejidad del modelo o aumenta los datos. 4. Aplica técnicas de regularización. Ejemplo: Si tu modelo es un árbol, limita su profundidad máxima (max_depth) para restringir el aprendizaje de detalles irrelevantes.",
+        "status": "draft",
+        "evidence_ids": [
+          "faq-1168"
+        ],
+        "flow": "faq",
+        "topic": "Sobreajuste"
+      },
+      {
+        "kind": "weekly_tip",
+        "title": "Detecta el sobreajuste",
+        "body": "Tip de la semana: ¿Tu modelo brilla en entrenamiento pero falla en prueba? Es sobreajuste. El modelo está memorizando ruido en lugar de aprender patrones. Simplifica tu modelo o usa regularización para mejorar su capacidad de generalización.",
+        "status": "draft",
+        "evidence_ids": [
+          "faq-1168"
+        ],
+        "flow": "faq",
+        "topic": "Sobreajuste"
+      },
+      {
+        "kind": "doc_topic",
+        "title": "Diagnóstico y solución de sobreajuste",
+        "body": "Motivación: 1 duda sobre discrepancia en métricas. Secciones: 1. ¿Qué es el sobreajuste? 2. Cómo identificarlo mediante métricas de entrenamiento y prueba. 3. Técnicas de regularización comunes. 4. Estrategias de validación cruzada. Respaldo: Basado en faq-1168, se requiere ampliar con técnicas prácticas.",
+        "status": "draft",
+        "evidence_ids": [
+          "faq-1168"
+        ],
+        "flow": "faq",
+        "topic": "Sobreajuste"
+      }
+    ],
+    "human_review": {
+      "required": true,
+      "status": "pending"
+    },
+    "storage": {
+      "provider": "local",
+      "status": "stored",
+      "location": "salidas/paquetes/13a7e0d3-4dfd-49f2-b8e9-57d0abd6f6eb.json"
+    },
+    "evidence": [
+      {
+        "record_id": "faq-1168",
+        "snippet": "Pregunta: What is overfitting in machine learning?\nRespuesta: Overfitting occurs when a model learns the details and noise in the training data to the extent that it negatively impacts its performance on unseen data.",
+        "source": "faq:python-machine-learning",
+        "score": 5.2413
+      }
+    ],
+    "interaction_analysis": [
+      {
+        "id": "interaction-1",
+        "author": "Valentina R",
+        "channel": "#dudas-langgraph",
+        "text": "¿Cómo hago para que mi grafo de LangGraph vuelva a llamar al LLM si la respuesta viene vacía? No entiendo bien cómo se arma el router.",
+        "sentiment": "neutral",
+        "category": "duda",
+        "relevance": 0.9,
+        "needs_support": true,
+        "topic": "LangGraph"
+      },
+      {
+        "id": "interaction-2",
+        "author": "Diego M",
+        "channel": "#dudas-langgraph",
+        "text": "En LangGraph, ¿cuál es la forma correcta de poner un límite de reintentos en un nodo condicional para que no quede en un bucle infinito?",
+        "sentiment": "neutral",
+        "category": "duda",
+        "relevance": 0.9,
+        "needs_support": true,
+        "topic": "LangGraph"
+      },
+      {
+        "id": "interaction-3",
+        "author": "Camila T",
+        "channel": "#dudas-machine-learning",
+        "text": "Mi modelo tiene 98% en entrenamiento y 65% en prueba. ¿Eso es sobreajuste? ¿Qué hago primero?",
+        "sentiment": "neutral",
+        "category": "duda",
+        "relevance": 0.8,
+        "needs_support": true,
+        "topic": "Sobreajuste"
+      },
+      {
+        "id": "interaction-4",
+        "author": "Andrés P",
+        "channel": "#dudas-python",
+        "text": "¿Conviene rellenar los valores faltantes con la media o borrar las filas? Tengo un dataset de ventas con muchos nulos.",
+        "sentiment": "neutral",
+        "category": "duda",
+        "relevance": 0.8,
+        "needs_support": true,
+        "topic": "Datos faltantes"
+      },
+      {
+        "id": "interaction-5",
+        "author": "Sofía L",
+        "channel": "#general",
+        "text": "Gracias a todos por las respuestas de la semana pasada, me sirvieron mucho para el proyecto.",
+        "sentiment": "positive",
+        "category": "comentario",
+        "relevance": 0.3,
+        "needs_support": false,
+        "topic": "Comunidad"
+      }
+    ],
+    "highlights": [
+      "interaction-1",
+      "interaction-2",
+      "interaction-3"
+    ],
+    "members_needing_support": [
+      {
+        "id": "interaction-1",
+        "author": "Valentina R",
+        "channel": "#dudas-langgraph",
+        "category": "duda"
+      },
+      {
+        "id": "interaction-2",
+        "author": "Diego M",
+        "channel": "#dudas-langgraph",
+        "category": "duda"
+      },
+      {
+        "id": "interaction-3",
+        "author": "Camila T",
+        "channel": "#dudas-machine-learning",
+        "category": "duda"
+      },
+      {
+        "id": "interaction-4",
+        "author": "Andrés P",
+        "channel": "#dudas-python",
+        "category": "duda"
+      }
+    ],
+    "discarded": [
+      "interaction-4",
+      "interaction-5"
+    ],
+    "faq_topics": [
+      {
+        "topic": "LangGraph",
+        "questions": 2,
+        "interaction_ids": [
+          "interaction-1",
+          "interaction-2"
+        ],
+        "evidence_ids": [],
+        "has_official_faq": false
+      },
+      {
+        "topic": "Sobreajuste",
+        "questions": 1,
+        "interaction_ids": [
+          "interaction-3"
+        ],
+        "evidence_ids": [
+          "faq-1168"
+        ],
+        "has_official_faq": true
+      }
+    ],
+    "warnings": [],
+    "formato_briefing": {
+      "status": "exito",
+      "resumen_comunidad": {
+        "total_interacciones_procesadas": 5,
+        "sentimiento_predominante": "Neutral",
+        "temas_principales": [
+          "LangGraph",
+          "Sobreajuste",
+          "Datos faltantes"
+        ]
+      },
+      "activos_distribucion_generados": {
+        "destaque_newsletter_semanal": {
+          "seccion": "Tip de la Semana",
+          "titular": "Evita bucles infinitos",
+          "resumen": "Tip de la semana: En LangGraph, siempre incluye un contador de intentos en tu estado cuando uses nodos condicionales. Esto evita que tu grafo se quede atrapado en un bucle infinito si el LLM no responde como esperas. ¡Controla tus flujos!"
+        },
+        "sugerencia_contenido_faq": {
+          "tema": "LangGraph",
+          "origen": "Duda planteada por Valentina R en #dudas-langgraph (y 1 más)",
+          "status": "derivado_a_mentoria"
+        },
+        "contenido_educativo": [
+          {
+            "tema": "LangGraph",
+            "dudas": 2,
+            "tutorial_rapido": {
+              "titulo": "Manejo de bucles y reintentos en LangGraph",
+              "contenido": "Sin FAQ oficial: borrador para validar con un mentor. Para gestionar la lógica de reintentos y evitar bucles infinitos en tus grafos, sigue estos pasos: 1. Define un estado que incluya un contador de intentos. 2. Implementa un nodo condicional que verifique si el contador supera tu límite. 3. Si el límite se alcanza, dirige el flujo a un nodo de salida o error. 4. Si no, incrementa el contador y reintenta la llamada al LLM. Ejemplo: if state['intentos'] > 3: return 'finalizar' else: return 'nodo_llm'."
+            },
+            "tip_semana": "Tip de la semana: En LangGraph, siempre incluye un contador de intentos en tu estado cuando uses nodos condicionales. Esto evita que tu grafo se quede atrapado en un bucle infinito si el LLM no responde como esperas. ¡Controla tus flujos!",
+            "tema_documentacion": {
+              "titulo": "Guía de control de flujo y reintentos en LangGraph",
+              "propuesta": "Motivación: 2 dudas detectadas sobre bucles y routers. Secciones: 1. Introducción a los nodos condicionales. 2. Implementación de contadores en el State. 3. Estrategias para evitar bucles infinitos. 4. Patrones de diseño para routers. Respaldo: Contenido nuevo necesario."
+            },
+            "respaldo_faq_oficial": [],
+            "status": "derivado_a_mentoria"
+          },
+          {
+            "tema": "Sobreajuste",
+            "dudas": 1,
+            "tutorial_rapido": {
+              "titulo": "Identificación y mitigación de sobreajuste",
+              "contenido": "El sobreajuste ocurre cuando el modelo aprende el ruido de los datos de entrenamiento, afectando su desempeño en datos nuevos. Pasos: 1. Compara métricas de entrenamiento vs prueba. 2. Si la diferencia es alta (ej. 98% vs 65%), confirma sobreajuste. 3. Reduce la complejidad del modelo o aumenta los datos. 4. Aplica técnicas de regularización. Ejemplo: Si tu modelo es un árbol, limita su profundidad máxima (max_depth) para restringir el aprendizaje de detalles irrelevantes."
+            },
+            "tip_semana": "Tip de la semana: ¿Tu modelo brilla en entrenamiento pero falla en prueba? Es sobreajuste. El modelo está memorizando ruido en lugar de aprender patrones. Simplifica tu modelo o usa regularización para mejorar su capacidad de generalización.",
+            "tema_documentacion": {
+              "titulo": "Diagnóstico y solución de sobreajuste",
+              "propuesta": "Motivación: 1 duda sobre discrepancia en métricas. Secciones: 1. ¿Qué es el sobreajuste? 2. Cómo identificarlo mediante métricas de entrenamiento y prueba. 3. Técnicas de regularización comunes. 4. Estrategias de validación cruzada. Respaldo: Basado en faq-1168, se requiere ampliar con técnicas prácticas."
+            },
+            "respaldo_faq_oficial": [
+              "faq-1168"
+            ],
+            "status": "respuesta_con_faq_oficial"
+          }
+        ]
+      },
+      "almacenamiento_oci": {
+        "bucket": null,
+        "ruta_objeto": "salidas/paquetes/13a7e0d3-4dfd-49f2-b8e9-57d0abd6f6eb.json",
+        "status": "guardado_local"
+      }
+    }
+  }
+}
