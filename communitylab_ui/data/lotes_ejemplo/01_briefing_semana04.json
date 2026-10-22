@@ -1,0 +1,18 @@
+{
+  "origen_comunidad": "Discord_Grupo_ONE_G10",
+  "periodo_referencia": "Semana_04",
+  "interacciones": [
+    {
+      "autor": "Mariana Souza",
+      "canal": "#logros-y-empleos",
+      "tipo": "testimonio",
+      "texto": "Comunidad, quede seleccionada para el puesto de Desarrolladora Junior de IA! El proyecto del curso de LangChain y OCI que construi en mi portfolio marco toda la diferencia en la entrevista tecnica. Muy agradecida con la comunidad por todo el apoyo!"
+    },
+    {
+      "autor": "Lucas Albuquerque",
+      "canal": "#dudas-langgraph",
+      "tipo": "pregunta_tecnica",
+      "texto": "Tengo dudas sobre como estructurar los nodos condicionales en LangGraph cuando la respuesta del LLM necesita reintento. Alguien tiene un ejemplo practico de router?"
+    }
+  ]
+}

@@ -10,22 +10,24 @@ directamente. Todos usan una sola funcion:
     clave = obtener_secreto("GEMINI_API_KEY")
 
 De donde sale ese valor es problema de este archivo, no del que lo usa.
-Hoy sale de un archivo .env local. Con OCI Vault configurado sale de ahi y
-nadie mas tiene que cambiar una sola linea de su codigo.
+En una computadora sale de un archivo .env local; en produccion sale de
+OCI Vault, y nadie mas tiene que cambiar una sola linea de su codigo.
 
 COMO ELIGE LA FUENTE
 --------------------
 Se controla con la variable de entorno FUENTE_SECRETOS:
 
-    FUENTE_SECRETOS=env    -> lee del archivo .env          (por defecto)
-    FUENTE_SECRETOS=vault  -> lee de OCI Vault
+    FUENTE_SECRETOS=env    -> lee del archivo .env          (si no se define)
+    FUENTE_SECRETOS=vault  -> lee de OCI Vault              (produccion)
     FUENTE_SECRETOS=auto   -> intenta Vault, si falla usa .env  (recomendado)
 
 QUE NECESITA EL MODO vault / auto
 ---------------------------------
-    1. OCI_VAULT_OCID en el .env (es un identificador, no un secreto).
-    2. Un archivo ~/.oci/config con las credenciales de tu usuario de OCI
-       (se genera con `oci setup config` o desde la consola de OCI).
+    1. OCI_VAULT_ID en el .env (es un identificador, no un secreto). Tambien
+       se acepta el nombre OCI_VAULT_OCID.
+    2. Con OCI_AUTH=config: un archivo ~/.oci/config con las credenciales de
+       tu usuario de OCI (se genera con `oci setup config` o desde la consola).
+       Con OCI_AUTH=instance_principal (servidor de OCI Compute) no hace falta.
     3. Una politica IAM que permita leer los secretos (ver README).
     4. Opcional: OCI_CONFIG_PROFILE si usas un perfil distinto de DEFAULT.
 
@@ -56,6 +58,12 @@ logger = logging.getLogger(__name__)
 # se le puso al secreto en la consola de OCI.
 # ---------------------------------------------------------------------------
 CATALOGO_SECRETOS: dict[str, dict[str, str]] = {
+    "BACKEND_URL": {
+        "env": "BACKEND_URL",
+        "vault": "communitylab-backend-url",
+        "descripcion": "Direccion del backend (por defecto http://localhost:8000).",
+        "obligatorio": "no",
+    },
     "GEMINI_API_KEY": {
         "env": "GEMINI_API_KEY",
         "vault": "communitylab-gemini-api-key",
@@ -94,7 +102,7 @@ class SecretoNoEncontrado(Exception):
 
 
 # ---------------------------------------------------------------------------
-# Fuente 1: archivo .env local
+# Fuente 1: archivo .env local  (por defecto, para trabajar en una computadora)
 # ---------------------------------------------------------------------------
 def _cargar_dotenv_una_vez() -> None:
     """Lee el archivo .env y mete sus valores en las variables de entorno."""
@@ -130,61 +138,105 @@ def _fuente_activa() -> str:
 
 
 def _leer_de_env(nombre_logico: str) -> str | None:
+    """Lee un secreto del entorno (o del .env) usando su nombre en el catalogo."""
     _cargar_dotenv_una_vez()
     clave_env = CATALOGO_SECRETOS.get(nombre_logico, {}).get("env", nombre_logico)
     return os.environ.get(clave_env)
 
 
 # ---------------------------------------------------------------------------
-# Fuente 2: OCI Vault
+# Fuente 2: OCI Vault  (produccion en OCI Compute)
+#
+# Variables que usa (se leen siempre del entorno o del .env, nunca del Vault):
+#   OCI_VAULT_ID        OCID del Vault (se acepta tambien OCI_VAULT_OCID)
+#   OCI_AUTH            config (archivo ~/.oci/config) | instance_principal
+#   OCI_REGION          region del Vault (opcional con instance_principal)
+#   OCI_CONFIG_FILE     ruta del archivo de configuracion (solo con config)
+#   OCI_CONFIG_PROFILE  perfil del archivo (solo con config)
+# Son los mismos nombres que usa el backend (ver su docs/secretos.md).
 #
 # Nota de costo: usar el Vault virtual (el tipo por defecto) con clave de
 # software. El Private Vault y las claves HSM dedicadas si tienen costo.
 # Verificar los limites vigentes de Always Free antes de crear nada.
 # ---------------------------------------------------------------------------
+def _id_vault() -> str | None:
+    """OCID del Vault, leido del entorno o del .env."""
+    _cargar_dotenv_una_vez()
+    return os.environ.get("OCI_VAULT_ID") or os.environ.get("OCI_VAULT_OCID")
+
+
 @functools.lru_cache(maxsize=1)
 def _cliente_vault():
-    """Crea una sola vez el cliente de OCI Secrets (import perezoso)."""
-    import oci  # solo se necesita si se usa Vault
-
-    perfil = os.environ.get("OCI_CONFIG_PROFILE", "DEFAULT")
-    cfg = oci.config.from_file(profile_name=perfil)
-    return oci.secrets.SecretsClient(cfg)
-
-
-def _leer_de_vault(nombre_logico: str) -> str | None:
     """
-    Lee un secreto de OCI Vault por su nombre y devuelve su version vigente.
+    Crea una sola vez el cliente oficial de OCI para leer secretos.
 
-    Nunca lanza excepciones: si algo falla (sin ~/.oci/config, sin permisos,
-    secreto inexistente, sin paquete oci) registra el motivo en el log y
-    devuelve None. Asi el modo 'auto' puede caer a .env sin romperse.
-    En el log se escribe el tipo de error, JAMAS el valor del secreto.
+    Con OCI_AUTH=config usa el archivo de configuracion de OCI (para probar
+    desde una computadora); con OCI_AUTH=instance_principal usa la identidad
+    del servidor de OCI Compute, sin claves guardadas. El SDK (paquete oci)
+    se importa aqui para que el panel arranque aunque no este instalado.
+    Si falla, lanza la excepcion original y no se guarda en cache.
     """
+    import oci  # se importa solo si de verdad se usa el Vault
+
     _cargar_dotenv_una_vez()
-    vault_id = os.environ.get("OCI_VAULT_OCID")
-    nombre_en_vault = CATALOGO_SECRETOS.get(nombre_logico, {}).get("vault")
+    autenticacion = os.environ.get("OCI_AUTH", "config").lower()
+    region = os.environ.get("OCI_REGION") or None
+    if autenticacion == "instance_principal":
+        firmante = oci.auth.signers.InstancePrincipalsSecurityTokenSigner()
+        return oci.secrets.SecretsClient({"region": region} if region else {}, signer=firmante)
+    ruta = os.path.expanduser(os.environ.get("OCI_CONFIG_FILE", "~/.oci/config"))
+    config = oci.config.from_file(ruta, os.environ.get("OCI_CONFIG_PROFILE", "DEFAULT"))
+    if region:
+        config["region"] = region
+    return oci.secrets.SecretsClient(config)
 
-    if not vault_id:
-        logger.warning("OCI_VAULT_OCID no esta definido; no se puede leer '%s' de Vault.", nombre_logico)
-        return None
-    if not nombre_en_vault:
-        logger.warning("'%s' no esta en el catalogo; no se puede buscar en Vault.", nombre_logico)
-        return None
 
+def _leer_de_vault(nombre_logico: str, cliente=None) -> str | None:
+    """
+    Lee un secreto de OCI Vault y devuelve su texto, o None si no se pudo.
+
+    Busca el nombre del Vault en CATALOGO_SECRETOS (columna "vault"); un
+    nombre fuera del catalogo devuelve None. Nunca lanza excepciones: si
+    falta el SDK, OCI_VAULT_ID, el permiso o el propio secreto, registra un
+    aviso SIN el valor y devuelve None, para que FUENTE_SECRETOS=auto pueda
+    seguir con el .env. ``cliente`` permite usar un cliente falso en pruebas.
+    """
+    nombre_vault = CATALOGO_SECRETOS.get(nombre_logico, {}).get("vault")
+    id_vault = _id_vault()
+    if not nombre_vault:
+        return None
+    if not id_vault:
+        # En modo auto es lo normal en una computadora: se sigue con el .env sin avisar.
+        registrar = logger.info if _fuente_activa() == "auto" else logger.warning
+        registrar("Falta OCI_VAULT_ID; no se puede leer %s de OCI Vault", nombre_logico)
+        return None
     try:
-        respuesta = _cliente_vault().get_secret_bundle_by_name(
-            secret_name=nombre_en_vault,
-            vault_id=vault_id,
-        )
-        contenido = respuesta.data.secret_bundle_content.content  # viene en base64
-        return base64.b64decode(contenido).decode("utf-8")
-    except Exception as exc:  # noqa: BLE001 - queremos capturar todo a proposito
-        logger.warning(
-            "No se pudo leer '%s' (%s) de OCI Vault: %s: %s",
-            nombre_logico, nombre_en_vault, type(exc).__name__, exc,
-        )
+        cliente = cliente if cliente is not None else _cliente_vault()
+    except ImportError:
+        logger.warning("El SDK de OCI (paquete oci) no esta instalado; no se puede leer OCI Vault")
         return None
+    except Exception:
+        logger.warning("No se pudo iniciar la sesion con OCI para leer el Vault (revisar OCI_AUTH y la configuracion de OCI)")
+        return None
+    try:
+        respuesta = cliente.get_secret_bundle_by_name(secret_name=nombre_vault, vault_id=id_vault)
+    except Exception as exc:
+        # No se copia el texto del error: puede traer identificadores de la cuenta.
+        estado = getattr(exc, "status", None)
+        if estado == 404:
+            logger.warning("OCI Vault no tiene el secreto '%s'", nombre_vault)
+        elif estado in (401, 403):
+            logger.warning("OCI rechazo el acceso al secreto '%s' (revisar grupo dinamico y politica 'read secret-family')", nombre_vault)
+        else:
+            logger.warning("No se pudo leer el secreto '%s' de OCI Vault (estado %s)", nombre_vault, estado or "sin respuesta")
+        return None
+    try:
+        contenido = respuesta.data.secret_bundle_content.content
+        valor = base64.b64decode(contenido, validate=True).decode("utf-8").strip()
+    except Exception:
+        logger.warning("El secreto '%s' de OCI Vault no tiene un texto valido", nombre_vault)
+        return None
+    return valor or None
 
 
 # ---------------------------------------------------------------------------
@@ -214,11 +266,14 @@ def obtener_secreto(nombre_logico: str, obligatorio: bool = True) -> str | None:
 
     if not valor and obligatorio:
         desc = CATALOGO_SECRETOS.get(nombre_logico, {}).get("descripcion", "")
+        nombre_vault = CATALOGO_SECRETOS.get(nombre_logico, {}).get("vault", nombre_logico)
+        ayuda = {
+            "vault": f"Revisa OCI_VAULT_ID, OCI_AUTH y que el secreto '{nombre_vault}' exista en el Vault.",
+            "auto": f"No esta en OCI Vault ('{nombre_vault}') ni en el .env.",
+        }.get(fuente, "Copia .env.example a .env y llena ese valor.")
         raise SecretoNoEncontrado(
             f"Falta el secreto '{nombre_logico}' (fuente activa: {fuente}). "
-            f"{desc} "
-            f"Revisa .env, o que exista en OCI Vault con el nombre "
-            f"'{CATALOGO_SECRETOS.get(nombre_logico, {}).get('vault', '?')}'."
+            f"{desc} {ayuda}"
         )
     return valor
 
@@ -252,8 +307,7 @@ if __name__ == "__main__":
 
     print(f"Fuente activa: {_fuente_activa()}")
     if _fuente_activa() in ("vault", "auto"):
-        hay_ocid = "definido" if os.environ.get("OCI_VAULT_OCID") else "NO definido"
-        print(f"OCI_VAULT_OCID: {hay_ocid}")
+        print(f"OCI_VAULT_ID: {'definido' if _id_vault() else 'NO definido'}")
     print()
     for fila in diagnostico():
         marca = "OK  " if fila["estado"] == "configurado" else "FALTA"

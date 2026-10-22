@@ -6,9 +6,11 @@ tornado>=6.4
 # Nota: streamlit-mui-elements no declara tornado como dependencia,
 # pero lo necesita. Por eso se fija aqui explicitamente.
 
-# Sprint 2 (descomentar cuando toque)
+requests>=2.32,<3
+
+# Nota: el backend (FastAPI, LangGraph, Gemini, Cohere, OCI) tiene su propio
+# requirements.txt en communitylab_backend/. Este panel solo lo llama por HTTP.
+
+# SDK de OCI para leer OCI Vault (FUENTE_SECRETOS=vault o auto).
+# El panel arranca aunque no este instalado: solo se importa al usar el Vault.
 oci==2.140.0
-# fastapi==0.115.6
-# uvicorn==0.34.0
-# langchain==0.3.14
-# google-generativeai==0.8.3

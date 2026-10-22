@@ -59,6 +59,7 @@ SENTIMIENTO = {
     "positivo":     "#3987E5",
     "neutro":       "#80868B",
     "negativo":     "#D03B3B",
+    "mixto":        "#B07D1A",
 }
 
 ESTADO = {
@@ -71,9 +72,13 @@ TIPO_ACTIVO = {
     "tip_faq":              ("Tip / FAQ",     "#0D47A1", "#E3EDFB"),
     "post_linkedin":        ("Post LinkedIn", "#4A3AA7", "#EAE7F8"),
     "destacado_newsletter": ("Newsletter",    "#8A4B00", "#FBEEE0"),
+    "caso_exito":           ("Historia de éxito", "#0A6B0A", "#E3F5E3"),
+    "tutorial_rapido":      ("Tutorial rápido",  "#0D47A1", "#E3EDFB"),
+    "tip_semana":           ("Tip de la semana", "#8A4B00", "#FBEEE0"),
+    "tema_documentacion":   ("Tema de documentación", "#4A3AA7", "#EAE7F8"),
 }
 
-SECCIONES = ["Resumen", "Mensajes procesados", "Curaduría de activos", "Configuración"]
+SECCIONES = ["Procesar lote", "Motor de FAQ", "Esta semana", "Resumen", "Mensajes procesados", "Curaduría de activos", "Base de conocimiento", "Configuración"]
 
 
 CSS = f"""
@@ -348,7 +353,155 @@ div[data-testid="stExpander"] summary p {{ font-size: 13px; font-weight: 500; }}
     border-color: {PRIMARY} !important;
 }}
 
+/* ===================== BANDEJA DE CURADURIA =====================
+   La lista de la izquierda es un st.radio dentro de un contenedor con
+   key="cl_bandeja" (Streamlit le agrega la clase .st-key-cl_bandeja).
+   Cada opcion se dibuja como una fila de bandeja de entrada.            */
+.st-key-cl_bandeja [role="radiogroup"] {{ gap: 6px; width: 100%; }}
+.st-key-cl_bandeja [data-testid="stRadioOption"] {{
+    width: 100%; margin: 0; padding: 10px 12px 9px 12px;
+    background: {SURFACE}; border: 1px solid {DIVIDER}; border-radius: 10px;
+    transition: border-color .15s ease, background .15s ease;
+    cursor: pointer;
+}}
+.st-key-cl_bandeja [data-testid="stRadioOption"]:hover {{
+    border-color: {PRIMARY_LIGHT}; background: #F7FAFF;
+}}
+.st-key-cl_bandeja [data-testid="stRadioOption"][data-selected="true"] {{
+    border-color: {PRIMARY}; background: #EAF2FD;
+    box-shadow: inset 3px 0 0 {PRIMARY};
+}}
+.st-key-cl_bandeja [data-testid="stRadioOption"] > div > div:first-child {{ display: none !important; }}
+.st-key-cl_bandeja [data-testid="stRadioOption"] p {{
+    font-size: 13px !important; line-height: 1.4 !important; color: {INK} !important;
+}}
+.st-key-cl_bandeja [data-testid="stCaptionContainer"] p,
+.st-key-cl_bandeja [data-testid="stRadioOption"] small {{
+    font-size: 11.5px !important; color: {INK_MUTED} !important;
+}}
+.st-key-cl_bandeja [data-testid="stWidgetLabel"] {{ display: none; }}
+
+/* Filtro de estado de la bandeja (st.segmented_control, key="bandeja_filtro"):
+   mas compacto para que las cuatro opciones entren en la columna. */
+.st-key-bandeja_filtro [data-testid="stButtonGroup"] > div {{ flex-wrap: wrap; gap: 4px; }}
+.st-key-bandeja_filtro button {{ padding: 4px 10px !important; min-height: 32px; }}
+.st-key-bandeja_filtro button p {{ font-size: 12.5px !important; }}
+
+.cl-progreso {{ font-size: 12.5px; color: {INK_SECONDARY}; margin: -6px 0 6px 0; }}
+.cl-progreso b {{ color: {INK}; font-weight: 500; }}
+.cl-contador {{ font-size: 12px; color: {INK_MUTED}; margin-top: -6px; }}
+.cl-contador.excedido {{ color: #A62C2C; font-weight: 500; }}
+.cl-vacio {{
+    text-align: center; padding: 60px 20px; color: {INK_SECONDARY};
+    border: 1px dashed {DIVIDER}; border-radius: 14px; background: {SURFACE};
+}}
+.cl-vacio b {{ display: block; font-size: 17px; color: {INK}; font-weight: 500; margin-bottom: 6px; }}
+
+/* ---------- Vistas previas por canal ---------- */
+.pv-tag {{ color: #0A66C2; font-weight: 500; }}
+.pv-li {{
+    max-width: 555px; background: #fff; border: 1px solid #DCDFE3; border-radius: 10px;
+    font-family: -apple-system, 'Segoe UI', Roboto, sans-serif; color: #1D2226;
+}}
+.pv-li-head {{ display: flex; gap: 10px; align-items: center; padding: 12px 16px 6px; }}
+.pv-li-avatar {{
+    width: 46px; height: 46px; border-radius: 50%; flex-shrink: 0;
+    background: linear-gradient(135deg, {PRIMARY_DARK}, {PRIMARY_LIGHT});
+    color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700;
+}}
+.pv-li-name {{ font-size: 14px; font-weight: 600; }}
+.pv-li-sub {{ font-size: 12px; color: #666; }}
+.pv-li-body {{ padding: 6px 16px 10px; font-size: 14px; line-height: 1.5; }}
+.pv-fold {{
+    display: block; margin: 8px 0; padding: 3px 8px; font-size: 11.5px; color: #666;
+    border-top: 1px dashed #C9CDD2; border-bottom: 1px dashed #C9CDD2; background: #FAFAFA;
+}}
+.pv-rest {{ color: #444; }}
+.pv-li-react {{ padding: 6px 16px; font-size: 12px; color: #666; border-bottom: 1px solid #E8E8E8; }}
+.pv-li-react span {{ margin-left: 6px; }}
+.pv-li-actions {{ display: flex; justify-content: space-around; padding: 8px 6px; font-size: 13px; color: #666; font-weight: 600; }}
+
+.pv-nl {{ background: #EEF1F4; border-radius: 12px; padding: 18px; }}
+.pv-nl-card {{ max-width: 600px; margin: 0 auto; background: #fff; border-radius: 8px; padding: 22px 26px; box-shadow: 0 1px 3px rgba(0,0,0,.08); }}
+.pv-nl-top {{ display: flex; justify-content: space-between; font-size: 12px; color: {INK_MUTED}; border-bottom: 2px solid {PRIMARY}; padding-bottom: 8px; margin-bottom: 14px; }}
+.pv-nl-top b {{ color: {PRIMARY_DARK}; }}
+.pv-nl-sec {{ font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: #B35309; font-weight: 600; }}
+.pv-nl-title {{ font-size: 19px; font-weight: 600; color: {INK}; margin: 4px 0 8px; line-height: 1.35; }}
+.pv-nl-body {{ font-size: 14px; line-height: 1.65; color: #333; }}
+.pv-nl-cta {{ display: inline-block; margin-top: 14px; padding: 8px 14px; border-radius: 6px; background: {PRIMARY}; color: #fff; font-size: 13px; font-weight: 500; }}
+
+.pv-faq {{ background: #fff; border: 1px solid {DIVIDER}; border-radius: 12px; padding: 18px 22px; }}
+.pv-faq-label {{ font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: {PRIMARY}; font-weight: 600; }}
+.pv-faq-title {{ font-size: 18px; font-weight: 600; color: {INK}; margin: 4px 0 10px; }}
+.pv-faq-body {{ font-size: 14px; line-height: 1.65; color: #333; }}
+.pv-faq-ok, .pv-faq-warn {{ margin-top: 14px; padding: 8px 12px; border-radius: 8px; font-size: 12.5px; }}
+.pv-faq-ok {{ background: #E3F5E3; color: #0A6B0A; }}
+.pv-faq-warn {{ background: #FFF4D6; color: #8A6D00; }}
+
+.pv-story {{ background: #fff; border: 1px solid {DIVIDER}; border-radius: 12px; padding: 18px 22px; }}
+.pv-story-warn {{ background: #FFF4D6; color: #8A6D00; font-size: 12.5px; padding: 8px 12px; border-radius: 8px; margin-bottom: 14px; }}
+.pv-story-label {{ font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: #0A6B0A; font-weight: 600; }}
+.pv-story-title {{ font-size: 20px; font-weight: 600; color: {INK}; margin: 4px 0 10px; }}
+.pv-story-body {{ font-size: 14.5px; line-height: 1.7; color: #333; }}
+
+.pv-tip {{ max-width: 560px; background: #313338; border-radius: 10px; padding: 14px 16px; color: #DBDEE1; font-size: 14px; line-height: 1.55; }}
+.pv-tip-head {{ display: flex; gap: 8px; align-items: center; margin-bottom: 8px; font-size: 13px; }}
+.pv-tip-head b {{ color: #fff; }}
+.pv-tip-bot {{ width: 32px; height: 32px; border-radius: 50%; background: {PRIMARY}; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; }}
+.pv-tip-tag {{ background: #5865F2; color: #fff; font-size: 10px; padding: 1px 5px; border-radius: 4px; }}
+.pv-tip-ch {{ color: #949BA4; margin-left: auto; }}
+.pv-tip-card {{ border-left: 4px solid #F0B232; background: #2B2D31; border-radius: 4px; padding: 10px 12px; }}
+.pv-tip-title {{ color: #fff; font-weight: 600; margin-bottom: 4px; }}
+.pv-doc {{ background: #fff; border: 1px solid {DIVIDER}; border-radius: 12px; overflow: hidden; }}
+.pv-doc-bar {{ background: #EAE7F8; color: #4A3AA7; font-size: 12px; font-weight: 600; padding: 8px 18px; letter-spacing: .4px; }}
+.pv-doc-body {{ padding: 16px 22px; }}
+
+.pv-src {{ padding: 10px 0 4px; border-bottom: 1px solid {DIVIDER}; }}
+.pv-src-head {{ display: flex; gap: 8px; align-items: center; flex-wrap: wrap; font-size: 12.5px; color: {INK_SECONDARY}; margin-bottom: 6px; }}
+.pv-src-head b {{ color: {INK}; font-weight: 500; }}
+.pv-src-title {{ font-size: 12.5px; color: {INK_SECONDARY}; font-weight: 500; margin: 16px 0 2px; }}
+.pv-dot {{ width: 8px; height: 8px; border-radius: 50%; display: inline-block; }}
+.pv-chips {{ display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }}
+.pv-chip {{ font-size: 11.5px; padding: 2px 9px; border-radius: 12px; background: #EDEFF2; color: {INK_SECONDARY}; }}
+.pv-chip-blue {{ background: #EAF2FD; color: {PRIMARY_DARK}; }}
+.pv-chip-green {{ background: #E3F5E3; color: #0A6B0A; }}
+.pv-chip-red {{ background: #FBE5E5; color: #A62C2C; }}
+
+/* ===================== MOTOR DE FAQ ===================== */
+.cl-flujo {{
+    display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+    background: {SURFACE}; border: 1px solid {DIVIDER}; border-radius: 14px;
+    padding: 12px 16px; margin: -8px 0 18px 0; font-size: 13px; color: {INK};
+}}
+.cl-flujo span {{ background: #EAF2FD; color: {PRIMARY_DARK}; border-radius: 16px; padding: 5px 12px; font-weight: 500; }}
+.cl-flujo span.cl-flujo-core {{ background: {PRIMARY}; color: #fff; }}
+.cl-flujo b {{ color: {INK_MUTED}; font-weight: 400; }}
+.cl-tema-head {{ display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 10px; }}
+.cl-tema-nombre {{ font-size: 18px; font-weight: 600; color: {INK}; margin-right: 6px; }}
+.cl-col-titulo {{ font-size: 11.5px; letter-spacing: .8px; text-transform: uppercase; color: {INK_MUTED}; font-weight: 600; margin-bottom: 6px; }}
+.cl-flecha {{ font-size: 30px; color: {PRIMARY_LIGHT}; text-align: center; padding-top: 70px; }}
+.cl-mini {{ max-height: 300px; overflow: auto; border-radius: 12px; }}
+.cl-mini .pv-faq, .cl-mini .pv-doc .pv-doc-body {{ padding: 12px 14px; }}
+.cl-mini .pv-faq-title {{ font-size: 15px; }}
+.cl-mini .pv-faq-body, .cl-mini .pv-tip {{ font-size: 13px; }}
+.cl-mini-q {{ font-size: 13px !important; margin-bottom: 8px !important; }}
+.cl-mini .pv-tip-ch {{ display: none; }}
+
 /* Ocultar chrome de Streamlit */
 #MainMenu, footer, header {{ visibility: hidden; }}
+
+/* ...pero NO el boton que vuelve a abrir la barra lateral. Vive dentro del
+   header: si se oculta junto con el, al contraer la barra no hay forma de
+   recuperar el menu (Resumen, Mensajes, Curaduria). */
+header [data-testid="stExpandSidebarButton"],
+header [data-testid="stSidebarCollapsedControl"] {{
+    visibility: visible !important;
+}}
+header [data-testid="stExpandSidebarButton"] {{
+    background: linear-gradient(135deg, {PRIMARY_DARK}, {PRIMARY});
+    color: #fff !important; border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(21,101,192,.32);
+}}
+header [data-testid="stExpandSidebarButton"] span {{ color: #fff !important; }}
 </style>
 """
