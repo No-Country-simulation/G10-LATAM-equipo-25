@@ -42,6 +42,10 @@ para construir adaptadores; esta clase no realiza llamadas a proveedores.
     oci_namespace: str | None = None
     oci_bucket: str | None = None
     oci_compartment_id: str | None = None
+    oci_auth: Literal["config", "instance_principal"] = "config"
+    oci_config_file: Path = Path("~/.oci/config")
+    oci_config_profile: str = "DEFAULT"
+    oci_object_prefix: str = "activos"
     success_keywords: str = "conseguí trabajo,logré,certifiqué,gradué,success,got a job"
     faq_keywords: str = "cómo,como,how,ayuda,error,problema,help,?"
     success_types: str = "testimonial"
