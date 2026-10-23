@@ -1,0 +1,23 @@
+# Dependencias para EJECUTAR el backend de CommunityLab.
+# Instalar:  pip install -r communitylab_backend/requirements.txt
+# Rangos compatibles: aceptan versiones nuevas del mismo bloque mayor y evitan
+# saltos que puedan romper la API. Probado con Python 3.13 y 3.14.
+
+# API HTTP
+fastapi>=0.115,<1
+uvicorn>=0.34,<1
+
+# Modelos y configuración
+pydantic>=2.9,<3
+pydantic-settings>=2.6,<3
+
+# Orquestación del flujo
+langgraph>=1.0,<2
+
+# Proveedores externos
+cohere>=7.2,<8          # Embed y Rerank
+google-genai>=2.30,<3   # Gemini
+oci>=2.140,<3           # OCI Object Storage (solo se usa con STORAGE_PROVIDER=oci)
+
+# Nota: el módulo dataset_builder (sanitización PII y RAG local) todavía no está
+# en el repositorio; cuando se agregue, sus dependencias deben declararse aquí.
