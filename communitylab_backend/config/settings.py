@@ -25,7 +25,7 @@ para construir adaptadores; esta clase no realiza llamadas a proveedores.
     embedding_provider: Literal["mock", "cohere"] = "mock"
     reranker_provider: Literal["mock", "cohere"] = "mock"
     vector_store_provider: Literal["local", "oci"] = "local"
-    retrieval_provider: Literal["mock", "existing_local"] = "mock"
+    retrieval_provider: Literal["mock", "existing_local", "semantic"] = "mock"
     storage_provider: Literal["local", "oci"] = "local"
     secret_provider: Literal["environment", "oci"] = "environment"
     local_storage_dir: Path = Path("output/backend/drafts")
@@ -34,11 +34,18 @@ para construir adaptadores; esta clase no realiza llamadas a proveedores.
     gemini_model: str = "gemini-3.8-flash"
     cohere_embed_model: str = "embed-v4.0"
     cohere_rerank_model: str = "rerank-v4.0-pro"
+    cohere_embed_dimension: int | None = None
     provider_timeout_seconds: float = 30.0
+    faq_index_path: Path = Path("data/faq_index.json")
+    retrieval_candidates: int = 20
     oci_region: str | None = None
     oci_namespace: str | None = None
     oci_bucket: str | None = None
     oci_compartment_id: str | None = None
+    oci_auth: Literal["config", "instance_principal"] = "config"
+    oci_config_file: Path = Path("~/.oci/config")
+    oci_config_profile: str = "DEFAULT"
+    oci_object_prefix: str = "activos"
     success_keywords: str = "conseguí trabajo,logré,certifiqué,gradué,success,got a job"
     faq_keywords: str = "cómo,como,how,ayuda,error,problema,help,?"
     success_types: str = "testimonial"
