@@ -61,6 +61,7 @@ El `.env` del panel **no lleva claves de IA**: el que habla con Gemini y Cohere 
 | Variable | Para qué | Cuándo cambiarla |
 |---|---|---|
 | `BACKEND_URL` | Dirección del motor | Si el motor no está en `http://localhost:8000` (por ejemplo, en un servidor) |
+| `PANEL_PASSWORD` | Contraseña para entrar al panel. Vacía, el panel no la pide | Solo cuando el panel se publica en internet (ver `docs/despliegue-hugging-face.md` en la rama del motor) |
 | `FUENTE_SECRETOS` | De dónde lee el panel sus datos: `auto` (la plantilla; usa el Vault si está configurado y, si no, este archivo), `env` (solo este archivo) o `vault` (solo OCI Vault) | Normalmente no se toca |
 | `OCI_VAULT_ID`, `OCI_AUTH` | Datos del Vault (también se acepta `OCI_VAULT_OCID`) | Solo si se usa OCI Vault |
 

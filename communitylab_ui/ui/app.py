@@ -35,6 +35,7 @@ COMO EJECUTARLO
     streamlit run ui/app.py
 """
 
+import hmac
 import json
 from datetime import datetime
 import re
@@ -50,6 +51,7 @@ sys.path.insert(0, str(RAIZ))
 
 from core import backend                    # noqa: E402
 from core import ingesta                    # noqa: E402
+from core.secretos import obtener_secreto   # noqa: E402
 from core.adaptador import armar_vista, resumen_respuesta  # noqa: E402
 from core.adaptador import lote_desde_resenas, resultado_importacion, resultados_busqueda, tabla_resenas  # noqa: E402
 from core.adaptador import vista_base as armar_base  # noqa: E402
@@ -1076,6 +1078,31 @@ def banner(estado: dict | None) -> None:
              'IA, configura <b>LLM_PROVIDER=gemini</b> en el .env del backend.</span></div>')
 
 
+def acceso_permitido() -> bool:
+    """
+    Pide la contrasena del panel cuando esta publicado en internet.
+
+    Si PANEL_PASSWORD no esta configurada (uso local), deja pasar sin pedir
+    nada. Si esta, muestra un formulario y solo deja pasar con la contrasena
+    correcta; la comparacion no revela por tiempo cuantas letras coinciden.
+    El acceso dura lo que dure la pestana del navegador.
+    """
+    clave = obtener_secreto("PANEL_PASSWORD", obligatorio=False)
+    if not clave or st.session_state.get("_acceso_panel"):
+        return True
+    _, centro, _ = st.columns([1, 1.2, 1])
+    with centro:
+        html('<div class="cl-head"><div><h1>CommunityLab</h1><p>Panel de curaduría · acceso del equipo</p></div></div>')
+        with st.form("acceso_panel"):
+            intento = st.text_input("Contraseña", type="password")
+            if st.form_submit_button("Entrar", type="primary", width="stretch"):
+                if hmac.compare_digest(intento.encode("utf-8"), clave.encode("utf-8")):
+                    st.session_state["_acceso_panel"] = True
+                    st.rerun()
+                st.error("Contraseña incorrecta.")
+    return False
+
+
 def main() -> None:
     """Punto de entrada del panel: configura la pagina y muestra la seccion elegida."""
     st.set_page_config(
@@ -1085,6 +1112,8 @@ def main() -> None:
         initial_sidebar_state="expanded",
     )
     html(T.CSS)
+    if not acceso_permitido():
+        return
     init_estado()
 
     estado = estado_motor(backend.estado())

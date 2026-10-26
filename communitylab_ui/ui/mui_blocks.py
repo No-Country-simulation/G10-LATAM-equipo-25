@@ -480,6 +480,10 @@ def tarjeta_almacenamiento(estado: dict | None, ubicaciones: list) -> None:
                 else:
                     texto = (f"carpeta  : {almacen.get('carpeta')}\n"
                              "Para OCI: STORAGE_PROVIDER=oci en el .env del backend.")
+                if estado is not None:
+                    texto += ("\nmemoria  : OCI (historial y FAQs respaldados en el bucket)"
+                              if estado.get("memoria") == "oci"
+                              else "\nmemoria  : archivos locales en data/")
                 if ubicaciones:
                     texto += "\n\nÚltimos paquetes guardados:\n" + "\n".join(
                         f"  {u}" for u in ubicaciones[-6:])
@@ -504,7 +508,9 @@ def tarjeta_secretos(filas: list) -> None:
 
                 for i, f in enumerate(filas):
                     ok = f["estado"] == "configurado"
+                    opcional = f["estado"] == "opcional"
                     color = (T.SENTIMIENTO["muy_positivo"] if ok
+                             else T.INK_SECONDARY if opcional
                              else T.SENTIMIENTO["negativo"])
                     with mui.Stack(direction="row", alignItems="center",
                                    spacing=1.4,
@@ -513,7 +519,7 @@ def tarjeta_secretos(filas: list) -> None:
                                        "flexWrap": "wrap",
                                        **ENTRADA,
                                        "animationDelay": f"{i * .07:.2f}s"}):
-                        getattr(mui.icon, "CheckCircle" if ok else "Cancel")(
+                        getattr(mui.icon, "CheckCircle" if ok else "RemoveCircleOutline" if opcional else "Cancel")(
                             sx={"color": color, "fontSize": 19})
                         mui.Typography(f["secreto"], variant="body2",
                                        sx={"fontFamily": "'Roboto Mono', monospace",
@@ -521,7 +527,7 @@ def tarjeta_secretos(filas: list) -> None:
                                            "backgroundColor": "#F1F3F4",
                                            "px": 1, "py": .3, "borderRadius": "4px",
                                            "color": T.INK})
-                        mui.Typography("Configurado" if ok else "Falta",
+                        mui.Typography("Configurado" if ok else "Opcional" if opcional else "Falta",
                                        variant="body2",
                                        sx={"color": color, "fontSize": "12px",
                                            "fontWeight": 500})

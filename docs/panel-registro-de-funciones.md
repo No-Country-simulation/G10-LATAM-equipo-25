@@ -59,7 +59,7 @@ Traduce lo que responde el motor (en inglés) a lo que dibujan las vistas (en es
 | `_analisis_por_mensaje` | Une el análisis del motor con cada mensaje del lote | 8 |
 | `rutas_de`, `resumen_respuesta` | Qué rutas activó el lote y la frase de "lote procesado" | 8 |
 | `_es_pregunta`, `_faq_de` | Detectar dudas y separar pregunta y respuesta de una FAQ citada | 2 |
-| `numero_activos`, `ubicacion`, `resumen_guardado`, `estado_motor`, `decision_backend`, `activo_para_guardar` | Traducen los datos que antes las vistas leían directo del motor: cuántos borradores hay, dónde se guardó, qué modelo usa y cómo se envía la curaduría | 18 |
+| `numero_activos`, `ubicacion`, `resumen_guardado`, `estado_motor` (desde el cambio 21 también `memoria`), `decision_backend`, `activo_para_guardar` | Traducen los datos que antes las vistas leían directo del motor: cuántos borradores hay, dónde se guardó, qué modelo usa y cómo se envía la curaduría | 18 |
 | `vista_base`, `citas_en_sesion`, `resultados_busqueda`, `tabla_resenas`, `lote_desde_resenas` | Base de conocimiento: resumen, FAQs más citadas, buscador y reseñas reales convertidas en un lote | 14 |
 | `resultado_importacion` (y `fila`) | Resultado de agregar FAQs: qué se agrega, qué ya existía y qué filas tienen errores | 15 |
 | `ranking_dudas` (y `respaldo`) | Ranking de dudas frecuentes, con un texto que dice si cada tema tiene FAQ oficial | 16 |
@@ -81,9 +81,9 @@ Traduce lo que responde el motor (en inglés) a lo que dibujan las vistas (en es
 |---|---|---|---|
 | `_leer_de_vault` | Cambiada | Lee un secreto de OCI Vault | En el Sprint 1 era un espacio vacío. Braulio (commit `50645d3`) y nosotros (cambio 10) lo implementamos en paralelo y se combinaron (cambio 20): queda nuestra versión, con mensajes por tipo de error y sin copiar identificadores de la cuenta |
 | `_id_vault`, `_cliente_vault` | Nuevas | Obtienen la identificación del Vault (`OCI_VAULT_ID` u `OCI_VAULT_OCID`) y abren una sola conexión con OCI, con archivo de configuración o con la identidad del servidor | Necesarias para leer del Vault |
-| `obtener_secreto`, `diagnostico` | Cambiadas | Devuelven un secreto (o el estado de todos) venga del `.env` o del Vault | Respetan la opción `auto` y usan `_fuente_activa` |
+| `obtener_secreto`, `diagnostico` | Cambiadas | Devuelven un secreto (o el estado de todos) venga del `.env` o del Vault | Respetan la opción `auto` y usan `_fuente_activa`; `diagnostico` marca como "opcional" un secreto no obligatorio sin configurar (cambio 21) |
 | `_fuente_activa` | Nueva (aporte de Braulio, commit `50645d3`) | Dice de dónde leer los secretos | Lee el `.env` antes de decidir; corrige que la primera consulta ignorara un `FUENTE_SECRETOS` escrito en el `.env` (cambio 20) |
-| `CATALOGO_SECRETOS` | Cambiado | Lista de secretos del proyecto | Suma `BACKEND_URL` y, de Braulio, `COHERE_API_KEY` (cambios 10 y 20) |
+| `CATALOGO_SECRETOS` | Cambiado | Lista de secretos del proyecto | Suma `BACKEND_URL`, `PANEL_PASSWORD` y, de Braulio, `COHERE_API_KEY` (cambios 10, 20 y 21) |
 
 ---
 
@@ -93,6 +93,7 @@ Traduce lo que responde el motor (en inglés) a lo que dibujan las vistas (en es
 
 | Función | Estado | Para qué sirve | Cambio |
 |---|---|---|---|
+| `acceso_permitido` | Nueva | Pide la contraseña del panel cuando está publicado en internet | 21 |
 | `cargar_resultados` | **Quitada** | Leía un archivo de ejemplo fijo | La reemplaza la conexión real con el motor (cambio 2) |
 | `init_estado`, `main`, `barra_lateral` | Cambiadas | Preparan la sesión, el menú y la sección elegida | Secciones nuevas y sesión recuperable (cambios 4, 14, 16 y 17) |
 | `vista_procesar`, `procesar`, `agregar_corrida` | Nuevas | Enviar un lote al motor (ejemplo, archivo o texto pegado) y guardarlo en la sesión | 4 |
@@ -114,8 +115,8 @@ Traduce lo que responde el motor (en inglés) a lo que dibujan las vistas (en es
 |---|---|---|
 | `fila_metricas`, `barra_apilada_sentimiento`, `panel_temas`, `tabla_grupos`, `lista_mensajes` | Cambiadas | Muestran datos reales y se acomodan mejor en pantallas angostas (cambios 6, 9 y 12) |
 | `cabecera_activo` | Cambiada | Íconos de los tipos nuevos y chip de tema (cambio 16) |
-| `tarjeta_almacenamiento`, `tarjeta_origen` | Cambiadas | Muestran la configuración real del motor, ya traducida por el adaptador (cambios 5 y 18) |
-| `tarjeta_secretos` | Cambiada | Dice qué secretos están configurados, nunca su valor (cambio 10) |
+| `tarjeta_almacenamiento`, `tarjeta_origen` | Cambiadas | Muestran la configuración real del motor, ya traducida por el adaptador, y dónde vive su memoria (cambios 5, 18 y 21) |
+| `tarjeta_secretos` | Cambiada | Dice qué secretos están configurados, nunca su valor; los opcionales sin configurar salen en gris (cambios 10 y 21) |
 | `tabla_corridas`, `tabla_apoyo` | Nuevas | Qué rutas eligió el motor en cada lote y quién necesita apoyo (cambio 9) |
 
 ### `ui/previas.py` (nuevo, cambios 11 y 16)

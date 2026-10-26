@@ -64,6 +64,12 @@ CATALOGO_SECRETOS: dict[str, dict[str, str]] = {
         "descripcion": "Direccion del backend (por defecto http://localhost:8000).",
         "obligatorio": "no",
     },
+    "PANEL_PASSWORD": {
+        "env": "PANEL_PASSWORD",
+        "vault": "communitylab-panel-password",
+        "descripcion": "Contraseña para entrar al panel publicado. Vacia: el panel abre sin pedirla (uso local).",
+        "obligatorio": "no",
+    },
     "GEMINI_API_KEY": {
         "env": "GEMINI_API_KEY",
         "vault": "communitylab-gemini-api-key",
@@ -180,12 +186,15 @@ def _cliente_vault():
 
     _cargar_dotenv_una_vez()
     autenticacion = os.environ.get("OCI_AUTH", "config").lower()
-    region = os.environ.get("OCI_REGION") or None
+    # OCI_VAULT_REGION / OCI_VAULT_CONFIG_PROFILE: por si el Vault esta en otra
+    # region o en otra cuenta de OCI que el bucket. Vacios: se usan los generales.
+    region = os.environ.get("OCI_VAULT_REGION") or os.environ.get("OCI_REGION") or None
+    perfil = os.environ.get("OCI_VAULT_CONFIG_PROFILE") or os.environ.get("OCI_CONFIG_PROFILE", "DEFAULT")
     if autenticacion == "instance_principal":
         firmante = oci.auth.signers.InstancePrincipalsSecurityTokenSigner()
         return oci.secrets.SecretsClient({"region": region} if region else {}, signer=firmante)
     ruta = os.path.expanduser(os.environ.get("OCI_CONFIG_FILE", "~/.oci/config"))
-    config = oci.config.from_file(ruta, os.environ.get("OCI_CONFIG_PROFILE", "DEFAULT"))
+    config = oci.config.from_file(ruta, perfil)
     if region:
         config["region"] = region
     return oci.secrets.SecretsClient(config)
@@ -282,7 +291,8 @@ def diagnostico() -> list[dict[str, str]]:
     """
     Revisa que secretos estan configurados y cuales faltan, SIN mostrar
     ningun valor. Sirve para el panel de Streamlit y para que cada
-    integrante verifique su entorno sin pedir ayuda.
+    integrante verifique su entorno sin pedir ayuda. Un secreto opcional
+    sin configurar aparece como "opcional", no como faltante.
     """
     fuente = _fuente_activa()
     reporte = []
@@ -294,7 +304,7 @@ def diagnostico() -> list[dict[str, str]]:
         reporte.append({
             "secreto": nombre,
             "fuente": fuente,
-            "estado": "configurado" if valor else "FALTA",
+            "estado": "configurado" if valor else ("FALTA" if meta.get("obligatorio") == "si" else "opcional"),
             "descripcion": meta["descripcion"],
         })
     return reporte
@@ -310,5 +320,5 @@ if __name__ == "__main__":
         print(f"OCI_VAULT_ID: {'definido' if _id_vault() else 'NO definido'}")
     print()
     for fila in diagnostico():
-        marca = "OK  " if fila["estado"] == "configurado" else "FALTA"
+        marca = {"configurado": "OK  ", "opcional": "OPC "}.get(fila["estado"], "FALTA")
         print(f"[{marca}] {fila['secreto']:<20} {fila['descripcion']}")

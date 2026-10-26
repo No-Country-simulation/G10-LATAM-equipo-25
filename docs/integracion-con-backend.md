@@ -283,6 +283,23 @@ Queda un detalle conocido: las tablas de Material UI dejan algo de espacio vací
   - el diagnóstico lista también Cohere.
 - **Archivos:** `communitylab_ui/core/secretos.py`, `communitylab_ui/.env.example`, `communitylab_ui/requirements.txt`, `communitylab_ui/README.md`, `.gitignore`, `docs/panel-instalacion.md`, `docs/panel-registro-de-funciones.md`.
 
+### Cambio 21 · Contraseña para el panel publicado y memoria del motor en Configuración
+
+- **Qué:**
+  - **Pantalla de acceso** (`acceso_permitido` en `ui/app.py`). Si `PANEL_PASSWORD` está configurada, el panel pide la contraseña antes de mostrar cualquier cosa, menú incluido. La comparación no revela por tiempo cuántas letras coinciden (`hmac.compare_digest`) y el acceso dura lo que dure la pestaña. Si `PANEL_PASSWORD` está vacía, como en uso local, no pide nada.
+  - **De dónde sale la contraseña:** viene del catálogo de secretos (`communitylab-panel-password` en OCI Vault). Con `FUENTE_SECRETOS=auto` se lee del Vault y, si no está, de la variable `PANEL_PASSWORD`.
+  - **Secretos opcionales:** en la tarjeta de *Configuración*, un secreto opcional sin configurar ya no aparece en rojo como "Falta", sino en gris como "Opcional" (`diagnostico` en `core/secretos.py`).
+  - **Memoria del motor:** la tarjeta de almacenamiento muestra dónde vive la memoria, según el campo nuevo `state_provider` de `/api/v1/status` (traducido en `estado_motor`). Puede ser "OCI (historial y FAQs respaldados en el bucket)" o "archivos locales".
+  - `.env.example` suma `PANEL_PASSWORD`.
+- **Por qué:** el panel se publica en Hugging Face Spaces (cambio 22 del motor). Sin contraseña, cualquiera con el enlace podría procesar lotes, gastando la cuota de Gemini, y agregar FAQs a la base.
+- **Verificación en el navegador**, con una contraseña de prueba local:
+  - la pantalla de acceso no deja ver el menú;
+  - una contraseña incorrecta muestra "Contraseña incorrecta.";
+  - la correcta abre el panel;
+  - *Configuración* muestra `PANEL_PASSWORD` como "Configurado" sin revelarla.
+  - Sin la variable, el panel abre como siempre.
+- **Archivos:** `ui/app.py`, `core/secretos.py`, `core/adaptador.py`, `ui/mui_blocks.py`, `.env.example`, `docs/panel-instalacion.md`, `docs/panel-registro-de-funciones.md`.
+
 ### Documentos nuevos
 
 - [panel-instalacion.md](panel-instalacion.md): instalación del panel paso a paso y qué se configura en su `.env`.

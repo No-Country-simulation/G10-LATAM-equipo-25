@@ -160,6 +160,8 @@ def estado_motor(estado: dict | None) -> dict | None:
         "proveedor_llm": estado.get("llm_provider"),
         "modelo_llm": estado.get("llm_model"),
         "busqueda": estado.get("retrieval_provider"),
+        # Donde vive la memoria del motor (historial de dudas y FAQs agregadas)
+        "memoria": "oci" if estado.get("state_provider") == "oci" else "local",
         "almacen": {
             "tipo": "oci" if almacen.get("provider") == "oci" else "local",
             "bucket": almacen.get("bucket"),
