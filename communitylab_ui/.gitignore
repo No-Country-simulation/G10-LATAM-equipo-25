@@ -1,0 +1,45 @@
+# ---------------------------------------------------------------
+# Lo que NUNCA se sube del panel de curaduría
+# Antes de hacer commit: git status --ignored  (lista lo que se queda fuera)
+# ---------------------------------------------------------------
+
+# --- Secretos y credenciales ---
+# Archivo de claves. Solo se sube la plantilla .env.example
+.env
+.env.*
+!.env.example
+# Llaves y configuración de Oracle Cloud (OCI)
+*.pem
+*.key
+.oci/
+oci_api_key*.pem
+# Secretos de Streamlit
+.streamlit/secrets.toml
+
+# --- Entorno de Python ---
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+*.egg-info/
+
+# --- Pruebas ---
+.pytest_cache/
+
+# --- Datos que se generan al usar el panel ---
+# Copia local de la sesión (trae textos de la comunidad)
+data/sesion_guardada.json
+
+# --- Temporales y registros ---
+*.tmp
+*.log
+
+# --- Configuración personal de editores, asistentes y sistema ---
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+.claude/
+.cursor/

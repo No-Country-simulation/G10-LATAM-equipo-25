@@ -1,0 +1,24 @@
+{
+  "origen_comunidad": "Slack_Comunidad_Data",
+  "periodo_referencia": "Semana_05",
+  "interacciones": [
+    {
+      "autor": "Mentor_1",
+      "canal": "#anuncios",
+      "tipo": "anuncio",
+      "texto": "Este jueves tendremos sesión en vivo sobre pandas y visualización de datos. Los esperamos a todos."
+    },
+    {
+      "autor": "Estudiante_F",
+      "canal": "#general",
+      "tipo": "comentario",
+      "texto": "Excelente la sesión de ayer de Python, la comunidad está muy activa esta semana."
+    },
+    {
+      "autor": "Estudiante_G",
+      "canal": "#proyectos",
+      "tipo": "comentario",
+      "texto": "Compartí mi notebook de análisis de datos en el canal de proyectos, quedó genial con los consejos del grupo."
+    }
+  ]
+}

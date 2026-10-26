@@ -1,0 +1,76 @@
+{
+  "origen_comunidad": "Coursera_Reseñas_Reales",
+  "periodo_referencia": "Reseñas_2019_2020",
+  "interacciones": [
+    {
+      "id": "resena-324",
+      "autor": "AKPAN, G E",
+      "canal": "Reseñas Coursera · applied-data-science-capstone",
+      "tipo": "reseña",
+      "texto": "What a wonderful way to complete the '9 courses' IBM Data Science Professional Certificate training! Applied Data Science Capstone is the best way to delve into professional experience."
+    },
+    {
+      "id": "resena-1074",
+      "autor": "SHUBHAM E",
+      "canal": "Reseñas Coursera · deep-neural-network",
+      "tipo": "reseña",
+      "texto": "Okay with week 1 and week 3 but you need to improve the motive behind presenting week 2. Also what was the purpose of batch normalization?"
+    },
+    {
+      "id": "resena-1153",
+      "autor": "Fabio L d S",
+      "canal": "Reseñas Coursera · open-source-tools-for-data-science",
+      "tipo": "reseña",
+      "texto": "Do we really need to know both Watson studio and Skills network lab?Maybe it would be best to focus on one platform and explore it more in detail"
+    },
+    {
+      "id": "resena-14",
+      "autor": "Matthew E",
+      "canal": "Reseñas Coursera · data-science-methodology",
+      "tipo": "reseña",
+      "texto": "The sites have changed so following the directions of this course were very confusing and hard to understand. The update from Data Science Experience to IBM Watson studio did not relate to the video demonstrated in this class"
+    },
+    {
+      "id": "resena-215",
+      "autor": "Amiya R B",
+      "canal": "Reseñas Coursera · data-science-methodology",
+      "tipo": "reseña",
+      "texto": "I think the trainer just read out some material prepared by him. concepts are uncleared to me. bad experience"
+    },
+    {
+      "id": "resena-11",
+      "autor": "srijanapuri",
+      "canal": "Reseñas Coursera · datasciencemathskills",
+      "tipo": "reseña",
+      "texto": "I learned many new things, ideas, knowledge,and skills from this course.I am very much thankful to both professors for teaching about all of those interesting lessons,providing many more things. now, I am able to give all of the answers frequently which I learned from this beneficial course."
+    },
+    {
+      "id": "resena-16",
+      "autor": "Carlo C",
+      "canal": "Reseñas Coursera · multivariate-calculus-machine-learning",
+      "tipo": "reseña",
+      "texto": "Well done!!! The course is interesting and well organized.Lack of Pyton knowledge from my side is sometimes critical to solve some exercises...It's my intention, as soon as I'lI have complete the three couses, to attend a Pyton course to complete my preparation."
+    },
+    {
+      "id": "resena-1796",
+      "autor": "Cat-Tuong N",
+      "canal": "Reseñas Coursera · python-machine-learning",
+      "tipo": "reseña",
+      "texto": "Challenging and fun course. The number of topics is on the high side. Maybe break this into 2 courses? The programming assignments are fun. You will need to go to discussion forum to solve often encountered problems."
+    },
+    {
+      "id": "resena-127",
+      "autor": "Sebastien C",
+      "canal": "Reseñas Coursera · convolutional-neural-networks",
+      "tipo": "reseña",
+      "texto": "Content was interestind and provided good theoretical overview. Exercices where you just have to fill in some line of codes are not usefull."
+    },
+    {
+      "id": "resena-1900",
+      "autor": "Julien P",
+      "canal": "Reseñas Coursera · applied-data-science-capstone",
+      "tipo": "reseña",
+      "texto": "Great to put into action the theoretical knowledge acquired in the previous 8 classes. What could be improved? The peer-rating system can be very slow. A common practice is to go on the forum to beg for a rating by another learner. This can be tiring."
+    }
+  ]
+}

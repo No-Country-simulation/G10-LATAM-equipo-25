@@ -1,0 +1,24 @@
+{
+  "origen_comunidad": "Discord_Grupo_ONE_G10",
+  "periodo_referencia": "Semana_05",
+  "interacciones": [
+    {
+      "autor": "Estudiante_A",
+      "canal": "#dudas-machine-learning",
+      "tipo": "pregunta_tecnica",
+      "texto": "¿Cómo evito el sobreajuste en mi red neuronal? En entrenamiento me da 99% y en validación 70%. Escríbanme a estudiante.a@correo.com si tienen ejemplos."
+    },
+    {
+      "autor": "Estudiante_B",
+      "canal": "#dudas-machine-learning",
+      "tipo": "pregunta_tecnica",
+      "texto": "Alguien me explica para qué sirve el dropout? Leí que ayuda con el overfitting pero no entiendo cómo."
+    },
+    {
+      "autor": "Estudiante_C",
+      "canal": "#general",
+      "tipo": "pregunta_tecnica",
+      "texto": "Mi modelo memoriza los datos de entrenamiento, ¿la regularización L1 o L2 me ayudaría con el sobreajuste?"
+    }
+  ]
+}
