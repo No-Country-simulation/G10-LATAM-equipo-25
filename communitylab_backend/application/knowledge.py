@@ -53,14 +53,15 @@ class KnowledgeService:
         devuelven con su motivo y no se escriben. Si se agregaron FAQs y se
         indicó ``topic`` (el tema de dudas que responden), el ranking marca
         ese tema como resuelto. Si ``reindex`` falla, las FAQs quedan igual y
-        se devuelve un aviso. Puede propagar ``InvalidInteractionError``,
+        se devuelve un aviso; también se conservan los avisos de la base (por
+        ejemplo, si no se pudo respaldar en OCI). Puede propagar ``InvalidInteractionError``,
         ``RetrievalError`` o ``StorageError``.
         """
         valid, invalid = clean_faq_rows(rows)
         result = self.base.add_faqs(valid, dry_run)
         if topic and result["new_ids"]:
             self.history.attach_faqs(topic_key(topic), result["new_ids"])
-        warnings = []
+        warnings = list(result.get("warnings", []))
         if result["new_ids"] and self.reindex:
             try:
                 self.reindex()

@@ -10,11 +10,12 @@ import json
 import logging
 import time
 import uuid
+from contextlib import asynccontextmanager
 
 from fastapi import Depends, FastAPI, Query, Request
 from fastapi.responses import JSONResponse
 
-from communitylab_backend.api.dependencies import get_knowledge, get_settings, get_workflow
+from communitylab_backend.api.dependencies import build_state_mirror, get_knowledge, get_settings, get_workflow
 from communitylab_backend.api.schemas import FaqImportRequest, ProcessRequest, ProcessResponse, RagQueryRequest, RagQueryResponse, ReviewRequest, ReviewResponse
 from communitylab_backend.application.batch import process_batch, save_review
 from communitylab_backend.application.knowledge import KnowledgeService
@@ -41,7 +42,24 @@ logging.basicConfig(level=get_settings().log_level, format="%(message)s")
 for handler in logging.getLogger().handlers:
     handler.setFormatter(JsonFormatter())
 
-app = FastAPI(title="Backend de CommunityLab", version="0.1.0", description="Procesa interacciones de una comunidad y prepara borradores para revisión humana. Funciona localmente sin credenciales externas.")
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Restaura la memoria del motor desde OCI al encender, si está activa.
+
+    Con ``STATE_PROVIDER=oci`` baja el historial de dudas y la base de
+    conocimiento antes de atender la primera solicitud. Si OCI falla, lo
+    registra y deja que cada solicitud lo reintente (y responda 503 mientras
+    tanto); nunca trabaja con una memoria vacía.
+    """
+
+    try:
+        build_state_mirror(get_settings())
+    except BackendError as exc:
+        logging.getLogger(__name__).error("state_restore_failed", extra={"provider": "oci", "error_type": type(exc).__name__})
+    yield
+
+
+app = FastAPI(lifespan=lifespan, title="Backend de CommunityLab", version="0.1.0", description="Procesa interacciones de una comunidad y prepara borradores para revisión humana. Funciona localmente sin credenciales externas.")
 
 
 @app.middleware("http")
@@ -82,7 +100,7 @@ def status():
 
     settings = get_settings()
     storage = {"provider": settings.storage_provider, "bucket": settings.oci_bucket, "region": settings.oci_region, "prefix": settings.oci_object_prefix} if settings.storage_provider == "oci" else {"provider": "local", "directory": settings.local_storage_dir.as_posix()}
-    return {"llm_provider": settings.llm_provider, "llm_model": settings.gemini_model if settings.llm_provider == "gemini" else "reglas locales (mock)", "retrieval_provider": settings.retrieval_provider, "storage": storage, "secret_provider": settings.secret_provider}
+    return {"llm_provider": settings.llm_provider, "llm_model": settings.gemini_model if settings.llm_provider == "gemini" else "reglas locales (mock)", "retrieval_provider": settings.retrieval_provider, "storage": storage, "secret_provider": settings.secret_provider, "state_provider": settings.state_provider}
 
 
 @app.get("/api/v1/knowledge/summary", summary="Resumen de la base de conocimiento", description="Cuenta las FAQs oficiales, las reseñas reales y los cursos de motor_educativo.db, con el reparto de sentimiento y de notas. Sólo lee la base; no llama a proveedores.", response_description="Totales, rango de fechas, sentimiento, notas y cursos con más reseñas.", responses={502: {"description": "La base no existe o no tiene el formato esperado."}})

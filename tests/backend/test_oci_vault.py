@@ -187,6 +187,16 @@ def test_oci_mode_reads_keys_from_the_vault(dependencies, fake_vault):
     assert [name for name, _ in client.calls] == ["communitylab-gemini-api-key", "clave-cohere-prod"]
 
 
+def test_vault_can_use_its_own_region_and_profile(dependencies, fake_vault, monkeypatch):
+    """El Vault usa ``OCI_VAULT_REGION``/``OCI_VAULT_CONFIG_PROFILE`` si existen; si no, los del bucket."""
+    received = []
+    monkeypatch.setattr(dependencies, "OCIVaultSecretProvider", lambda vault_id, names, region, auth, config_file, profile, timeout: received.append((region, profile)))
+    shared = dict(secret_provider="oci", oci_vault_id="ocid1.vault.prod", oci_region="sa-saopaulo-1", oci_config_profile="DEFAULT")
+    dependencies.build_secret_provider(settings(**shared))
+    dependencies.build_secret_provider(settings(**shared, oci_vault_region="mx-queretaro-1", oci_vault_config_profile="VAULT"))
+    assert received == [("sa-saopaulo-1", "DEFAULT"), ("mx-queretaro-1", "VAULT")]
+
+
 def test_oci_mode_reports_a_missing_secret_by_name(dependencies, fake_vault):
     """Si el Vault no tiene el secreto, el error dice cuál y qué variable revisar."""
     config = settings(secret_provider="oci", oci_vault_id="ocid1.vault.prod")

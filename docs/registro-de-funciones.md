@@ -55,7 +55,7 @@ La idea es que **el corazón del motor no dependa de ningún proveedor**. Si ma�
 | **Funciona sin internet** | Con el `.env` de ejemplo, todo corre en modo local; los servicios reales se activan con una variable |
 | **Ahorro de cuota** | 2 consultas a Gemini por lote, sin importar cuántas rutas o temas tenga; textos recortados |
 | **Escrituras seguras** | Antes de agregar FAQs a la base se guarda una copia completa, y todo se escribe en una sola transacción |
-| **Pruebas sin costo** | 94 pruebas unitarias con versiones falsas de Gemini, Cohere y OCI: no gastan cuota ni necesitan red |
+| **Pruebas sin costo** | 101 pruebas unitarias con versiones falsas de Gemini, Cohere y OCI: no gastan cuota ni necesitan red |
 | **Todo documentado en español** | Cada módulo, clase y función tiene su explicación, y lo comprueba `documentation_check` |
 
 ---
@@ -212,6 +212,18 @@ Los prompts, las salvaguardas y el método `generate` original **no cambiaron**.
 | `DoubtHistory.attach_faqs` | Marca un tema como resuelto cuando el equipo agrega su FAQ |
 | `DoubtHistory._connect` | Abre el archivo y crea la tabla si hace falta |
 
+### `infrastructure/oci_state.py` (nuevo, cambio 22)
+
+| Nombre | Para qué sirve |
+|---|---|
+| `OCIFileMirror.restore` | Al encender, baja del bucket la última copia del historial y de la base; si no existe, deja la local |
+| `OCIFileMirror.save` | Sube un archivo de memoria al bucket |
+| `OCIFileMirror.object_name`, `_translate_error` | Nombre del objeto (`estado/<archivo>`) y mensajes de error seguros |
+| `MirroredDoubtHistory` (y sus 4 métodos) | Cumple `DoubtHistoryPort`: usa el historial local y lo sube a OCI después de cada cambio |
+| `MirroredKnowledgeBase` (y sus 5 métodos) | Cumple `KnowledgeBasePort`: usa la base local y la sube a OCI después de agregar FAQs |
+
+**Por qué existe:** para desplegar en un servidor cuyo disco se borra al reiniciar (Hugging Face Spaces) sin perder el ranking ni las FAQs aprendidas.
+
 ### Otros adaptadores
 
 | Archivo | Origen | Estado |
@@ -235,7 +247,8 @@ Los prompts, las salvaguardas y el método `generate` original **no cambiaron**.
 | `build_retriever`, `build_storage` | Nuevas | Eligen la búsqueda (local o Cohere) y el almacenamiento (carpeta u OCI) | 4 |
 | `get_api_key`, `build_secret_provider`, `_vault_provider` | Nuevas | Obtienen la clave de Gemini o Cohere del `.env` o de OCI Vault | 15 |
 | `rebuild_semantic_index` | Nueva | Actualiza el índice de la búsqueda inteligente al agregar FAQs | 19 |
-| `build_knowledge`, `get_knowledge` | Nuevas | Arman el servicio de la base de conocimiento | 20 |
+| `build_knowledge`, `get_knowledge` | Nuevas | Arman el servicio de la base de conocimiento | 20 y 22 |
+| `build_state_mirror`, `_state_mirror`, `build_history` | Nuevas | Con `STATE_PROVIDER=oci`, restauran la memoria desde OCI una sola vez y envuelven el historial y la base para respaldarlos | 22 |
 
 ### `api/schemas.py` (forma de los datos que entran y salen)
 
@@ -251,7 +264,8 @@ Los prompts, las salvaguardas y el método `generate` original **no cambiaron**.
 | Función | Dirección | Estado | Cambio |
 |---|---|---|---|
 | `process_activity` | `POST /api/v1/activity/process` | Cambiada: le pasa el autor a `process_batch` sin enviarlo a la IA | 8 y 13 |
-| `status` | `GET /api/v1/status` | Nueva: qué proveedores están activos, sin claves | 8 |
+| `status` | `GET /api/v1/status` | Nueva: qué proveedores están activos, sin claves; desde el cambio 22 también dónde vive la memoria | 8 y 22 |
+| `lifespan` | (al encender) | Nueva: restaura la memoria desde OCI antes de la primera solicitud | 22 |
 | `review_assets` | `POST /api/v1/assets/review` | Nueva: guarda la curaduría | 8 |
 | `knowledge_summary`, `knowledge_faqs`, `knowledge_reviews` | `GET /api/v1/knowledge/...` | Nuevas: consultar la base | 16 y 20 |
 | `import_faqs` | `POST /api/v1/knowledge/faqs/import` | Nueva: agregar FAQs | 17, 19 y 20 |
@@ -266,10 +280,18 @@ Los prompts, las salvaguardas y el método `generate` original **no cambiaron**.
 | `build_faq_index` | Rama `feature/semantic-retrieval` | Prepara el índice de la búsqueda inteligente; ahora lee la base con la misma función que el buscador y toma la clave del `.env` o del Vault | 5 y 15 |
 | `search_faq` | Rama `feature/semantic-retrieval` | Busca una pregunta desde la terminal; toma la clave del `.env` o del Vault | 15 |
 | `check_oci` | Rama `feature/oci-object-storage` | Prueba la conexión con el bucket | Sin cambios |
+| `sync_state` | Nueva | Sube o baja la memoria del motor (historial y base) al bucket | 22 |
 
 ### `config/settings.py`
 
-`Settings` suma las variables nuevas, todas con un valor por defecto que funciona en modo local: `FAQ_DB_PATH`, `FAQ_BACKUP_DIR`, `HISTORY_DB_PATH`, `RETRIEVAL_MIN_SCORE`, `OCI_VAULT_ID`, `OCI_SECRET_GEMINI`, `OCI_SECRET_COHERE` y los tipos y palabras del briefing (cambios 7, 15, 17, 18 y 19).
+`Settings` suma las variables nuevas, todas con un valor por defecto que funciona en modo local: `FAQ_DB_PATH`, `FAQ_BACKUP_DIR`, `HISTORY_DB_PATH`, `RETRIEVAL_MIN_SCORE`, `OCI_VAULT_ID`, `OCI_SECRET_GEMINI`, `OCI_SECRET_COHERE`, `STATE_PROVIDER`, `OCI_STATE_PREFIX` y los tipos y palabras del briefing (cambios 7, 15, 17, 18, 19 y 22).
+
+### `despliegue/huggingface/` (nuevo, cambio 22)
+
+| Archivo | Para qué sirve |
+|---|---|
+| `Dockerfile` | Arma el contenedor del Space: Python 3.13, descarga las dos ramas de GitHub e instala el motor y el panel |
+| `arrancar.sh` | Arma la configuración de OCI con los secretos, enciende el motor solo hacia adentro y el panel hacia afuera, y reinicia todo si uno se cae |
 
 ---
 
@@ -280,6 +302,6 @@ Los prompts, las salvaguardas y el método `generate` original **no cambiaron**.
 | `test_gemini_adapter.py` | Solo cambió el JSON falso de una prueba, porque el esquema de Gemini ahora pide señales y temas (cambios 13 y 18) |
 | `test_semantic_wiring.py`, `test_storage_wiring.py` | Ajustes de integración (cambio 10) |
 | `test_semantic_retriever.py` | Suma una prueba del umbral `min_score` (cambio 19) |
-| `test_oci_vault.py`, `test_faq_import.py`, `test_motor_faq.py`, `test_knowledge_service.py` | Nuevos (cambios 15, 17, 18 y 20) |
+| `test_oci_vault.py`, `test_faq_import.py`, `test_motor_faq.py`, `test_knowledge_service.py`, `test_oci_state.py` | Nuevos (cambios 15, 17, 18, 20 y 22) |
 
 Todas son pruebas unitarias. No se agregaron pruebas de punta a punta ni de aceptación.

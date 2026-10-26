@@ -184,13 +184,18 @@ La llave `.pem` y el archivo `config` **nunca** se suben al repositorio. Más de
 
 En un servidor no conviene dejar claves en un archivo. Para eso el motor puede leerlas de **OCI Vault** (una caja fuerte de Oracle) cambiando una sola línea: `SECRET_PROVIDER=oci`. Los pasos para crear el Vault, darle permiso al servidor y **rotar una clave** (cambiarla sin tocar el código) están en [secretos.md](secretos.md).
 
-### 6.5 Credenciales del panel
+### 6.5 Publicar en internet
+
+Para publicar el proyecto (motor y panel) en Hugging Face Spaces, con la memoria y las claves en OCI, sigue [despliegue-hugging-face.md](despliegue-hugging-face.md).
+
+### 6.6 Credenciales del panel
 
 El `.env` del panel **no lleva claves de IA**: el que habla con Gemini y Cohere es el motor. Lo único que se cambia ahí es:
 
 | Variable | Para qué | Cuándo cambiarla |
 |---|---|---|
 | `BACKEND_URL` | Dirección del motor | Si el motor no está en `http://localhost:8000` (por ejemplo, en un servidor) |
+| `PANEL_PASSWORD` | Contraseña para entrar al panel. Vacía, el panel no la pide | Solo cuando el panel se publica en internet |
 | `FUENTE_SECRETOS` | De dónde lee el panel sus datos: `auto` (la plantilla; usa OCI Vault si está configurado y, si no, este archivo), `env` o `vault` | Normalmente no se toca |
 
 La vista **Configuración** del panel muestra qué datos están configurados, **sin mostrar nunca los valores**.

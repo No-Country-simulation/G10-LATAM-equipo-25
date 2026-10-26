@@ -344,6 +344,40 @@ Qué hace cada función que cambió desde la rama original, y por qué: [registr
   - Ninguno de esos 86 tiene claves. Las pruebas de OCI usan valores de mentira (`ocid1.user.oc1..aaaa`).
 - **Archivos:** `.gitignore`.
 
+### Cambio 22 · Memoria del motor en OCI Object Storage y despliegue en Hugging Face Spaces
+
+- **Contexto:** no se pudo crear la máquina en OCI Compute. Los organizadores confirmaron que se puede desplegar en cualquier lugar, siempre que se usen los servicios de OCI. Se eligió **Hugging Face Spaces** (Docker, gratis), con **OCI Object Storage** y **OCI Vault** como servicios centrales.
+- **Problema a resolver:** el disco de un Space se borra al reiniciar. Sin un cambio, se perderían el historial de dudas (el ranking) y las FAQs que el equipo agrega a la base.
+- **Qué:**
+  - **`STATE_PROVIDER=oci`** (nuevo; por defecto sigue `local`). El módulo nuevo `infrastructure/oci_state.py` tiene tres piezas:
+    - `OCIFileMirror`: al encender, baja del bucket `estado/historial_dudas.db` y `estado/motor_educativo.db`; si todavía no existen, usa las copias locales del repositorio. También sabe subirlos.
+    - `MirroredDoubtHistory`: envuelve al historial local y lo sube después de cada cambio.
+    - `MirroredKnowledgeBase`: envuelve a la base local y la sube después de agregar FAQs.
+  - Las dos envolturas cumplen los mismos contratos (`DoubtHistoryPort` y `KnowledgeBasePort`): el grafo, la API y los casos de uso no cambiaron.
+  - **Seguridad de la memoria:** si OCI no responde al encender, el motor **no trabaja con una memoria vacía**, porque después la subiría encima de la buena. Responde 503 con un mensaje claro y reintenta en la siguiente solicitud. La restauración ocurre una sola vez por proceso, protegida con un candado, al encender (`lifespan` en `main.py`).
+  - Si subir la base falla después de agregar FAQs, las FAQs quedan y la respuesta trae un aviso. `KnowledgeService` ahora conserva los avisos que vienen de la base.
+  - `GET /api/v1/status` informa `state_provider`.
+  - Nueva herramienta `python -m communitylab_backend.tools.sync_state subir|bajar`, para cargar la memoria inicial al bucket o traer la del servidor.
+  - **Despliegue:** `despliegue/huggingface/Dockerfile` (Python 3.13; clona las dos ramas de GitHub e instala el motor y el panel juntos) y `despliegue/huggingface/arrancar.sh` (arma `~/.oci/config` con los secretos del Space, enciende el motor solo hacia adentro y el panel hacia afuera, y reinicia el contenedor si uno de los dos se cae).
+  - `.gitattributes`: los `.sh` y el `Dockerfile` siempre con fin de línea LF, porque se ejecutan en Linux.
+  - Guía paso a paso: [despliegue-hugging-face.md](despliegue-hugging-face.md).
+- **Por qué así:** la memoria vive en OCI y el servidor solo ejecuta. Se puede cambiar de proveedor de hosting sin perder nada, y OCI pasa a ser el corazón del proyecto: paquetes, conocimiento, memoria y claves. Se respetó la arquitectura hexagonal, porque la memoria remota es solo otro adaptador.
+- **Verificación:**
+  - 7 pruebas nuevas en `tests/backend/test_oci_state.py`, con un bucket falso:
+    - restaurar un archivo de 3 MB por partes;
+    - primer arranque sin copia en el bucket;
+    - un 403 detiene sin filtrar identificadores;
+    - las subidas ocurren solo cuando algo cambió;
+    - aviso si falla la subida;
+    - la restauración ocurre una sola vez al armar el motor.
+  - En total pasan 101 pruebas y `documentation_check` está completo.
+  - Se confirmó en el SDK de OCI instalado que `get_object` entrega el contenido por partes (`data.raw.stream`).
+  - **Motor encendido con `STATE_PROVIDER=oci` y una configuración de OCI inválida:** `/health` responde, `/status` informa `state_provider: oci`, y el ranking y el procesamiento responden 503 con "No se pudo iniciar la sesión con OCI". No se escribió ningún paquete.
+  - **`arrancar.sh`:** con una llave de prueba generada en el momento, armó un `~/.oci/config` que el SDK de OCI valida. También funciona con la llave en base64 y, si falta un secreto, lo nombra.
+  - Las librerías del motor y del panel se instalan juntas en Python 3.13 sin conflictos (93 paquetes, `oci 2.140.0`).
+  - **No se probó** contra una cuenta real de OCI ni en Hugging Face, porque no hay credenciales ni Docker en el entorno de trabajo.
+- **Archivos:** `infrastructure/oci_state.py` (nuevo), `api/dependencies.py`, `application/knowledge.py`, `main.py`, `config/settings.py`, `tools/sync_state.py` (nuevo), `.env.example`, `.gitattributes` (nuevo), `despliegue/huggingface/Dockerfile` (nuevo), `despliegue/huggingface/arrancar.sh` (nuevo), `tests/backend/test_oci_state.py` (nuevo), `docs/despliegue-hugging-face.md` (nuevo), `README.md`, `docs/instalacion.md`, `docs/registro-de-funciones.md`.
+
 ## 8. Pendientes
 
 | Pendiente | Quién lo destraba |
@@ -354,5 +388,6 @@ Qué hace cada función que cambió desde la rama original, y por qué: [registr
 | Agregar pruebas unitarias para `route` con varias rutas, `compose`, `InteractionRules` y `briefing_format` | Equipo de backend (hoy se verificaron a mano y con los ejemplos) |
 | Ajustar con el equipo de comunidad los pesos de relevancia y las palabras de frustración del modo local | Equipo de comunidad y marketing |
 | Crear el Vault, los secretos, el grupo dinámico y la política, y probar `SECRET_PROVIDER=oci` en el servidor (pasos en `docs/secretos.md`) | Quien administra la cuenta OCI |
-| OCI Vector Store y despliegue en OCI Compute | Siguientes etapas (opcionales en el briefing) |
+| Publicar el Space siguiendo [despliegue-hugging-face.md](despliegue-hugging-face.md) y probar la memoria en OCI con la cuenta real | Quien tiene las credenciales de OCI |
+| OCI Vector Store | Siguiente etapa (opcional en el briefing) |
 | Pruebas de aceptación y de punta a punta | Se dejaron fuera de esta etapa por tiempo |

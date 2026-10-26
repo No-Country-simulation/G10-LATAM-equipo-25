@@ -27,6 +27,7 @@ para construir adaptadores; esta clase no realiza llamadas a proveedores.
     vector_store_provider: Literal["local", "oci"] = "local"
     retrieval_provider: Literal["mock", "faq_db", "semantic"] = "faq_db"
     storage_provider: Literal["local", "oci"] = "local"
+    state_provider: Literal["local", "oci"] = "local"
     secret_provider: Literal["environment", "oci"] = "environment"
     local_storage_dir: Path = Path("salidas/paquetes")
     gemini_api_key: str | None = Field(default=None, repr=False)
@@ -50,7 +51,12 @@ para construir adaptadores; esta clase no realiza llamadas a proveedores.
     oci_config_file: Path = Path("~/.oci/config")
     oci_config_profile: str = "DEFAULT"
     oci_object_prefix: str = "activos"
+    oci_state_prefix: str = "estado"
     oci_vault_id: str | None = None
+    # Vacíos: el Vault usa OCI_REGION y OCI_CONFIG_PROFILE (los del bucket).
+    # Sirven cuando el Vault está en otra región o en otra cuenta de OCI.
+    oci_vault_region: str | None = None
+    oci_vault_config_profile: str | None = None
     oci_secret_gemini: str = "communitylab-gemini-api-key"
     oci_secret_cohere: str = "communitylab-cohere-api-key"
     success_keywords: str = "conseguí trabajo,quedé seleccionad,me contrataron,logré,certifiqué,gradué,success,got a job"

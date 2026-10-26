@@ -4,7 +4,9 @@ Selecciona adaptadores a partir de ``Settings`` para que el dominio y el
 grafo no necesiten conocer los proveedores concretos.
 """
 
+import threading
 from functools import lru_cache
+from pathlib import Path
 
 from communitylab_backend.application.knowledge import KnowledgeService
 from communitylab_backend.application.orchestration import ProcessingWorkflow
@@ -15,10 +17,14 @@ from communitylab_backend.infrastructure.cohere_adapters import CohereEmbeddingA
 from communitylab_backend.infrastructure.doubt_history import DoubtHistory
 from communitylab_backend.infrastructure.faq_database import SqliteFaqRetriever, SqliteKnowledgeBase
 from communitylab_backend.infrastructure.gemini_adapter import GeminiLLMAdapter
+from communitylab_backend.infrastructure.oci_state import MirroredDoubtHistory, MirroredKnowledgeBase, OCIFileMirror
 from communitylab_backend.infrastructure.oci_storage import OCIObjectStorageAdapter
 from communitylab_backend.infrastructure.oci_vault import OCIVaultSecretProvider
 from communitylab_backend.infrastructure.vector_index import LocalVectorStore
 from communitylab_backend.infrastructure.local import ExistingSanitizerAdapter, LocalObjectStorageAdapter, MockLLMProvider, MockRetriever
+
+# Evita que dos solicitudes simultáneas restauren la memoria a la vez.
+_STATE_LOCK = threading.Lock()
 
 SECRET_SETTINGS = {"GEMINI_API_KEY": ("gemini_api_key", "oci_secret_gemini", "OCI_SECRET_GEMINI"), "COHERE_API_KEY": ("cohere_api_key", "oci_secret_cohere", "OCI_SECRET_COHERE")}
 
@@ -50,12 +56,16 @@ def _vault_provider(vault_id: str | None, secret_names: tuple, region: str | Non
 def build_secret_provider(settings: Settings) -> OCIVaultSecretProvider:
     """Devuelve el lector de OCI Vault configurado en ``settings``.
 
-    Sólo se usa con ``SECRET_PROVIDER=oci``. Produce
+    Sólo se usa con ``SECRET_PROVIDER=oci``. ``OCI_VAULT_REGION`` y
+    ``OCI_VAULT_CONFIG_PROFILE`` reemplazan a la región y al perfil del bucket
+    cuando el Vault vive en otra región o en otra cuenta de OCI. Produce
     ``ProviderUnavailableError`` si falta ``OCI_VAULT_ID`` o la sesión de OCI.
     """
 
     names = tuple((name, getattr(settings, field)) for name, (_, field, _) in SECRET_SETTINGS.items())
-    return _vault_provider(settings.oci_vault_id, names, settings.oci_region, settings.oci_auth, settings.oci_config_file, settings.oci_config_profile, settings.provider_timeout_seconds)
+    region = settings.oci_vault_region or settings.oci_region
+    profile = settings.oci_vault_config_profile or settings.oci_config_profile
+    return _vault_provider(settings.oci_vault_id, names, region, settings.oci_auth, settings.oci_config_file, profile, settings.provider_timeout_seconds)
 
 
 def get_api_key(settings: Settings, name: str) -> str | None:
@@ -132,6 +142,50 @@ def build_storage(settings: Settings):
     return None
 
 
+@lru_cache
+def _state_mirror(namespace: str | None, bucket: str | None, region: str | None, prefix: str, auth: str, config_file: Path, profile: str, timeout_seconds: float, history_path: Path, faq_db_path: Path) -> OCIFileMirror:
+    """Crea el espejo de OCI y restaura la memoria **una sola vez** por proceso.
+
+    Baja de OCI el historial de dudas y la base de conocimiento antes de que
+    el motor los use. Recibe valores simples de ``Settings`` para poder usarlos
+    como clave de la caché. Si OCI falla, propaga el error y no guarda nada en
+    caché: el motor responde 503 y vuelve a intentarlo en la siguiente
+    solicitud, en vez de trabajar con una memoria vacía que después pisaría
+    la buena.
+    """
+
+    mirror = OCIFileMirror(namespace, bucket, region, prefix, auth, config_file, profile, timeout_seconds)
+    for path in (history_path, faq_db_path):
+        mirror.restore(path)
+    return mirror
+
+
+def build_state_mirror(settings: Settings) -> OCIFileMirror | None:
+    """Devuelve el espejo de la memoria en OCI, o ``None`` con ``STATE_PROVIDER=local``.
+
+    Con ``oci`` usa el mismo bucket y la misma autenticación que el
+    almacenamiento de paquetes, bajo el prefijo ``OCI_STATE_PREFIX``. Puede
+    producir ``ProviderUnavailableError`` o ``StorageError``.
+    """
+
+    if settings.state_provider != "oci":
+        return None
+    with _STATE_LOCK:
+        return _state_mirror(settings.oci_namespace, settings.oci_bucket, settings.oci_region, settings.oci_state_prefix, settings.oci_auth, settings.oci_config_file, settings.oci_config_profile, settings.provider_timeout_seconds, settings.history_db_path, settings.faq_db_path)
+
+
+def build_history(settings: Settings):
+    """Devuelve el historial de dudas (``DoubtHistoryPort``) según ``STATE_PROVIDER``.
+
+    Con ``local`` es el archivo SQLite; con ``oci``, el mismo archivo pero
+    respaldado en OCI después de cada cambio.
+    """
+
+    history = DoubtHistory(settings.history_db_path)
+    mirror = build_state_mirror(settings)
+    return MirroredDoubtHistory(history, mirror, settings.history_db_path) if mirror else history
+
+
 def build_workflow(settings: Settings) -> ProcessingWorkflow:
     """Construye el grafo con los adaptadores elegidos por ``settings``.
 
@@ -146,7 +200,7 @@ def build_workflow(settings: Settings) -> ProcessingWorkflow:
     storage = build_storage(settings)
     if llm is None or retriever is None or storage is None:
         raise ProviderUnavailableError("Unknown configured provider")
-    return ProcessingWorkflow(ExistingSanitizerAdapter(), llm, retriever, storage, DoubtHistory(settings.history_db_path))
+    return ProcessingWorkflow(ExistingSanitizerAdapter(), llm, retriever, storage, build_history(settings))
 
 
 def get_workflow() -> ProcessingWorkflow:
@@ -164,10 +218,15 @@ def build_knowledge(settings: Settings) -> KnowledgeService:
 
     Usa ``motor_educativo.db`` (``FAQ_DB_PATH``), el historial de dudas
     (``HISTORY_DB_PATH``) y, al agregar FAQs, reconstruye el índice semántico
-    si esa búsqueda está activa. No abre archivos hasta que se usa.
+    si esa búsqueda está activa. Con ``STATE_PROVIDER=oci``, la base y el
+    historial se respaldan en OCI después de cada cambio.
     """
 
-    return KnowledgeService(SqliteKnowledgeBase(settings.faq_db_path, settings.faq_backup_dir), DoubtHistory(settings.history_db_path), lambda: rebuild_semantic_index(settings))
+    base = SqliteKnowledgeBase(settings.faq_db_path, settings.faq_backup_dir)
+    mirror = build_state_mirror(settings)
+    if mirror:
+        base = MirroredKnowledgeBase(base, mirror, settings.faq_db_path)
+    return KnowledgeService(base, build_history(settings), lambda: rebuild_semantic_index(settings))
 
 
 def get_knowledge() -> KnowledgeService:

@@ -47,7 +47,7 @@ Hackathon ONE G10 · Oracle Next Education & Alura · Equipo 25
 flowchart TB
     U([Equipo de marketing y comunidad])
 
-    subgraph CMP["OCI Compute Ampere A1 · despliegue (pendiente)"]
+    subgraph CMP["Hugging Face Spaces · Docker (despliegue)"]
         UI["Streamlit<br/>Panel de curaduría<br/><i>rama feature/ui-curaduria</i>"]
         API["FastAPI + LangGraph<br/>Backend IA · orquestación RAG<br/><i>este repositorio</i>"]
     end
@@ -89,7 +89,7 @@ flowchart TB
 | UI | Streamlit | Implementado (rama `feature/ui-curaduria`) |
 | Vector store | OCI Generative AI Vector Stores | Pendiente. Hoy el índice vectorial es un archivo JSON local |
 | Secretos | OCI Vault | Implementado (`SECRET_PROVIDER=oci`). Falta probar con una cuenta real; por defecto se usa el `.env` |
-| Hosting | OCI Compute Ampere A1 | Pendiente (diferencial opcional) |
+| Hosting | Hugging Face Spaces (Docker) | Listo para publicar con [docs/despliegue-hugging-face.md](docs/despliegue-hugging-face.md). La memoria del motor (`STATE_PROVIDER=oci`) y las claves viven en OCI; el servidor solo ejecuta |
 
 El backend sigue una **arquitectura hexagonal**: el dominio define contratos (*puertos*) y cada proveedor externo es un *adaptador* intercambiable. Por eso cada pieza tiene un modo local que no necesita claves, y se cambia a Gemini, Cohere u OCI con una variable de entorno, sin tocar el flujo.
 
@@ -304,6 +304,7 @@ Todas las variables están explicadas en [`.env.example`](.env.example). Las pri
 ├── ejemplos/                    Lotes de demostración (JSON y CSV)
 ├── salidas/respuestas/          Resultados de la demostración
 ├── docs/                        Documentación por tema
+├── despliegue/huggingface/      Dockerfile y arranque para Hugging Face Spaces
 ├── tests/backend/               Pruebas unitarias
 └── .env.example                 Plantilla de configuración
 ```
@@ -331,6 +332,7 @@ Todas las variables están explicadas en [`.env.example`](.env.example). Las pri
 |---|---|
 | [docs/integracion-ramas.md](docs/integracion-ramas.md) | **Qué se integró de cada rama, qué se cambió y por qué**, y las mejoras posteriores (varias rutas por lote, análisis por mensaje, formato del briefing, claves desde OCI Vault) |
 | [docs/instalacion.md](docs/instalacion.md) | **Instalación paso a paso y cambio de credenciales**, en lenguaje simple |
+| [docs/despliegue-hugging-face.md](docs/despliegue-hugging-face.md) | **Publicar el proyecto en Hugging Face Spaces** con OCI Object Storage y OCI Vault |
 | [docs/registro-de-funciones.md](docs/registro-de-funciones.md) | **Para qué sirve cada función que cambió y por qué**, y cómo se respeta la arquitectura hexagonal |
 | [docs/motor-faq-base-de-datos.md](docs/motor-faq-base-de-datos.md) | Cómo se buscan las FAQs en `motor_educativo.db` |
 | [docs/guia-demo.md](docs/guia-demo.md) | Guion paso a paso para la demostración |
