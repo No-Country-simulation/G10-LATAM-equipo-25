@@ -1,0 +1,166 @@
+{
+  "entrada": {
+    "community_source": "Slack_Comunidad_Data",
+    "reference_period": "Semana_05",
+    "interactions": [
+      {
+        "id": null,
+        "author": "Mentor_1",
+        "channel": "#anuncios",
+        "type": "anuncio",
+        "text": "Este jueves tendremos sesión en vivo sobre pandas y visualización de datos. Los esperamos a todos."
+      },
+      {
+        "id": null,
+        "author": "Estudiante_F",
+        "channel": "#general",
+        "type": "comentario",
+        "text": "Excelente la sesión de ayer de Python, la comunidad está muy activa esta semana."
+      },
+      {
+        "id": null,
+        "author": "Estudiante_G",
+        "channel": "#proyectos",
+        "type": "comentario",
+        "text": "Compartí mi notebook de análisis de datos en el canal de proyectos, quedó genial con los consejos del grupo."
+      }
+    ]
+  },
+  "respuesta": {
+    "status": "success",
+    "request_id": "ba6c81bb-d55a-4a02-a585-2bd01af67329",
+    "community_summary": {
+      "total_interactions_processed": 3,
+      "predominant_sentiment": "positive",
+      "main_topics": [
+        "Pandas",
+        "Visualización de datos",
+        "Python",
+        "Análisis de datos"
+      ]
+    },
+    "insights": [
+      "La comunidad muestra un alto nivel de compromiso y participación activa.",
+      "Los miembros valoran positivamente las sesiones en vivo y el apoyo colaborativo en proyectos."
+    ],
+    "routing": {
+      "selected_flow": "success_story",
+      "reason": "Señal de historia de éxito: 1 logro(s) o testimonio(s)",
+      "flows": [
+        "success_story"
+      ],
+      "reasons": {
+        "success_story": "Señal de historia de éxito: 1 logro(s) o testimonio(s)"
+      }
+    },
+    "generated_assets": [
+      {
+        "kind": "success_story",
+        "title": "De la práctica al proyecto: un análisis de datos compartido",
+        "body": "Un miembro de nuestra comunidad logró consolidar sus conocimientos en Python y Pandas al desarrollar y compartir su propio notebook de análisis de datos. Gracias a la retroalimentación y los consejos recibidos en el canal de proyectos, pudo perfeccionar su trabajo y obtener un resultado de alta calidad, demostrando cómo la colaboración potencia el aprendizaje técnico.",
+        "status": "draft",
+        "evidence_ids": [],
+        "flow": "success_story",
+        "topic": null
+      },
+      {
+        "kind": "linkedin_post",
+        "title": "El poder de compartir tu código",
+        "body": "¡Qué gran satisfacción es ver cómo el aprendizaje se transforma en proyectos reales! Esta semana, uno de nuestros integrantes compartió su notebook de análisis de datos tras aplicar los consejos de la comunidad. Es increíble ver cómo el uso de Python y Pandas, sumado a una buena visualización, permite contar historias a través de los datos. Gracias a todos los que aportan su granito de arena para que sigamos creciendo juntos. ¡A seguir analizando y compartiendo! #DataScience #Python #Pandas #ComunidadDeAprendizaje",
+        "status": "draft",
+        "evidence_ids": [],
+        "flow": "success_story",
+        "topic": null
+      }
+    ],
+    "human_review": {
+      "required": true,
+      "status": "pending"
+    },
+    "storage": {
+      "provider": "local",
+      "status": "stored",
+      "location": "salidas/paquetes/ba6c81bb-d55a-4a02-a585-2bd01af67329.json"
+    },
+    "evidence": [],
+    "interaction_analysis": [
+      {
+        "id": "interaction-1",
+        "author": "Mentor_1",
+        "channel": "#anuncios",
+        "text": "Este jueves tendremos sesión en vivo sobre pandas y visualización de datos. Los esperamos a todos.",
+        "sentiment": "positive",
+        "category": "comentario",
+        "relevance": 0.6,
+        "needs_support": false,
+        "topic": "Pandas"
+      },
+      {
+        "id": "interaction-2",
+        "author": "Estudiante_F",
+        "channel": "#general",
+        "text": "Excelente la sesión de ayer de Python, la comunidad está muy activa esta semana.",
+        "sentiment": "positive",
+        "category": "comentario",
+        "relevance": 0.4,
+        "needs_support": false,
+        "topic": "Python"
+      },
+      {
+        "id": "interaction-3",
+        "author": "Estudiante_G",
+        "channel": "#proyectos",
+        "text": "Compartí mi notebook de análisis de datos en el canal de proyectos, quedó genial con los consejos del grupo.",
+        "sentiment": "positive",
+        "category": "logro",
+        "relevance": 0.9,
+        "needs_support": false,
+        "topic": "Análisis de datos"
+      }
+    ],
+    "highlights": [
+      "interaction-3",
+      "interaction-1",
+      "interaction-2"
+    ],
+    "members_needing_support": [],
+    "discarded": [
+      "interaction-1",
+      "interaction-2"
+    ],
+    "faq_topics": [],
+    "warnings": [],
+    "formato_briefing": {
+      "status": "exito",
+      "resumen_comunidad": {
+        "total_interacciones_procesadas": 3,
+        "sentimiento_predominante": "Altamente Positivo",
+        "temas_principales": [
+          "Pandas",
+          "Visualización de datos",
+          "Python",
+          "Análisis de datos"
+        ]
+      },
+      "activos_distribucion_generados": {
+        "post_linkedin": {
+          "titulo": "El poder de compartir tu código",
+          "copy": "¡Qué gran satisfacción es ver cómo el aprendizaje se transforma en proyectos reales! Esta semana, uno de nuestros integrantes compartió su notebook de análisis de datos tras aplicar los consejos de la comunidad. Es increíble ver cómo el uso de Python y Pandas, sumado a una buena visualización, permite contar historias a través de los datos. Gracias a todos los que aportan su granito de arena para que sigamos creciendo juntos. ¡A seguir analizando y compartiendo! #DataScience #Python #Pandas #ComunidadDeAprendizaje",
+          "canal_recomendado": "LinkedIn Oficial",
+          "potencial_engagement": "Alto"
+        },
+        "caso_exito": {
+          "titulo": "De la práctica al proyecto: un análisis de datos compartido",
+          "origen": "Logro compartido por Estudiante_G en #proyectos",
+          "borrador": "Un miembro de nuestra comunidad logró consolidar sus conocimientos en Python y Pandas al desarrollar y compartir su propio notebook de análisis de datos. Gracias a la retroalimentación y los consejos recibidos en el canal de proyectos, pudo perfeccionar su trabajo y obtener un resultado de alta calidad, demostrando cómo la colaboración potencia el aprendizaje técnico.",
+          "status": "validar_con_la_persona"
+        }
+      },
+      "almacenamiento_oci": {
+        "bucket": null,
+        "ruta_objeto": "salidas/paquetes/ba6c81bb-d55a-4a02-a585-2bd01af67329.json",
+        "status": "guardado_local"
+      }
+    }
+  }
+}

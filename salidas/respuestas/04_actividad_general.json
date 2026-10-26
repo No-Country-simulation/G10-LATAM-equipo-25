@@ -1,0 +1,157 @@
+{
+  "entrada": {
+    "community_source": "Slack_Comunidad_Data",
+    "reference_period": "Semana_05",
+    "interactions": [
+      {
+        "id": null,
+        "author": "Mentor_1",
+        "channel": "#anuncios",
+        "type": "anuncio",
+        "text": "Este jueves tendremos sesión en vivo sobre pandas y visualización de datos. Los esperamos a todos."
+      },
+      {
+        "id": null,
+        "author": "Estudiante_F",
+        "channel": "#general",
+        "type": "comentario",
+        "text": "Excelente la sesión de ayer de Python, la comunidad está muy activa esta semana."
+      },
+      {
+        "id": null,
+        "author": "Estudiante_G",
+        "channel": "#proyectos",
+        "type": "comentario",
+        "text": "Compartí mi notebook de análisis de datos en el canal de proyectos, quedó genial con los consejos del grupo."
+      }
+    ]
+  },
+  "respuesta": {
+    "status": "success",
+    "request_id": "228ee67f-efb2-4c20-80f5-274fb29c21d8",
+    "community_summary": {
+      "total_interactions_processed": 3,
+      "predominant_sentiment": "positive",
+      "main_topics": [
+        "Datos y Python",
+        "Comunidad"
+      ]
+    },
+    "insights": [
+      "Actividad general de la comunidad"
+    ],
+    "routing": {
+      "selected_flow": "community_highlight",
+      "reason": "Actividad general de la comunidad",
+      "flows": [
+        "community_highlight"
+      ],
+      "reasons": {
+        "community_highlight": "Actividad general de la comunidad"
+      }
+    },
+    "generated_assets": [
+      {
+        "kind": "linkedin_post",
+        "title": "Novedades de la comunidad",
+        "body": "Esta semana la comunidad conversó sobre Datos y Python, Comunidad.\n\n\"Este jueves tendremos sesión en vivo sobre pandas y visualización de datos. Los esperamos a todos.\"\n\n#ComunidadTech #Aprendizaje",
+        "status": "draft",
+        "evidence_ids": [],
+        "flow": "community_highlight",
+        "topic": null
+      },
+      {
+        "kind": "newsletter_highlight",
+        "title": "Resumen de la comunidad",
+        "body": "Lo más comentado: Datos y Python, Comunidad. 3 interacciones analizadas. Destacado: \"Este jueves tendremos sesión en vivo sobre pandas y visualización de datos. Los esperamos a todos.\"",
+        "status": "draft",
+        "evidence_ids": [],
+        "flow": "community_highlight",
+        "topic": null
+      }
+    ],
+    "human_review": {
+      "required": true,
+      "status": "pending"
+    },
+    "storage": {
+      "provider": "local",
+      "status": "stored",
+      "location": "salidas/paquetes/228ee67f-efb2-4c20-80f5-274fb29c21d8.json"
+    },
+    "evidence": [],
+    "interaction_analysis": [
+      {
+        "id": "interaction-1",
+        "author": "Mentor_1",
+        "channel": "#anuncios",
+        "text": "Este jueves tendremos sesión en vivo sobre pandas y visualización de datos. Los esperamos a todos.",
+        "sentiment": "neutral",
+        "category": "comentario",
+        "relevance": 0.39,
+        "needs_support": false,
+        "topic": "Datos y Python"
+      },
+      {
+        "id": "interaction-2",
+        "author": "Estudiante_F",
+        "channel": "#general",
+        "text": "Excelente la sesión de ayer de Python, la comunidad está muy activa esta semana.",
+        "sentiment": "positive",
+        "category": "comentario",
+        "relevance": 0.38,
+        "needs_support": false,
+        "topic": "Datos y Python"
+      },
+      {
+        "id": "interaction-3",
+        "author": "Estudiante_G",
+        "channel": "#proyectos",
+        "text": "Compartí mi notebook de análisis de datos en el canal de proyectos, quedó genial con los consejos del grupo.",
+        "sentiment": "positive",
+        "category": "comentario",
+        "relevance": 0.39,
+        "needs_support": false,
+        "topic": "Datos y Python"
+      }
+    ],
+    "highlights": [
+      "interaction-1",
+      "interaction-3",
+      "interaction-2"
+    ],
+    "members_needing_support": [],
+    "discarded": [],
+    "faq_topics": [],
+    "warnings": [],
+    "formato_briefing": {
+      "status": "exito",
+      "resumen_comunidad": {
+        "total_interacciones_procesadas": 3,
+        "sentimiento_predominante": "Positivo",
+        "temas_principales": [
+          "Datos y Python",
+          "Comunidad"
+        ]
+      },
+      "activos_distribucion_generados": {
+        "post_linkedin": {
+          "titulo": "Novedades de la comunidad",
+          "copy": "Esta semana la comunidad conversó sobre Datos y Python, Comunidad.\n\n\"Este jueves tendremos sesión en vivo sobre pandas y visualización de datos. Los esperamos a todos.\"\n\n#ComunidadTech #Aprendizaje",
+          "canal_recomendado": "LinkedIn Oficial",
+          "potencial_engagement": "Bajo"
+        },
+        "destaque_newsletter_semanal": {
+          "seccion": "Novedades de la Comunidad",
+          "titular": "Resumen de la comunidad",
+          "resumen": "Lo más comentado: Datos y Python, Comunidad. 3 interacciones analizadas. Destacado: \"Este jueves tendremos sesión en vivo sobre pandas y visualización de datos. Los esperamos a todos.\""
+        }
+      },
+      "almacenamiento_oci": {
+        "bucket": null,
+        "ruta_objeto": "salidas/paquetes/228ee67f-efb2-4c20-80f5-274fb29c21d8.json",
+        "status": "guardado_local"
+      }
+    }
+  }
+}

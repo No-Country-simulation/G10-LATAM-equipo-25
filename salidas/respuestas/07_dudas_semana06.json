@@ -1,0 +1,336 @@
+{
+  "entrada": {
+    "community_source": "Discord_Grupo_ONE_G10",
+    "reference_period": "Semana_06",
+    "interactions": [
+      {
+        "id": null,
+        "author": "Valentina R",
+        "channel": "#dudas-langgraph",
+        "type": "pregunta_tecnica",
+        "text": "¿Cómo hago para que mi grafo de LangGraph vuelva a llamar al LLM si la respuesta viene vacía? No entiendo bien cómo se arma el router."
+      },
+      {
+        "id": null,
+        "author": "Diego M",
+        "channel": "#dudas-langgraph",
+        "type": "pregunta_tecnica",
+        "text": "En LangGraph, ¿cuál es la forma correcta de poner un límite de reintentos en un nodo condicional para que no quede en un bucle infinito?"
+      },
+      {
+        "id": null,
+        "author": "Camila T",
+        "channel": "#dudas-machine-learning",
+        "type": "pregunta_tecnica",
+        "text": "Mi modelo tiene 98% en entrenamiento y 65% en prueba. ¿Eso es sobreajuste? ¿Qué hago primero?"
+      },
+      {
+        "id": null,
+        "author": "Andrés P",
+        "channel": "#dudas-python",
+        "type": "pregunta_tecnica",
+        "text": "¿Conviene rellenar los valores faltantes con la media o borrar las filas? Tengo un dataset de ventas con muchos nulos."
+      },
+      {
+        "id": null,
+        "author": "Sofía L",
+        "channel": "#general",
+        "type": "comentario",
+        "text": "Gracias a todos por las respuestas de la semana pasada, me sirvieron mucho para el proyecto."
+      }
+    ]
+  },
+  "respuesta": {
+    "status": "success",
+    "request_id": "db6c302d-4654-4d9a-99a2-c275673733a5",
+    "community_summary": {
+      "total_interactions_processed": 5,
+      "predominant_sentiment": "positive",
+      "main_topics": [
+        "Machine learning",
+        "IA generativa y LangGraph",
+        "Datos y Python"
+      ]
+    },
+    "insights": [
+      "4 duda(s) que pueden convertirse en FAQ",
+      "4 persona(s) podrían necesitar apoyo o mentoría"
+    ],
+    "routing": {
+      "selected_flow": "faq",
+      "reason": "Señal de pregunta recurrente: 4 duda(s) de la comunidad en 2 tema(s)",
+      "flows": [
+        "faq"
+      ],
+      "reasons": {
+        "faq": "Señal de pregunta recurrente: 4 duda(s) de la comunidad en 2 tema(s)"
+      }
+    },
+    "generated_assets": [
+      {
+        "kind": "quick_tutorial",
+        "title": "Tutorial rápido: IA generativa y LangGraph",
+        "body": "Duda de la comunidad: «¿Cómo hago para que mi grafo de LangGraph vuelva a llamar al LLM si la respuesta viene vacía? No entiendo bien cómo se arma el router.»\n\nTodavía no hay una FAQ oficial sobre este tema. Esqueleto para que un mentor lo complete:\n1. Explicar la idea principal en una frase.\n2. Mostrar un ejemplo mínimo.\n3. Señalar el error más común.\n4. Enlazar el material del curso.",
+        "status": "draft",
+        "evidence_ids": [],
+        "flow": "faq",
+        "topic": "IA generativa y LangGraph"
+      },
+      {
+        "kind": "weekly_tip",
+        "title": "Tip de la semana: IA generativa y LangGraph",
+        "body": "Tip de la semana · IA generativa y LangGraph: si te trabas con este tema, compártelo en el canal; 2 persona(s) preguntaron lo mismo.",
+        "status": "draft",
+        "evidence_ids": [],
+        "flow": "faq",
+        "topic": "IA generativa y LangGraph"
+      },
+      {
+        "kind": "doc_topic",
+        "title": "Tema de documentación: IA generativa y LangGraph",
+        "body": "Por qué hace falta: 2 duda(s) de la comunidad sobre «IA generativa y LangGraph».\nRespaldo: sin FAQ oficial: hay que crear contenido nuevo.\n\nSecciones propuestas:\n1. Qué es y cuándo aparece.\n2. Paso a paso con un ejemplo.\n3. Errores frecuentes.\n4. Preguntas reales de la comunidad:\n   • ¿Cómo hago para que mi grafo de LangGraph vuelva a llamar al LLM si la respuesta viene vacía? No entiendo bien cómo se arma el router.\n   • En LangGraph, ¿cuál es la forma correcta de poner un límite de reintentos en un nodo condicional para que no quede en un bucle infinito?",
+        "status": "draft",
+        "evidence_ids": [],
+        "flow": "faq",
+        "topic": "IA generativa y LangGraph"
+      },
+      {
+        "kind": "quick_tutorial",
+        "title": "Tutorial rápido: Machine learning",
+        "body": "Duda de la comunidad: «¿Conviene rellenar los valores faltantes con la media o borrar las filas? Tengo un dataset de ventas con muchos nulos.»\n\nPaso a paso (según la FAQ oficial «How do you handle missing data in a dataset?»):\n1. Missing data can be handled by techniques such as imputation, where missing values are replaced with estimated values based on the remaining data, or by removing rows or columns with missing values.\n\nPara practicar: aplica estos pasos en tu proyecto y comparte el resultado en el canal.",
+        "status": "draft",
+        "evidence_ids": [
+          "faq-1503"
+        ],
+        "flow": "faq",
+        "topic": "Machine learning"
+      },
+      {
+        "kind": "weekly_tip",
+        "title": "Tip de la semana: Machine learning",
+        "body": "Tip de la semana · Machine learning: Missing data can be handled by techniques such as imputation, where missing values are replaced with estimated values based on the remaining data, or by removing rows or columns with missing values.",
+        "status": "draft",
+        "evidence_ids": [
+          "faq-1503"
+        ],
+        "flow": "faq",
+        "topic": "Machine learning"
+      },
+      {
+        "kind": "doc_topic",
+        "title": "Tema de documentación: Machine learning",
+        "body": "Por qué hace falta: 2 duda(s) de la comunidad sobre «Machine learning».\nRespaldo: FAQ oficial faq-1503 («How do you handle missing data in a dataset?»).\n\nSecciones propuestas:\n1. Qué es y cuándo aparece.\n2. Paso a paso con un ejemplo.\n3. Errores frecuentes.\n4. Preguntas reales de la comunidad:\n   • ¿Conviene rellenar los valores faltantes con la media o borrar las filas? Tengo un dataset de ventas con muchos nulos.\n   • Mi modelo tiene 98% en entrenamiento y 65% en prueba. ¿Eso es sobreajuste? ¿Qué hago primero?",
+        "status": "draft",
+        "evidence_ids": [
+          "faq-1503"
+        ],
+        "flow": "faq",
+        "topic": "Machine learning"
+      }
+    ],
+    "human_review": {
+      "required": true,
+      "status": "pending"
+    },
+    "storage": {
+      "provider": "local",
+      "status": "stored",
+      "location": "salidas/paquetes/db6c302d-4654-4d9a-99a2-c275673733a5.json"
+    },
+    "evidence": [
+      {
+        "record_id": "faq-1503",
+        "snippet": "Pregunta: How do you handle missing data in a dataset?\nRespuesta: Missing data can be handled by techniques such as imputation, where missing values are replaced with estimated values based on the remaining data, or by removing rows or columns with missing values.",
+        "source": "faq:machine-learning-duke",
+        "score": 12.9242
+      },
+      {
+        "record_id": "faq-1168",
+        "snippet": "Pregunta: What is overfitting in machine learning?\nRespuesta: Overfitting occurs when a model learns the details and noise in the training data to the extent that it negatively impacts its performance on unseen data.",
+        "source": "faq:python-machine-learning",
+        "score": 10.831
+      }
+    ],
+    "interaction_analysis": [
+      {
+        "id": "interaction-1",
+        "author": "Valentina R",
+        "channel": "#dudas-langgraph",
+        "text": "¿Cómo hago para que mi grafo de LangGraph vuelva a llamar al LLM si la respuesta viene vacía? No entiendo bien cómo se arma el router.",
+        "sentiment": "negative",
+        "category": "duda",
+        "relevance": 0.7,
+        "needs_support": true,
+        "topic": "IA generativa y LangGraph"
+      },
+      {
+        "id": "interaction-2",
+        "author": "Diego M",
+        "channel": "#dudas-langgraph",
+        "text": "En LangGraph, ¿cuál es la forma correcta de poner un límite de reintentos en un nodo condicional para que no quede en un bucle infinito?",
+        "sentiment": "neutral",
+        "category": "duda",
+        "relevance": 0.7,
+        "needs_support": true,
+        "topic": "IA generativa y LangGraph"
+      },
+      {
+        "id": "interaction-3",
+        "author": "Camila T",
+        "channel": "#dudas-machine-learning",
+        "text": "Mi modelo tiene 98% en entrenamiento y 65% en prueba. ¿Eso es sobreajuste? ¿Qué hago primero?",
+        "sentiment": "neutral",
+        "category": "duda",
+        "relevance": 0.68,
+        "needs_support": true,
+        "topic": "Machine learning"
+      },
+      {
+        "id": "interaction-4",
+        "author": "Andrés P",
+        "channel": "#dudas-python",
+        "text": "¿Conviene rellenar los valores faltantes con la media o borrar las filas? Tengo un dataset de ventas con muchos nulos.",
+        "sentiment": "neutral",
+        "category": "duda",
+        "relevance": 0.69,
+        "needs_support": true,
+        "topic": "Machine learning"
+      },
+      {
+        "id": "interaction-5",
+        "author": "Sofía L",
+        "channel": "#general",
+        "text": "Gracias a todos por las respuestas de la semana pasada, me sirvieron mucho para el proyecto.",
+        "sentiment": "positive",
+        "category": "comentario",
+        "relevance": 0.38,
+        "needs_support": false,
+        "topic": "General"
+      }
+    ],
+    "highlights": [
+      "interaction-1",
+      "interaction-2",
+      "interaction-4"
+    ],
+    "members_needing_support": [
+      {
+        "id": "interaction-1",
+        "author": "Valentina R",
+        "channel": "#dudas-langgraph",
+        "category": "duda"
+      },
+      {
+        "id": "interaction-2",
+        "author": "Diego M",
+        "channel": "#dudas-langgraph",
+        "category": "duda"
+      },
+      {
+        "id": "interaction-3",
+        "author": "Camila T",
+        "channel": "#dudas-machine-learning",
+        "category": "duda"
+      },
+      {
+        "id": "interaction-4",
+        "author": "Andrés P",
+        "channel": "#dudas-python",
+        "category": "duda"
+      }
+    ],
+    "discarded": [
+      "interaction-5"
+    ],
+    "faq_topics": [
+      {
+        "topic": "IA generativa y LangGraph",
+        "questions": 2,
+        "interaction_ids": [
+          "interaction-1",
+          "interaction-2"
+        ],
+        "evidence_ids": [],
+        "has_official_faq": false
+      },
+      {
+        "topic": "Machine learning",
+        "questions": 2,
+        "interaction_ids": [
+          "interaction-4",
+          "interaction-3"
+        ],
+        "evidence_ids": [
+          "faq-1503",
+          "faq-1168"
+        ],
+        "has_official_faq": true
+      }
+    ],
+    "warnings": [],
+    "formato_briefing": {
+      "status": "exito",
+      "resumen_comunidad": {
+        "total_interacciones_procesadas": 5,
+        "sentimiento_predominante": "Positivo",
+        "temas_principales": [
+          "Machine learning",
+          "IA generativa y LangGraph",
+          "Datos y Python"
+        ]
+      },
+      "activos_distribucion_generados": {
+        "destaque_newsletter_semanal": {
+          "seccion": "Tip de la Semana",
+          "titular": "Tip de la semana: IA generativa y LangGraph",
+          "resumen": "Tip de la semana · IA generativa y LangGraph: si te trabas con este tema, compártelo en el canal; 2 persona(s) preguntaron lo mismo."
+        },
+        "sugerencia_contenido_faq": {
+          "tema": "IA generativa y LangGraph",
+          "origen": "Duda planteada por Valentina R en #dudas-langgraph (y 1 más)",
+          "status": "derivado_a_mentoria"
+        },
+        "contenido_educativo": [
+          {
+            "tema": "IA generativa y LangGraph",
+            "dudas": 2,
+            "tutorial_rapido": {
+              "titulo": "Tutorial rápido: IA generativa y LangGraph",
+              "contenido": "Duda de la comunidad: «¿Cómo hago para que mi grafo de LangGraph vuelva a llamar al LLM si la respuesta viene vacía? No entiendo bien cómo se arma el router.»\n\nTodavía no hay una FAQ oficial sobre este tema. Esqueleto para que un mentor lo complete:\n1. Explicar la idea principal en una frase.\n2. Mostrar un ejemplo mínimo.\n3. Señalar el error más común.\n4. Enlazar el material del curso."
+            },
+            "tip_semana": "Tip de la semana · IA generativa y LangGraph: si te trabas con este tema, compártelo en el canal; 2 persona(s) preguntaron lo mismo.",
+            "tema_documentacion": {
+              "titulo": "Tema de documentación: IA generativa y LangGraph",
+              "propuesta": "Por qué hace falta: 2 duda(s) de la comunidad sobre «IA generativa y LangGraph».\nRespaldo: sin FAQ oficial: hay que crear contenido nuevo.\n\nSecciones propuestas:\n1. Qué es y cuándo aparece.\n2. Paso a paso con un ejemplo.\n3. Errores frecuentes.\n4. Preguntas reales de la comunidad:\n   • ¿Cómo hago para que mi grafo de LangGraph vuelva a llamar al LLM si la respuesta viene vacía? No entiendo bien cómo se arma el router.\n   • En LangGraph, ¿cuál es la forma correcta de poner un límite de reintentos en un nodo condicional para que no quede en un bucle infinito?"
+            },
+            "respaldo_faq_oficial": [],
+            "status": "derivado_a_mentoria"
+          },
+          {
+            "tema": "Machine learning",
+            "dudas": 2,
+            "tutorial_rapido": {
+              "titulo": "Tutorial rápido: Machine learning",
+              "contenido": "Duda de la comunidad: «¿Conviene rellenar los valores faltantes con la media o borrar las filas? Tengo un dataset de ventas con muchos nulos.»\n\nPaso a paso (según la FAQ oficial «How do you handle missing data in a dataset?»):\n1. Missing data can be handled by techniques such as imputation, where missing values are replaced with estimated values based on the remaining data, or by removing rows or columns with missing values.\n\nPara practicar: aplica estos pasos en tu proyecto y comparte el resultado en el canal."
+            },
+            "tip_semana": "Tip de la semana · Machine learning: Missing data can be handled by techniques such as imputation, where missing values are replaced with estimated values based on the remaining data, or by removing rows or columns with missing values.",
+            "tema_documentacion": {
+              "titulo": "Tema de documentación: Machine learning",
+              "propuesta": "Por qué hace falta: 2 duda(s) de la comunidad sobre «Machine learning».\nRespaldo: FAQ oficial faq-1503 («How do you handle missing data in a dataset?»).\n\nSecciones propuestas:\n1. Qué es y cuándo aparece.\n2. Paso a paso con un ejemplo.\n3. Errores frecuentes.\n4. Preguntas reales de la comunidad:\n   • ¿Conviene rellenar los valores faltantes con la media o borrar las filas? Tengo un dataset de ventas con muchos nulos.\n   • Mi modelo tiene 98% en entrenamiento y 65% en prueba. ¿Eso es sobreajuste? ¿Qué hago primero?"
+            },
+            "respaldo_faq_oficial": [
+              "faq-1503",
+              "faq-1168"
+            ],
+            "status": "respuesta_con_faq_oficial"
+          }
+        ]
+      },
+      "almacenamiento_oci": {
+        "bucket": null,
+        "ruta_objeto": "salidas/paquetes/db6c302d-4654-4d9a-99a2-c275673733a5.json",
+        "status": "guardado_local"
+      }
+    }
+  }
+}

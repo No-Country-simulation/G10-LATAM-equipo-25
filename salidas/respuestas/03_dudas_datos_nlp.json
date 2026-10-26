@@ -1,0 +1,213 @@
+{
+  "entrada": {
+    "community_source": "Foro_Alura_Latam",
+    "reference_period": "Semana_05",
+    "interactions": [
+      {
+        "id": null,
+        "author": "Estudiante_D",
+        "channel": "#dudas-python",
+        "type": "pregunta_tecnica",
+        "text": "¿Cómo manejo los valores faltantes en mi dataset? Tengo muchas columnas con nulos en pandas y no sé si borrarlas."
+      },
+      {
+        "id": null,
+        "author": "Estudiante_E",
+        "channel": "#dudas-python",
+        "type": "pregunta_tecnica",
+        "text": "Me sale error al entrenar porque el dataset tiene datos faltantes, ¿qué técnicas de preprocesamiento recomiendan?"
+      }
+    ]
+  },
+  "respuesta": {
+    "status": "success",
+    "request_id": "f4318c85-28cd-48c3-9267-8ae4848fc92e",
+    "community_summary": {
+      "total_interactions_processed": 2,
+      "predominant_sentiment": "negative",
+      "main_topics": [
+        "Machine learning",
+        "Datos y Python"
+      ]
+    },
+    "insights": [
+      "2 duda(s) que pueden convertirse en FAQ",
+      "2 persona(s) podrían necesitar apoyo o mentoría"
+    ],
+    "routing": {
+      "selected_flow": "faq",
+      "reason": "Señal de pregunta recurrente: 2 duda(s) de la comunidad en 1 tema(s)",
+      "flows": [
+        "faq"
+      ],
+      "reasons": {
+        "faq": "Señal de pregunta recurrente: 2 duda(s) de la comunidad en 1 tema(s)"
+      }
+    },
+    "generated_assets": [
+      {
+        "kind": "quick_tutorial",
+        "title": "Tutorial rápido: Machine learning",
+        "body": "Duda de la comunidad: «¿Cómo manejo los valores faltantes en mi dataset? Tengo muchas columnas con nulos en pandas y no sé si borrarlas.»\n\nPaso a paso (según la FAQ oficial «How do you handle missing data in a dataset?»):\n1. Missing data can be handled by techniques such as imputation, where missing values are replaced with estimated values based on the remaining data, or by removing rows or columns with missing values.\n\nPara practicar: aplica estos pasos en tu proyecto y comparte el resultado en el canal.",
+        "status": "draft",
+        "evidence_ids": [
+          "faq-1503"
+        ],
+        "flow": "faq",
+        "topic": "Machine learning"
+      },
+      {
+        "kind": "weekly_tip",
+        "title": "Tip de la semana: Machine learning",
+        "body": "Tip de la semana · Machine learning: Missing data can be handled by techniques such as imputation, where missing values are replaced with estimated values based on the remaining data, or by removing rows or columns with missing values.",
+        "status": "draft",
+        "evidence_ids": [
+          "faq-1503"
+        ],
+        "flow": "faq",
+        "topic": "Machine learning"
+      },
+      {
+        "kind": "doc_topic",
+        "title": "Tema de documentación: Machine learning",
+        "body": "Por qué hace falta: 2 duda(s) de la comunidad sobre «Machine learning».\nRespaldo: FAQ oficial faq-1503 («How do you handle missing data in a dataset?»).\n\nSecciones propuestas:\n1. Qué es y cuándo aparece.\n2. Paso a paso con un ejemplo.\n3. Errores frecuentes.\n4. Preguntas reales de la comunidad:\n   • ¿Cómo manejo los valores faltantes en mi dataset? Tengo muchas columnas con nulos en pandas y no sé si borrarlas.\n   • Me sale error al entrenar porque el dataset tiene datos faltantes, ¿qué técnicas de preprocesamiento recomiendan?",
+        "status": "draft",
+        "evidence_ids": [
+          "faq-1503"
+        ],
+        "flow": "faq",
+        "topic": "Machine learning"
+      }
+    ],
+    "human_review": {
+      "required": true,
+      "status": "pending"
+    },
+    "storage": {
+      "provider": "local",
+      "status": "stored",
+      "location": "salidas/paquetes/f4318c85-28cd-48c3-9267-8ae4848fc92e.json"
+    },
+    "evidence": [
+      {
+        "record_id": "faq-1503",
+        "snippet": "Pregunta: How do you handle missing data in a dataset?\nRespuesta: Missing data can be handled by techniques such as imputation, where missing values are replaced with estimated values based on the remaining data, or by removing rows or columns with missing values.",
+        "source": "faq:machine-learning-duke",
+        "score": 12.9242
+      },
+      {
+        "record_id": "faq-1776",
+        "snippet": "Pregunta: What are the common data preprocessing techniques in unsupervised learning?\nRespuesta: Common techniques include handling missing values, feature scaling, feature encoding, dimensionality reduction, and outlier detection.",
+        "source": "faq:linear-algebra-machine-learning",
+        "score": 12.3187
+      }
+    ],
+    "interaction_analysis": [
+      {
+        "id": "interaction-1",
+        "author": "Estudiante_D",
+        "channel": "#dudas-python",
+        "text": "¿Cómo manejo los valores faltantes en mi dataset? Tengo muchas columnas con nulos en pandas y no sé si borrarlas.",
+        "sentiment": "neutral",
+        "category": "duda",
+        "relevance": 0.69,
+        "needs_support": true,
+        "topic": "Machine learning"
+      },
+      {
+        "id": "interaction-2",
+        "author": "Estudiante_E",
+        "channel": "#dudas-python",
+        "text": "Me sale error al entrenar porque el dataset tiene datos faltantes, ¿qué técnicas de preprocesamiento recomiendan?",
+        "sentiment": "negative",
+        "category": "duda",
+        "relevance": 0.69,
+        "needs_support": true,
+        "topic": "Machine learning"
+      }
+    ],
+    "highlights": [
+      "interaction-1",
+      "interaction-2"
+    ],
+    "members_needing_support": [
+      {
+        "id": "interaction-1",
+        "author": "Estudiante_D",
+        "channel": "#dudas-python",
+        "category": "duda"
+      },
+      {
+        "id": "interaction-2",
+        "author": "Estudiante_E",
+        "channel": "#dudas-python",
+        "category": "duda"
+      }
+    ],
+    "discarded": [],
+    "faq_topics": [
+      {
+        "topic": "Machine learning",
+        "questions": 2,
+        "interaction_ids": [
+          "interaction-1",
+          "interaction-2"
+        ],
+        "evidence_ids": [
+          "faq-1503",
+          "faq-1776"
+        ],
+        "has_official_faq": true
+      }
+    ],
+    "warnings": [],
+    "formato_briefing": {
+      "status": "exito",
+      "resumen_comunidad": {
+        "total_interacciones_procesadas": 2,
+        "sentimiento_predominante": "Negativo",
+        "temas_principales": [
+          "Machine learning",
+          "Datos y Python"
+        ]
+      },
+      "activos_distribucion_generados": {
+        "destaque_newsletter_semanal": {
+          "seccion": "Tip de la Semana",
+          "titular": "Tip de la semana: Machine learning",
+          "resumen": "Tip de la semana · Machine learning: Missing data can be handled by techniques such as imputation, where missing values are replaced with estimated values based on the remaining data, or by removing rows or columns with missing values."
+        },
+        "sugerencia_contenido_faq": {
+          "tema": "Machine learning",
+          "origen": "Duda planteada por Estudiante_D en #dudas-python (y 1 más)",
+          "status": "respuesta_con_faq_oficial"
+        },
+        "contenido_educativo": [
+          {
+            "tema": "Machine learning",
+            "dudas": 2,
+            "tutorial_rapido": {
+              "titulo": "Tutorial rápido: Machine learning",
+              "contenido": "Duda de la comunidad: «¿Cómo manejo los valores faltantes en mi dataset? Tengo muchas columnas con nulos en pandas y no sé si borrarlas.»\n\nPaso a paso (según la FAQ oficial «How do you handle missing data in a dataset?»):\n1. Missing data can be handled by techniques such as imputation, where missing values are replaced with estimated values based on the remaining data, or by removing rows or columns with missing values.\n\nPara practicar: aplica estos pasos en tu proyecto y comparte el resultado en el canal."
+            },
+            "tip_semana": "Tip de la semana · Machine learning: Missing data can be handled by techniques such as imputation, where missing values are replaced with estimated values based on the remaining data, or by removing rows or columns with missing values.",
+            "tema_documentacion": {
+              "titulo": "Tema de documentación: Machine learning",
+              "propuesta": "Por qué hace falta: 2 duda(s) de la comunidad sobre «Machine learning».\nRespaldo: FAQ oficial faq-1503 («How do you handle missing data in a dataset?»).\n\nSecciones propuestas:\n1. Qué es y cuándo aparece.\n2. Paso a paso con un ejemplo.\n3. Errores frecuentes.\n4. Preguntas reales de la comunidad:\n   • ¿Cómo manejo los valores faltantes en mi dataset? Tengo muchas columnas con nulos en pandas y no sé si borrarlas.\n   • Me sale error al entrenar porque el dataset tiene datos faltantes, ¿qué técnicas de preprocesamiento recomiendan?"
+            },
+            "respaldo_faq_oficial": [
+              "faq-1503",
+              "faq-1776"
+            ],
+            "status": "respuesta_con_faq_oficial"
+          }
+        ]
+      },
+      "almacenamiento_oci": {
+        "bucket": null,
+        "ruta_objeto": "salidas/paquetes/f4318c85-28cd-48c3-9267-8ae4848fc92e.json",
+        "status": "guardado_local"
+      }
+    }
+  }
+}

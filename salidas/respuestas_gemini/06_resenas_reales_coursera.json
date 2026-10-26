@@ -1,0 +1,484 @@
+{
+  "entrada": {
+    "community_source": "Coursera_Reseñas_Reales",
+    "reference_period": "Reseñas_2019_2020",
+    "interactions": [
+      {
+        "id": "resena-324",
+        "author": "AKPAN, G E",
+        "channel": "Reseñas Coursera · applied-data-science-capstone",
+        "type": "reseña",
+        "text": "What a wonderful way to complete the '9 courses' IBM Data Science Professional Certificate training! Applied Data Science Capstone is the best way to delve into professional experience."
+      },
+      {
+        "id": "resena-1074",
+        "author": "SHUBHAM E",
+        "channel": "Reseñas Coursera · deep-neural-network",
+        "type": "reseña",
+        "text": "Okay with week 1 and week 3 but you need to improve the motive behind presenting week 2. Also what was the purpose of batch normalization?"
+      },
+      {
+        "id": "resena-1153",
+        "author": "Fabio L d S",
+        "channel": "Reseñas Coursera · open-source-tools-for-data-science",
+        "type": "reseña",
+        "text": "Do we really need to know both Watson studio and Skills network lab?Maybe it would be best to focus on one platform and explore it more in detail"
+      },
+      {
+        "id": "resena-14",
+        "author": "Matthew E",
+        "channel": "Reseñas Coursera · data-science-methodology",
+        "type": "reseña",
+        "text": "The sites have changed so following the directions of this course were very confusing and hard to understand. The update from Data Science Experience to IBM Watson studio did not relate to the video demonstrated in this class"
+      },
+      {
+        "id": "resena-215",
+        "author": "Amiya R B",
+        "channel": "Reseñas Coursera · data-science-methodology",
+        "type": "reseña",
+        "text": "I think the trainer just read out some material prepared by him. concepts are uncleared to me. bad experience"
+      },
+      {
+        "id": "resena-11",
+        "author": "srijanapuri",
+        "channel": "Reseñas Coursera · datasciencemathskills",
+        "type": "reseña",
+        "text": "I learned many new things, ideas, knowledge,and skills from this course.I am very much thankful to both professors for teaching about all of those interesting lessons,providing many more things. now, I am able to give all of the answers frequently which I learned from this beneficial course."
+      },
+      {
+        "id": "resena-16",
+        "author": "Carlo C",
+        "channel": "Reseñas Coursera · multivariate-calculus-machine-learning",
+        "type": "reseña",
+        "text": "Well done!!! The course is interesting and well organized.Lack of Pyton knowledge from my side is sometimes critical to solve some exercises...It's my intention, as soon as I'lI have complete the three couses, to attend a Pyton course to complete my preparation."
+      },
+      {
+        "id": "resena-1796",
+        "author": "Cat-Tuong N",
+        "channel": "Reseñas Coursera · python-machine-learning",
+        "type": "reseña",
+        "text": "Challenging and fun course. The number of topics is on the high side. Maybe break this into 2 courses? The programming assignments are fun. You will need to go to discussion forum to solve often encountered problems."
+      },
+      {
+        "id": "resena-127",
+        "author": "Sebastien C",
+        "channel": "Reseñas Coursera · convolutional-neural-networks",
+        "type": "reseña",
+        "text": "Content was interestind and provided good theoretical overview. Exercices where you just have to fill in some line of codes are not usefull."
+      },
+      {
+        "id": "resena-1900",
+        "author": "Julien P",
+        "channel": "Reseñas Coursera · applied-data-science-capstone",
+        "type": "reseña",
+        "text": "Great to put into action the theoretical knowledge acquired in the previous 8 classes. What could be improved? The peer-rating system can be very slow. A common practice is to go on the forum to beg for a rating by another learner. This can be tiring."
+      }
+    ]
+  },
+  "respuesta": {
+    "status": "success",
+    "request_id": "49e12ccd-6783-4bfc-814f-6baab808c2db",
+    "community_summary": {
+      "total_interactions_processed": 10,
+      "predominant_sentiment": "mixed",
+      "main_topics": [
+        "Experiencia de aprendizaje",
+        "Actualización de plataformas",
+        "Metodología de enseñanza",
+        "Sistemas de evaluación"
+      ]
+    },
+    "insights": [
+      "Los estudiantes valoran la aplicación práctica de conocimientos pero reportan frustración con plataformas desactualizadas.",
+      "Existe una necesidad de mejorar la claridad en conceptos teóricos y la eficiencia en los sistemas de evaluación entre pares.",
+      "La falta de conocimientos previos en herramientas específicas dificulta el progreso en algunos módulos."
+    ],
+    "routing": {
+      "selected_flow": "success_story",
+      "reason": "Señal de historia de éxito: 2 logro(s) o testimonio(s)",
+      "flows": [
+        "success_story",
+        "faq"
+      ],
+      "reasons": {
+        "success_story": "Señal de historia de éxito: 2 logro(s) o testimonio(s)",
+        "faq": "Señal de pregunta recurrente: 2 duda(s) de la comunidad en 2 tema(s)"
+      }
+    },
+    "generated_assets": [
+      {
+        "kind": "success_story",
+        "title": "De la teoría a la práctica: completando el camino",
+        "body": "Un estudiante ha compartido su experiencia tras finalizar el certificado profesional de Ciencia de Datos. Destaca que el proyecto final fue la mejor manera de aplicar los conocimientos adquiridos en los nueve cursos previos, permitiéndole ganar confianza y experiencia profesional real en el campo.",
+        "status": "draft",
+        "evidence_ids": [],
+        "flow": "success_story",
+        "topic": null
+      },
+      {
+        "kind": "linkedin_post",
+        "title": "Celebrando el aprendizaje continuo",
+        "body": "Terminar una certificación profesional es solo el comienzo. He visto cómo compañeros transforman conceptos teóricos en habilidades prácticas gracias a proyectos aplicados. La constancia en el aprendizaje es la clave para destacar en el mundo de los datos. ¡Sigamos creciendo! #DataScience #AprendizajeContinuo #CarreraProfesional #TechSkills",
+        "status": "draft",
+        "evidence_ids": [],
+        "flow": "success_story",
+        "topic": null
+      },
+      {
+        "kind": "quick_tutorial",
+        "title": "Entendiendo la Normalización por lotes",
+        "body": "La normalización por lotes es fundamental para estabilizar y acelerar el entrenamiento de redes neuronales profundas. 1. Identifica las activaciones de la capa. 2. Ajusta los valores para tener media cero. 3. Escala los valores para tener varianza unitaria. 4. Aplica la normalización a lo largo de la dimensión del lote. Ejemplo: En una red, esto evita que los gradientes se desvanezcan o exploten, permitiendo tasas de aprendizaje más altas.",
+        "status": "draft",
+        "evidence_ids": [
+          "faq-2067",
+          "faq-718"
+        ],
+        "flow": "faq",
+        "topic": "Normalización por lotes"
+      },
+      {
+        "kind": "weekly_tip",
+        "title": "Tip: Acelera tu entrenamiento",
+        "body": "Usa la normalización por lotes para ajustar las activaciones de tus capas a media cero y varianza unitaria. Esto no solo estabiliza el aprendizaje, sino que permite entrenar tus redes neuronales mucho más rápido. ¡Pruébalo en tu próximo modelo!",
+        "status": "draft",
+        "evidence_ids": [
+          "faq-2067"
+        ],
+        "flow": "faq",
+        "topic": "Normalización por lotes"
+      },
+      {
+        "kind": "doc_topic",
+        "title": "Guía técnica: Normalización por lotes vs. Capas",
+        "body": "Esta página es necesaria debido a dudas recurrentes sobre el propósito de la normalización en redes neuronales. Secciones: 1. ¿Qué es la normalización por lotes? 2. Diferencias clave con la normalización por capas. 3. Impacto en el rendimiento del modelo. 4. Casos de uso recomendados. Respaldo: FAQ oficial disponible sobre normalización.",
+        "status": "draft",
+        "evidence_ids": [
+          "faq-2067",
+          "faq-718"
+        ],
+        "flow": "faq",
+        "topic": "Normalización por lotes"
+      },
+      {
+        "kind": "quick_tutorial",
+        "title": "Uso de herramientas de laboratorio",
+        "body": "Sin FAQ oficial: borrador para validar con un mentor. La elección de herramientas de laboratorio depende de los objetivos específicos de tu proyecto de ciencia de datos. 1. Evalúa las funcionalidades de Watson Studio. 2. Compara con las capacidades de Skills Network Lab. 3. Selecciona la plataforma que mejor se adapte a tu flujo de trabajo actual. 4. Profundiza en una sola herramienta para dominarla antes de cambiar.",
+        "status": "draft",
+        "evidence_ids": [],
+        "flow": "faq",
+        "topic": "Herramientas de laboratorio"
+      },
+      {
+        "kind": "weekly_tip",
+        "title": "Tip: Domina tu entorno",
+        "body": "En lugar de intentar aprender múltiples plataformas de laboratorio a la vez, elige una y explórala a fondo. Dominar una herramienta te dará más productividad que conocer superficialmente varias. ¡Enfócate y profundiza!",
+        "status": "draft",
+        "evidence_ids": [],
+        "flow": "faq",
+        "topic": "Herramientas de laboratorio"
+      },
+      {
+        "kind": "doc_topic",
+        "title": "Guía de selección de entornos de laboratorio",
+        "body": "Propuesta motivada por la confusión de los estudiantes sobre qué plataforma priorizar en el aprendizaje. Secciones: 1. Comparativa de entornos de laboratorio. 2. Criterios para elegir tu herramienta principal. 3. Ventajas de la especialización en una plataforma. 4. Recursos para profundizar en Watson Studio y Skills Network Lab. Contenido nuevo a crear.",
+        "status": "draft",
+        "evidence_ids": [],
+        "flow": "faq",
+        "topic": "Herramientas de laboratorio"
+      }
+    ],
+    "human_review": {
+      "required": true,
+      "status": "pending"
+    },
+    "storage": {
+      "provider": "local",
+      "status": "stored",
+      "location": "salidas/paquetes/49e12ccd-6783-4bfc-814f-6baab808c2db.json"
+    },
+    "evidence": [
+      {
+        "record_id": "faq-2067",
+        "snippet": "Pregunta: What is batch normalization in neural networks?\nRespuesta: Batch normalization is a technique used to normalize the activations of each layer in a neural network by adjusting and scaling them to have zero mean and unit variance, which can accelerate training and improve model performance.",
+        "source": "faq:neural-networks-deep-learning",
+        "score": 17.6578
+      },
+      {
+        "record_id": "faq-718",
+        "snippet": "Pregunta: What is the difference between batch normalization and layer normalization in neural networks?\nRespuesta: Batch normalization normalizes the activations of each layer across the batch dimension, while layer normalization normalizes the activations across the feature dimension, making it more suitable for recurrent neural networks and other architectures with variable-length sequences.",
+        "source": "faq:machine-learning",
+        "score": 13.2484
+      },
+      {
+        "record_id": "faq-2715",
+        "snippet": "Pregunta: What is the exploration-exploitation trade-off in reinforcement learning?\nRespuesta: The exploration-exploitation trade-off refers to the dilemma faced by agents in balancing the need to explore new options with the desire to exploit known options for immediate rewards, to achieve long-term optimal performance.",
+        "source": "faq:sql-for-data-science",
+        "score": 7.3754
+      },
+      {
+        "record_id": "faq-1509",
+        "snippet": "Pregunta: What is the exploration-exploitation dilemma in reinforcement learning?\nRespuesta: The exploration-exploitation dilemma refers to the challenge faced by agents in balancing the need to explore new actions or states to discover optimal policies with the desire to exploit known actions or states for immediate rewards, to achieve long-term optimal performance.",
+        "source": "faq:machine-learning-duke",
+        "score": 7.1768
+      }
+    ],
+    "interaction_analysis": [
+      {
+        "id": "resena-324",
+        "author": "AKPAN, G E",
+        "channel": "Reseñas Coursera · applied-data-science-capstone",
+        "text": "What a wonderful way to complete the '9 courses' IBM Data Science Professional Certificate training! Applied Data Science Capstone is the best way to delve into professional experience.",
+        "sentiment": "positive",
+        "category": "logro",
+        "relevance": 0.8,
+        "needs_support": false,
+        "topic": "Certificación profesional"
+      },
+      {
+        "id": "resena-1074",
+        "author": "SHUBHAM E",
+        "channel": "Reseñas Coursera · deep-neural-network",
+        "text": "Okay with week 1 and week 3 but you need to improve the motive behind presenting week 2. Also what was the purpose of batch normalization?",
+        "sentiment": "neutral",
+        "category": "duda",
+        "relevance": 0.7,
+        "needs_support": true,
+        "topic": "Normalización por lotes"
+      },
+      {
+        "id": "resena-1153",
+        "author": "Fabio L d S",
+        "channel": "Reseñas Coursera · open-source-tools-for-data-science",
+        "text": "Do we really need to know both Watson studio and Skills network lab?Maybe it would be best to focus on one platform and explore it more in detail",
+        "sentiment": "neutral",
+        "category": "duda",
+        "relevance": 0.6,
+        "needs_support": true,
+        "topic": "Herramientas de laboratorio"
+      },
+      {
+        "id": "resena-14",
+        "author": "Matthew E",
+        "channel": "Reseñas Coursera · data-science-methodology",
+        "text": "The sites have changed so following the directions of this course were very confusing and hard to understand. The update from Data Science Experience to IBM Watson studio did not relate to the video demonstrated in this class",
+        "sentiment": "negative",
+        "category": "apoyo",
+        "relevance": 0.9,
+        "needs_support": true,
+        "topic": "Actualización de plataformas"
+      },
+      {
+        "id": "resena-215",
+        "author": "Amiya R B",
+        "channel": "Reseñas Coursera · data-science-methodology",
+        "text": "I think the trainer just read out some material prepared by him. concepts are uncleared to me. bad experience",
+        "sentiment": "negative",
+        "category": "apoyo",
+        "relevance": 0.5,
+        "needs_support": false,
+        "topic": "Calidad docente"
+      },
+      {
+        "id": "resena-11",
+        "author": "srijanapuri",
+        "channel": "Reseñas Coursera · datasciencemathskills",
+        "text": "I learned many new things, ideas, knowledge,and skills from this course.I am very much thankful to both professors for teaching about all of those interesting lessons,providing many more things. now, I am able to give all of the answers frequently which I learned from this beneficial course.",
+        "sentiment": "positive",
+        "category": "logro",
+        "relevance": 0.7,
+        "needs_support": false,
+        "topic": "Adquisición de habilidades"
+      },
+      {
+        "id": "resena-16",
+        "author": "Carlo C",
+        "channel": "Reseñas Coursera · multivariate-calculus-machine-learning",
+        "text": "Well done!!! The course is interesting and well organized.Lack of Pyton knowledge from my side is sometimes critical to solve some exercises...It's my intention, as soon as I'lI have complete the three couses, to attend a Pyton course to complete my preparation.",
+        "sentiment": "positive",
+        "category": "comentario",
+        "relevance": 0.6,
+        "needs_support": false,
+        "topic": "Preparación técnica"
+      },
+      {
+        "id": "resena-1796",
+        "author": "Cat-Tuong N",
+        "channel": "Reseñas Coursera · python-machine-learning",
+        "text": "Challenging and fun course. The number of topics is on the high side. Maybe break this into 2 courses? The programming assignments are fun. You will need to go to discussion forum to solve often encountered problems.",
+        "sentiment": "mixed",
+        "category": "comentario",
+        "relevance": 0.7,
+        "needs_support": false,
+        "topic": "Estructura del curso"
+      },
+      {
+        "id": "resena-127",
+        "author": "Sebastien C",
+        "channel": "Reseñas Coursera · convolutional-neural-networks",
+        "text": "Content was interestind and provided good theoretical overview. Exercices where you just have to fill in some line of codes are not usefull.",
+        "sentiment": "neutral",
+        "category": "comentario",
+        "relevance": 0.6,
+        "needs_support": false,
+        "topic": "Ejercicios prácticos"
+      },
+      {
+        "id": "resena-1900",
+        "author": "Julien P",
+        "channel": "Reseñas Coursera · applied-data-science-capstone",
+        "text": "Great to put into action the theoretical knowledge acquired in the previous 8 classes. What could be improved? The peer-rating system can be very slow. A common practice is to go on the forum to beg for a rating by another learner. This can be tiring.",
+        "sentiment": "mixed",
+        "category": "apoyo",
+        "relevance": 0.8,
+        "needs_support": true,
+        "topic": "Evaluación entre pares"
+      }
+    ],
+    "highlights": [
+      "resena-14",
+      "resena-324",
+      "resena-1900"
+    ],
+    "members_needing_support": [
+      {
+        "id": "resena-1074",
+        "author": "SHUBHAM E",
+        "channel": "Reseñas Coursera · deep-neural-network",
+        "category": "duda"
+      },
+      {
+        "id": "resena-1153",
+        "author": "Fabio L d S",
+        "channel": "Reseñas Coursera · open-source-tools-for-data-science",
+        "category": "duda"
+      },
+      {
+        "id": "resena-14",
+        "author": "Matthew E",
+        "channel": "Reseñas Coursera · data-science-methodology",
+        "category": "apoyo"
+      },
+      {
+        "id": "resena-1900",
+        "author": "Julien P",
+        "channel": "Reseñas Coursera · applied-data-science-capstone",
+        "category": "apoyo"
+      }
+    ],
+    "discarded": [
+      "resena-14",
+      "resena-215",
+      "resena-16",
+      "resena-1796",
+      "resena-127",
+      "resena-1900"
+    ],
+    "faq_topics": [
+      {
+        "topic": "Normalización por lotes",
+        "questions": 1,
+        "interaction_ids": [
+          "resena-1074"
+        ],
+        "evidence_ids": [
+          "faq-2067",
+          "faq-718"
+        ],
+        "has_official_faq": true
+      },
+      {
+        "topic": "Herramientas de laboratorio",
+        "questions": 1,
+        "interaction_ids": [
+          "resena-1153"
+        ],
+        "evidence_ids": [
+          "faq-2715",
+          "faq-1509"
+        ],
+        "has_official_faq": true
+      }
+    ],
+    "warnings": [],
+    "formato_briefing": {
+      "status": "exito",
+      "resumen_comunidad": {
+        "total_interacciones_procesadas": 10,
+        "sentimiento_predominante": "Mixto",
+        "temas_principales": [
+          "Experiencia de aprendizaje",
+          "Actualización de plataformas",
+          "Metodología de enseñanza",
+          "Sistemas de evaluación"
+        ]
+      },
+      "activos_distribucion_generados": {
+        "post_linkedin": {
+          "titulo": "Celebrando el aprendizaje continuo",
+          "copy": "Terminar una certificación profesional es solo el comienzo. He visto cómo compañeros transforman conceptos teóricos en habilidades prácticas gracias a proyectos aplicados. La constancia en el aprendizaje es la clave para destacar en el mundo de los datos. ¡Sigamos creciendo! #DataScience #AprendizajeContinuo #CarreraProfesional #TechSkills",
+          "canal_recomendado": "LinkedIn Oficial",
+          "potencial_engagement": "Alto"
+        },
+        "destaque_newsletter_semanal": {
+          "seccion": "Tip de la Semana",
+          "titular": "Tip: Acelera tu entrenamiento",
+          "resumen": "Usa la normalización por lotes para ajustar las activaciones de tus capas a media cero y varianza unitaria. Esto no solo estabiliza el aprendizaje, sino que permite entrenar tus redes neuronales mucho más rápido. ¡Pruébalo en tu próximo modelo!"
+        },
+        "sugerencia_contenido_faq": {
+          "tema": "Normalización por lotes",
+          "origen": "Duda planteada por SHUBHAM E en Reseñas Coursera · deep-neural-network",
+          "status": "respuesta_con_faq_oficial"
+        },
+        "caso_exito": {
+          "titulo": "De la teoría a la práctica: completando el camino",
+          "origen": "Logro compartido por AKPAN, G E en Reseñas Coursera · applied-data-science-capstone (y 1 más)",
+          "borrador": "Un estudiante ha compartido su experiencia tras finalizar el certificado profesional de Ciencia de Datos. Destaca que el proyecto final fue la mejor manera de aplicar los conocimientos adquiridos en los nueve cursos previos, permitiéndole ganar confianza y experiencia profesional real en el campo.",
+          "status": "validar_con_la_persona"
+        },
+        "contenido_educativo": [
+          {
+            "tema": "Normalización por lotes",
+            "dudas": 1,
+            "tutorial_rapido": {
+              "titulo": "Entendiendo la Normalización por lotes",
+              "contenido": "La normalización por lotes es fundamental para estabilizar y acelerar el entrenamiento de redes neuronales profundas. 1. Identifica las activaciones de la capa. 2. Ajusta los valores para tener media cero. 3. Escala los valores para tener varianza unitaria. 4. Aplica la normalización a lo largo de la dimensión del lote. Ejemplo: En una red, esto evita que los gradientes se desvanezcan o exploten, permitiendo tasas de aprendizaje más altas."
+            },
+            "tip_semana": "Usa la normalización por lotes para ajustar las activaciones de tus capas a media cero y varianza unitaria. Esto no solo estabiliza el aprendizaje, sino que permite entrenar tus redes neuronales mucho más rápido. ¡Pruébalo en tu próximo modelo!",
+            "tema_documentacion": {
+              "titulo": "Guía técnica: Normalización por lotes vs. Capas",
+              "propuesta": "Esta página es necesaria debido a dudas recurrentes sobre el propósito de la normalización en redes neuronales. Secciones: 1. ¿Qué es la normalización por lotes? 2. Diferencias clave con la normalización por capas. 3. Impacto en el rendimiento del modelo. 4. Casos de uso recomendados. Respaldo: FAQ oficial disponible sobre normalización."
+            },
+            "respaldo_faq_oficial": [
+              "faq-2067",
+              "faq-718"
+            ],
+            "status": "respuesta_con_faq_oficial"
+          },
+          {
+            "tema": "Herramientas de laboratorio",
+            "dudas": 1,
+            "tutorial_rapido": {
+              "titulo": "Uso de herramientas de laboratorio",
+              "contenido": "Sin FAQ oficial: borrador para validar con un mentor. La elección de herramientas de laboratorio depende de los objetivos específicos de tu proyecto de ciencia de datos. 1. Evalúa las funcionalidades de Watson Studio. 2. Compara con las capacidades de Skills Network Lab. 3. Selecciona la plataforma que mejor se adapte a tu flujo de trabajo actual. 4. Profundiza en una sola herramienta para dominarla antes de cambiar."
+            },
+            "tip_semana": "En lugar de intentar aprender múltiples plataformas de laboratorio a la vez, elige una y explórala a fondo. Dominar una herramienta te dará más productividad que conocer superficialmente varias. ¡Enfócate y profundiza!",
+            "tema_documentacion": {
+              "titulo": "Guía de selección de entornos de laboratorio",
+              "propuesta": "Propuesta motivada por la confusión de los estudiantes sobre qué plataforma priorizar en el aprendizaje. Secciones: 1. Comparativa de entornos de laboratorio. 2. Criterios para elegir tu herramienta principal. 3. Ventajas de la especialización en una plataforma. 4. Recursos para profundizar en Watson Studio y Skills Network Lab. Contenido nuevo a crear."
+            },
+            "respaldo_faq_oficial": [
+              "faq-2715",
+              "faq-1509"
+            ],
+            "status": "derivado_a_mentoria"
+          }
+        ]
+      },
+      "almacenamiento_oci": {
+        "bucket": null,
+        "ruta_objeto": "salidas/paquetes/49e12ccd-6783-4bfc-814f-6baab808c2db.json",
+        "status": "guardado_local"
+      }
+    }
+  }
+}

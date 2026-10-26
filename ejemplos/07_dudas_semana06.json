@@ -1,0 +1,36 @@
+{
+  "origen_comunidad": "Discord_Grupo_ONE_G10",
+  "periodo_referencia": "Semana_06",
+  "interacciones": [
+    {
+      "autor": "Valentina R",
+      "canal": "#dudas-langgraph",
+      "tipo": "pregunta_tecnica",
+      "texto": "¿Cómo hago para que mi grafo de LangGraph vuelva a llamar al LLM si la respuesta viene vacía? No entiendo bien cómo se arma el router."
+    },
+    {
+      "autor": "Diego M",
+      "canal": "#dudas-langgraph",
+      "tipo": "pregunta_tecnica",
+      "texto": "En LangGraph, ¿cuál es la forma correcta de poner un límite de reintentos en un nodo condicional para que no quede en un bucle infinito?"
+    },
+    {
+      "autor": "Camila T",
+      "canal": "#dudas-machine-learning",
+      "tipo": "pregunta_tecnica",
+      "texto": "Mi modelo tiene 98% en entrenamiento y 65% en prueba. ¿Eso es sobreajuste? ¿Qué hago primero?"
+    },
+    {
+      "autor": "Andrés P",
+      "canal": "#dudas-python",
+      "tipo": "pregunta_tecnica",
+      "texto": "¿Conviene rellenar los valores faltantes con la media o borrar las filas? Tengo un dataset de ventas con muchos nulos."
+    },
+    {
+      "autor": "Sofía L",
+      "canal": "#general",
+      "tipo": "comentario",
+      "texto": "Gracias a todos por las respuestas de la semana pasada, me sirvieron mucho para el proyecto."
+    }
+  ]
+}

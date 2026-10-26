@@ -1,0 +1,217 @@
+{
+  "entrada": {
+    "community_source": "Discord_Grupo_ONE_G10",
+    "reference_period": "Semana_04",
+    "interactions": [
+      {
+        "id": null,
+        "author": "Mariana Souza",
+        "channel": "#logros-y-empleos",
+        "type": "testimonio",
+        "text": "Comunidad, quede seleccionada para el puesto de Desarrolladora Junior de IA! El proyecto del curso de LangChain y OCI que construi en mi portfolio marco toda la diferencia en la entrevista tecnica. Muy agradecida con la comunidad por todo el apoyo!"
+      },
+      {
+        "id": null,
+        "author": "Lucas Albuquerque",
+        "channel": "#dudas-langgraph",
+        "type": "pregunta_tecnica",
+        "text": "Tengo dudas sobre como estructurar los nodos condicionales en LangGraph cuando la respuesta del LLM necesita reintento. Alguien tiene un ejemplo practico de router?"
+      }
+    ]
+  },
+  "respuesta": {
+    "status": "success",
+    "request_id": "4605355f-c15d-4eda-8558-8ea32f0c9377",
+    "community_summary": {
+      "total_interactions_processed": 2,
+      "predominant_sentiment": "positive",
+      "main_topics": [
+        "Empleo en IA",
+        "LangGraph",
+        "LangChain",
+        "Portfolio"
+      ]
+    },
+    "insights": [
+      "Se confirma el impacto positivo de los proyectos del curso en la empleabilidad de los miembros.",
+      "Existe una necesidad técnica específica sobre la implementación de routers en LangGraph."
+    ],
+    "routing": {
+      "selected_flow": "success_story",
+      "reason": "Señal de historia de éxito: 1 logro(s) o testimonio(s)",
+      "flows": [
+        "success_story",
+        "faq"
+      ],
+      "reasons": {
+        "success_story": "Señal de historia de éxito: 1 logro(s) o testimonio(s)",
+        "faq": "Señal de pregunta recurrente: 1 duda(s) de la comunidad en 1 tema(s)"
+      }
+    },
+    "generated_assets": [
+      {
+        "kind": "success_story",
+        "title": "De la formación al empleo: un caso de éxito en IA",
+        "body": "Una integrante de nuestra comunidad ha compartido una excelente noticia: ha sido seleccionada para un puesto como Desarrolladora Junior de IA. Según nos comenta, el proyecto que desarrolló durante el curso de LangChain y OCI fue el factor determinante para destacar en su entrevista técnica. Este logro subraya la importancia de construir un portfolio sólido y práctico para abrir puertas en el mercado laboral.",
+        "status": "draft",
+        "evidence_ids": [],
+        "flow": "success_story",
+        "topic": null
+      },
+      {
+        "kind": "linkedin_post",
+        "title": "El valor de un portfolio en IA",
+        "body": "¡Qué orgullo ver cómo el esfuerzo da sus frutos! Una compañera de nuestra comunidad acaba de conseguir su primer empleo como Desarrolladora Junior de IA. ¿La clave? Un proyecto sólido en su portfolio basado en LangChain y OCI que marcó la diferencia en su entrevista técnica. No subestimes el poder de aplicar lo aprendido en proyectos reales; es lo que realmente demuestra tu capacidad ante los reclutadores. ¡Felicidades por este gran paso profesional! #IA #DesarrolloProfesional #LangChain #Portfolio",
+        "status": "draft",
+        "evidence_ids": [],
+        "flow": "success_story",
+        "topic": null
+      },
+      {
+        "kind": "quick_tutorial",
+        "title": "Implementación de nodos condicionales en LangGraph",
+        "body": "Sin FAQ oficial: borrador para validar con un mentor. Para gestionar reintentos en LangGraph mediante nodos condicionales, sigue estos pasos: 1. Define el nodo principal que ejecuta el LLM. 2. Crea una función de enrutamiento que analice la salida. 3. Configura el 'Conditional Edge' para dirigir el flujo según el resultado. 4. Si la respuesta es inválida, redirige al nodo de reintento. 5. Conecta el flujo de vuelta al nodo principal. Ejemplo: add_conditional_edges(start_node, router_function, { 'retry': 'llm_node', 'continue': 'next_node' }).",
+        "status": "draft",
+        "evidence_ids": [],
+        "flow": "faq",
+        "topic": "LangGraph"
+      },
+      {
+        "kind": "weekly_tip",
+        "title": "Tip: Enrutamiento en LangGraph",
+        "body": "Para gestionar reintentos en LangGraph, utiliza 'conditional_edges'. Define una función de enrutamiento que evalúe la salida del LLM y redirija el flujo hacia el nodo de reintento o hacia el siguiente paso según corresponda. ¡Mantén tu grafo modular!",
+        "status": "draft",
+        "evidence_ids": [],
+        "flow": "faq",
+        "topic": "LangGraph"
+      },
+      {
+        "kind": "doc_topic",
+        "title": "Guía de Nodos Condicionales y Enrutamiento en LangGraph",
+        "body": "Esta página es necesaria debido a las dudas recurrentes sobre cómo gestionar flujos complejos y reintentos en LangGraph. Secciones propuestas: 1. Introducción a los Conditional Edges. 2. Creación de funciones de enrutamiento personalizadas. 3. Patrones de diseño para reintentos automáticos. 4. Ejemplo práctico de implementación. Se requiere crear contenido nuevo, ya que no existe respaldo oficial en las citas actuales.",
+        "status": "draft",
+        "evidence_ids": [],
+        "flow": "faq",
+        "topic": "LangGraph"
+      }
+    ],
+    "human_review": {
+      "required": true,
+      "status": "pending"
+    },
+    "storage": {
+      "provider": "local",
+      "status": "stored",
+      "location": "salidas/paquetes/4605355f-c15d-4eda-8558-8ea32f0c9377.json"
+    },
+    "evidence": [],
+    "interaction_analysis": [
+      {
+        "id": "interaction-1",
+        "author": "Mariana Souza",
+        "channel": "#logros-y-empleos",
+        "text": "Comunidad, quede seleccionada para el puesto de Desarrolladora Junior de IA! El proyecto del curso de LangChain y OCI que construi en mi portfolio marco toda la diferencia en la entrevista tecnica. Muy agradecida con la comunidad por todo el apoyo!",
+        "sentiment": "positive",
+        "category": "logro",
+        "relevance": 0.95,
+        "needs_support": false,
+        "topic": "Empleo en IA"
+      },
+      {
+        "id": "interaction-2",
+        "author": "Lucas Albuquerque",
+        "channel": "#dudas-langgraph",
+        "text": "Tengo dudas sobre como estructurar los nodos condicionales en LangGraph cuando la respuesta del LLM necesita reintento. Alguien tiene un ejemplo practico de router?",
+        "sentiment": "neutral",
+        "category": "duda",
+        "relevance": 0.85,
+        "needs_support": true,
+        "topic": "LangGraph"
+      }
+    ],
+    "highlights": [
+      "interaction-1",
+      "interaction-2"
+    ],
+    "members_needing_support": [
+      {
+        "id": "interaction-2",
+        "author": "Lucas Albuquerque",
+        "channel": "#dudas-langgraph",
+        "category": "duda"
+      }
+    ],
+    "discarded": [],
+    "faq_topics": [
+      {
+        "topic": "LangGraph",
+        "questions": 1,
+        "interaction_ids": [
+          "interaction-2"
+        ],
+        "evidence_ids": [],
+        "has_official_faq": false
+      }
+    ],
+    "warnings": [],
+    "formato_briefing": {
+      "status": "exito",
+      "resumen_comunidad": {
+        "total_interacciones_procesadas": 2,
+        "sentimiento_predominante": "Positivo",
+        "temas_principales": [
+          "Empleo en IA",
+          "LangGraph",
+          "LangChain",
+          "Portfolio"
+        ]
+      },
+      "activos_distribucion_generados": {
+        "post_linkedin": {
+          "titulo": "El valor de un portfolio en IA",
+          "copy": "¡Qué orgullo ver cómo el esfuerzo da sus frutos! Una compañera de nuestra comunidad acaba de conseguir su primer empleo como Desarrolladora Junior de IA. ¿La clave? Un proyecto sólido en su portfolio basado en LangChain y OCI que marcó la diferencia en su entrevista técnica. No subestimes el poder de aplicar lo aprendido en proyectos reales; es lo que realmente demuestra tu capacidad ante los reclutadores. ¡Felicidades por este gran paso profesional! #IA #DesarrolloProfesional #LangChain #Portfolio",
+          "canal_recomendado": "LinkedIn Oficial",
+          "potencial_engagement": "Alto"
+        },
+        "destaque_newsletter_semanal": {
+          "seccion": "Tip de la Semana",
+          "titular": "Tip: Enrutamiento en LangGraph",
+          "resumen": "Para gestionar reintentos en LangGraph, utiliza 'conditional_edges'. Define una función de enrutamiento que evalúe la salida del LLM y redirija el flujo hacia el nodo de reintento o hacia el siguiente paso según corresponda. ¡Mantén tu grafo modular!"
+        },
+        "sugerencia_contenido_faq": {
+          "tema": "LangGraph",
+          "origen": "Duda planteada por Lucas Albuquerque en #dudas-langgraph",
+          "status": "derivado_a_mentoria"
+        },
+        "caso_exito": {
+          "titulo": "De la formación al empleo: un caso de éxito en IA",
+          "origen": "Logro compartido por Mariana Souza en #logros-y-empleos",
+          "borrador": "Una integrante de nuestra comunidad ha compartido una excelente noticia: ha sido seleccionada para un puesto como Desarrolladora Junior de IA. Según nos comenta, el proyecto que desarrolló durante el curso de LangChain y OCI fue el factor determinante para destacar en su entrevista técnica. Este logro subraya la importancia de construir un portfolio sólido y práctico para abrir puertas en el mercado laboral.",
+          "status": "validar_con_la_persona"
+        },
+        "contenido_educativo": [
+          {
+            "tema": "LangGraph",
+            "dudas": 1,
+            "tutorial_rapido": {
+              "titulo": "Implementación de nodos condicionales en LangGraph",
+              "contenido": "Sin FAQ oficial: borrador para validar con un mentor. Para gestionar reintentos en LangGraph mediante nodos condicionales, sigue estos pasos: 1. Define el nodo principal que ejecuta el LLM. 2. Crea una función de enrutamiento que analice la salida. 3. Configura el 'Conditional Edge' para dirigir el flujo según el resultado. 4. Si la respuesta es inválida, redirige al nodo de reintento. 5. Conecta el flujo de vuelta al nodo principal. Ejemplo: add_conditional_edges(start_node, router_function, { 'retry': 'llm_node', 'continue': 'next_node' })."
+            },
+            "tip_semana": "Para gestionar reintentos en LangGraph, utiliza 'conditional_edges'. Define una función de enrutamiento que evalúe la salida del LLM y redirija el flujo hacia el nodo de reintento o hacia el siguiente paso según corresponda. ¡Mantén tu grafo modular!",
+            "tema_documentacion": {
+              "titulo": "Guía de Nodos Condicionales y Enrutamiento en LangGraph",
+              "propuesta": "Esta página es necesaria debido a las dudas recurrentes sobre cómo gestionar flujos complejos y reintentos en LangGraph. Secciones propuestas: 1. Introducción a los Conditional Edges. 2. Creación de funciones de enrutamiento personalizadas. 3. Patrones de diseño para reintentos automáticos. 4. Ejemplo práctico de implementación. Se requiere crear contenido nuevo, ya que no existe respaldo oficial en las citas actuales."
+            },
+            "respaldo_faq_oficial": [],
+            "status": "derivado_a_mentoria"
+          }
+        ]
+      },
+      "almacenamiento_oci": {
+        "bucket": null,
+        "ruta_objeto": "salidas/paquetes/4605355f-c15d-4eda-8558-8ea32f0c9377.json",
+        "status": "guardado_local"
+      }
+    }
+  }
+}

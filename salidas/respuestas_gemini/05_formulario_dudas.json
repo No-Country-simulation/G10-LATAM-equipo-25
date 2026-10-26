@@ -1,0 +1,322 @@
+{
+  "entrada": {
+    "community_source": "comunidad",
+    "reference_period": "05_formulario_dudas",
+    "interactions": [
+      {
+        "id": null,
+        "author": "Estudiante_H",
+        "channel": "Formulario de feedback",
+        "type": "pregunta",
+        "text": "¿Cuál es la diferencia entre clasificación y regresión? En el curso no me quedó claro."
+      },
+      {
+        "id": null,
+        "author": "Estudiante_I",
+        "channel": "Formulario de feedback",
+        "type": "pregunta",
+        "text": "No entiendo la diferencia entre aprendizaje supervisado y no supervisado. Mi teléfono es +52 55 1234 5678 por si me pueden llamar."
+      },
+      {
+        "id": null,
+        "author": "Estudiante_J",
+        "channel": "Formulario de feedback",
+        "type": "comentario",
+        "text": "El curso va muy bien pero me cuesta la parte de regresión lineal."
+      }
+    ]
+  },
+  "respuesta": {
+    "status": "success",
+    "request_id": "5165ecfb-04cd-4e75-b3f3-ee069721ddf3",
+    "community_summary": {
+      "total_interactions_processed": 3,
+      "predominant_sentiment": "negative",
+      "main_topics": [
+        "Clasificación vs Regresión",
+        "Aprendizaje supervisado",
+        "Regresión lineal"
+      ]
+    },
+    "insights": [
+      "Los estudiantes presentan confusión en conceptos fundamentales de aprendizaje automático.",
+      "Existe una necesidad de reforzar los materiales sobre regresión lineal y tipos de aprendizaje.",
+      "Se requiere atención personalizada para resolver dudas conceptuales básicas."
+    ],
+    "routing": {
+      "selected_flow": "faq",
+      "reason": "Señal de pregunta recurrente: 2 duda(s) de la comunidad en 2 tema(s)",
+      "flows": [
+        "faq"
+      ],
+      "reasons": {
+        "faq": "Señal de pregunta recurrente: 2 duda(s) de la comunidad en 2 tema(s)"
+      }
+    },
+    "generated_assets": [
+      {
+        "kind": "quick_tutorial",
+        "title": "Diferencias entre aprendizaje supervisado y no supervisado",
+        "body": "El aprendizaje supervisado utiliza datos etiquetados para entrenar modelos, mientras que el no supervisado busca patrones en datos sin etiquetas. Sigue estos pasos: 1. Identifica si tu conjunto de datos tiene etiquetas de salida conocidas. 2. Si las tiene, aplica algoritmos de aprendizaje supervisado. 3. Si no las tiene, utiliza técnicas de aprendizaje no supervisado para hallar estructuras. 4. Considera el aprendizaje semi-supervisado si tienes una mezcla de ambos tipos de datos. Ejemplo: Clasificar correos como spam (etiquetado) vs. agrupar clientes por comportamiento (no etiquetado).",
+        "status": "draft",
+        "evidence_ids": [
+          "faq-3006",
+          "faq-2704"
+        ],
+        "flow": "faq",
+        "topic": "Aprendizaje supervisado"
+      },
+      {
+        "kind": "weekly_tip",
+        "title": "Tip: Elige tu paradigma de aprendizaje",
+        "body": "Antes de entrenar, verifica si tus datos están etiquetados. Si tienes etiquetas, usa aprendizaje supervisado. Si buscas estructuras ocultas, usa no supervisado. ¡Ahorrarás mucho tiempo de cómputo eligiendo el enfoque correcto desde el inicio!",
+        "status": "draft",
+        "evidence_ids": [
+          "faq-3006"
+        ],
+        "flow": "faq",
+        "topic": "Aprendizaje supervisado"
+      },
+      {
+        "kind": "doc_topic",
+        "title": "Guía de paradigmas de aprendizaje",
+        "body": "Motivación: 1 duda recurrente sobre la distinción de conceptos. Secciones: 1. Definición de aprendizaje supervisado. 2. Definición de aprendizaje no supervisado. 3. Introducción al aprendizaje semi-supervisado. 4. Tabla comparativa de casos de uso. Respaldo: Contenido basado en las FAQs faq-3006 y faq-2704.",
+        "status": "draft",
+        "evidence_ids": [
+          "faq-3006",
+          "faq-2704"
+        ],
+        "flow": "faq",
+        "topic": "Aprendizaje supervisado"
+      },
+      {
+        "kind": "quick_tutorial",
+        "title": "Clasificación vs. Regresión: ¿Qué elegir?",
+        "body": "La elección depende de si buscas predecir una categoría o un valor numérico. Pasos: 1. Define tu variable objetivo. 2. Si es una categoría (ej. 'sí'/'no'), es un problema de clasificación. 3. Si es un valor continuo (ej. precio), es un problema de regresión. 4. Si usas regresión lineal, recuerda aplicar regularización para evitar overfitting. Ejemplo: Predecir el tipo de flor (clasificación) vs. predecir la temperatura (regresión).",
+        "status": "draft",
+        "evidence_ids": [
+          "faq-1572",
+          "faq-2541"
+        ],
+        "flow": "faq",
+        "topic": "Clasificación vs Regresión"
+      },
+      {
+        "kind": "weekly_tip",
+        "title": "Tip: ¿Clasificación o Regresión?",
+        "body": "La clave está en el output: ¿es una categoría o un número? Si es categoría, clasifica. Si es un valor continuo, usa regresión. ¡No olvides aplicar regularización en tus modelos de regresión lineal para mejorar su precisión!",
+        "status": "draft",
+        "evidence_ids": [
+          "faq-1572",
+          "faq-2541"
+        ],
+        "flow": "faq",
+        "topic": "Clasificación vs Regresión"
+      },
+      {
+        "kind": "doc_topic",
+        "title": "Diferencias fundamentales entre clasificación y regresión",
+        "body": "Motivación: 1 duda detectada en el curso. Secciones: 1. ¿Qué es la clasificación? 2. ¿Qué es la regresión? 3. Diferencias clave en el output. 4. Introducción a la regularización en regresión lineal. Respaldo: Contenido basado en las FAQs faq-1572 y faq-2541.",
+        "status": "draft",
+        "evidence_ids": [
+          "faq-1572",
+          "faq-2541"
+        ],
+        "flow": "faq",
+        "topic": "Clasificación vs Regresión"
+      }
+    ],
+    "human_review": {
+      "required": true,
+      "status": "pending"
+    },
+    "storage": {
+      "provider": "local",
+      "status": "stored",
+      "location": "salidas/paquetes/5165ecfb-04cd-4e75-b3f3-ee069721ddf3.json"
+    },
+    "evidence": [
+      {
+        "record_id": "faq-3006",
+        "snippet": "Pregunta: What is the difference between supervised and unsupervised learning?\nRespuesta: In supervised learning, the model is trained on labeled data, where the output is known, while in unsupervised learning, the model is trained on unlabeled data, and it tries to find patterns or structures in the data.",
+        "source": "faq:machine-learning-with-python",
+        "score": 9.3935
+      },
+      {
+        "record_id": "faq-2704",
+        "snippet": "Pregunta: What is semi-supervised learning?\nRespuesta: Semi-supervised learning is a machine learning paradigm that combines labeled and unlabeled data to improve model performance, often by leveraging the inherent structure or relationships in the data to semi-supervised learning algorithms.",
+        "source": "faq:what-is-datascience",
+        "score": 7.1372
+      },
+      {
+        "record_id": "faq-1572",
+        "snippet": "Pregunta: What is the difference between classification and regression?\nRespuesta: Classification is a task where the goal is to predict the category or class label of an input, while regression is a task where the goal is to predict a continuous numerical value.",
+        "source": "faq:convolutional-neural-networks-tensorflow",
+        "score": 14.4306
+      },
+      {
+        "record_id": "faq-2541",
+        "snippet": "Pregunta: What is regularization in linear regression?\nRespuesta: Regularization in linear regression involves adding a penalty term to the ordinary least squares (OLS) loss function to prevent overfitting, with common regularization techniques including Ridge regression (L2 regularization) and Lasso regression (L1 regularization).",
+        "source": "faq:convolutional-neural-networks",
+        "score": 6.1342
+      }
+    ],
+    "interaction_analysis": [
+      {
+        "id": "interaction-1",
+        "author": "Estudiante_H",
+        "channel": "Formulario de feedback",
+        "text": "¿Cuál es la diferencia entre clasificación y regresión? En el curso no me quedó claro.",
+        "sentiment": "neutral",
+        "category": "duda",
+        "relevance": 0.8,
+        "needs_support": true,
+        "topic": "Clasificación vs Regresión"
+      },
+      {
+        "id": "interaction-2",
+        "author": "Estudiante_I",
+        "channel": "Formulario de feedback",
+        "text": "No entiendo la diferencia entre aprendizaje supervisado y no supervisado. Mi teléfono es [TELEFONO] por si me pueden llamar.",
+        "sentiment": "negative",
+        "category": "duda",
+        "relevance": 0.9,
+        "needs_support": true,
+        "topic": "Aprendizaje supervisado"
+      },
+      {
+        "id": "interaction-3",
+        "author": "Estudiante_J",
+        "channel": "Formulario de feedback",
+        "text": "El curso va muy bien pero me cuesta la parte de regresión lineal.",
+        "sentiment": "mixed",
+        "category": "apoyo",
+        "relevance": 0.7,
+        "needs_support": true,
+        "topic": "Regresión lineal"
+      }
+    ],
+    "highlights": [
+      "interaction-2",
+      "interaction-1",
+      "interaction-3"
+    ],
+    "members_needing_support": [
+      {
+        "id": "interaction-1",
+        "author": "Estudiante_H",
+        "channel": "Formulario de feedback",
+        "category": "duda"
+      },
+      {
+        "id": "interaction-2",
+        "author": "Estudiante_I",
+        "channel": "Formulario de feedback",
+        "category": "duda"
+      },
+      {
+        "id": "interaction-3",
+        "author": "Estudiante_J",
+        "channel": "Formulario de feedback",
+        "category": "apoyo"
+      }
+    ],
+    "discarded": [
+      "interaction-3"
+    ],
+    "faq_topics": [
+      {
+        "topic": "Aprendizaje supervisado",
+        "questions": 1,
+        "interaction_ids": [
+          "interaction-2"
+        ],
+        "evidence_ids": [
+          "faq-3006",
+          "faq-2704"
+        ],
+        "has_official_faq": true
+      },
+      {
+        "topic": "Clasificación vs Regresión",
+        "questions": 1,
+        "interaction_ids": [
+          "interaction-1"
+        ],
+        "evidence_ids": [
+          "faq-1572",
+          "faq-2541"
+        ],
+        "has_official_faq": true
+      }
+    ],
+    "warnings": [],
+    "formato_briefing": {
+      "status": "exito",
+      "resumen_comunidad": {
+        "total_interacciones_procesadas": 3,
+        "sentimiento_predominante": "Negativo",
+        "temas_principales": [
+          "Clasificación vs Regresión",
+          "Aprendizaje supervisado",
+          "Regresión lineal"
+        ]
+      },
+      "activos_distribucion_generados": {
+        "destaque_newsletter_semanal": {
+          "seccion": "Tip de la Semana",
+          "titular": "Tip: Elige tu paradigma de aprendizaje",
+          "resumen": "Antes de entrenar, verifica si tus datos están etiquetados. Si tienes etiquetas, usa aprendizaje supervisado. Si buscas estructuras ocultas, usa no supervisado. ¡Ahorrarás mucho tiempo de cómputo eligiendo el enfoque correcto desde el inicio!"
+        },
+        "sugerencia_contenido_faq": {
+          "tema": "Aprendizaje supervisado",
+          "origen": "Duda planteada por Estudiante_I en Formulario de feedback",
+          "status": "respuesta_con_faq_oficial"
+        },
+        "contenido_educativo": [
+          {
+            "tema": "Aprendizaje supervisado",
+            "dudas": 1,
+            "tutorial_rapido": {
+              "titulo": "Diferencias entre aprendizaje supervisado y no supervisado",
+              "contenido": "El aprendizaje supervisado utiliza datos etiquetados para entrenar modelos, mientras que el no supervisado busca patrones en datos sin etiquetas. Sigue estos pasos: 1. Identifica si tu conjunto de datos tiene etiquetas de salida conocidas. 2. Si las tiene, aplica algoritmos de aprendizaje supervisado. 3. Si no las tiene, utiliza técnicas de aprendizaje no supervisado para hallar estructuras. 4. Considera el aprendizaje semi-supervisado si tienes una mezcla de ambos tipos de datos. Ejemplo: Clasificar correos como spam (etiquetado) vs. agrupar clientes por comportamiento (no etiquetado)."
+            },
+            "tip_semana": "Antes de entrenar, verifica si tus datos están etiquetados. Si tienes etiquetas, usa aprendizaje supervisado. Si buscas estructuras ocultas, usa no supervisado. ¡Ahorrarás mucho tiempo de cómputo eligiendo el enfoque correcto desde el inicio!",
+            "tema_documentacion": {
+              "titulo": "Guía de paradigmas de aprendizaje",
+              "propuesta": "Motivación: 1 duda recurrente sobre la distinción de conceptos. Secciones: 1. Definición de aprendizaje supervisado. 2. Definición de aprendizaje no supervisado. 3. Introducción al aprendizaje semi-supervisado. 4. Tabla comparativa de casos de uso. Respaldo: Contenido basado en las FAQs faq-3006 y faq-2704."
+            },
+            "respaldo_faq_oficial": [
+              "faq-3006",
+              "faq-2704"
+            ],
+            "status": "respuesta_con_faq_oficial"
+          },
+          {
+            "tema": "Clasificación vs Regresión",
+            "dudas": 1,
+            "tutorial_rapido": {
+              "titulo": "Clasificación vs. Regresión: ¿Qué elegir?",
+              "contenido": "La elección depende de si buscas predecir una categoría o un valor numérico. Pasos: 1. Define tu variable objetivo. 2. Si es una categoría (ej. 'sí'/'no'), es un problema de clasificación. 3. Si es un valor continuo (ej. precio), es un problema de regresión. 4. Si usas regresión lineal, recuerda aplicar regularización para evitar overfitting. Ejemplo: Predecir el tipo de flor (clasificación) vs. predecir la temperatura (regresión)."
+            },
+            "tip_semana": "La clave está en el output: ¿es una categoría o un número? Si es categoría, clasifica. Si es un valor continuo, usa regresión. ¡No olvides aplicar regularización en tus modelos de regresión lineal para mejorar su precisión!",
+            "tema_documentacion": {
+              "titulo": "Diferencias fundamentales entre clasificación y regresión",
+              "propuesta": "Motivación: 1 duda detectada en el curso. Secciones: 1. ¿Qué es la clasificación? 2. ¿Qué es la regresión? 3. Diferencias clave en el output. 4. Introducción a la regularización en regresión lineal. Respaldo: Contenido basado en las FAQs faq-1572 y faq-2541."
+            },
+            "respaldo_faq_oficial": [
+              "faq-1572",
+              "faq-2541"
+            ],
+            "status": "respuesta_con_faq_oficial"
+          }
+        ]
+      },
+      "almacenamiento_oci": {
+        "bucket": null,
+        "ruta_objeto": "salidas/paquetes/5165ecfb-04cd-4e75-b3f3-ee069721ddf3.json",
+        "status": "guardado_local"
+      }
+    }
+  }
+}

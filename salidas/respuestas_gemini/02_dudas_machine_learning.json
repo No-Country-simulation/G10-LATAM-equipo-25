@@ -1,0 +1,319 @@
+{
+  "entrada": {
+    "community_source": "Discord_Grupo_ONE_G10",
+    "reference_period": "Semana_05",
+    "interactions": [
+      {
+        "id": null,
+        "author": "Estudiante_A",
+        "channel": "#dudas-machine-learning",
+        "type": "pregunta_tecnica",
+        "text": "¿Cómo evito el sobreajuste en mi red neuronal? En entrenamiento me da 99% y en validación 70%. Escríbanme a estudiante.a@correo.com si tienen ejemplos."
+      },
+      {
+        "id": null,
+        "author": "Estudiante_B",
+        "channel": "#dudas-machine-learning",
+        "type": "pregunta_tecnica",
+        "text": "Alguien me explica para qué sirve el dropout? Leí que ayuda con el overfitting pero no entiendo cómo."
+      },
+      {
+        "id": null,
+        "author": "Estudiante_C",
+        "channel": "#general",
+        "type": "pregunta_tecnica",
+        "text": "Mi modelo memoriza los datos de entrenamiento, ¿la regularización L1 o L2 me ayudaría con el sobreajuste?"
+      }
+    ]
+  },
+  "respuesta": {
+    "status": "success",
+    "request_id": "c6551cec-b117-4fc2-98ae-d7d1dc100362",
+    "community_summary": {
+      "total_interactions_processed": 3,
+      "predominant_sentiment": "neutral",
+      "main_topics": [
+        "Sobreajuste",
+        "Regularización",
+        "Dropout"
+      ]
+    },
+    "insights": [
+      "Existe una preocupación recurrente sobre el sobreajuste en redes neuronales.",
+      "Los usuarios buscan explicaciones teóricas y prácticas sobre técnicas de regularización."
+    ],
+    "routing": {
+      "selected_flow": "faq",
+      "reason": "Señal de pregunta recurrente: 3 duda(s) de la comunidad en 2 tema(s)",
+      "flows": [
+        "faq"
+      ],
+      "reasons": {
+        "faq": "Señal de pregunta recurrente: 3 duda(s) de la comunidad en 2 tema(s)"
+      }
+    },
+    "generated_assets": [
+      {
+        "kind": "quick_tutorial",
+        "title": "Evitando el sobreajuste con regularización",
+        "body": "Si tu modelo memoriza los datos de entrenamiento pero falla en validación, la regularización es clave. 1. Identifica el sobreajuste comparando métricas. 2. Aplica L1 si buscas esparsidad y selección de características. 3. Aplica L2 para penalizar pesos grandes y suavizar el modelo. Ejemplo: model.add(Dense(64, kernel_regularizer=l2(0.01))).",
+        "status": "draft",
+        "evidence_ids": [
+          "faq-538",
+          "faq-1974"
+        ],
+        "flow": "faq",
+        "topic": "Sobreajuste"
+      },
+      {
+        "kind": "weekly_tip",
+        "title": "Tip: Regularización L1 vs L2",
+        "body": "Si tu red neuronal memoriza demasiado, usa L2 para reducir el tamaño de los pesos o L1 si necesitas simplificar el modelo mediante esparsidad. ¡Ambas técnicas añaden una penalización a la función de pérdida para evitar configuraciones complejas!",
+        "status": "draft",
+        "evidence_ids": [
+          "faq-538",
+          "faq-1974"
+        ],
+        "flow": "faq",
+        "topic": "Sobreajuste"
+      },
+      {
+        "kind": "doc_topic",
+        "title": "Guía de Regularización en Redes Neuronales",
+        "body": "Motivada por 2 dudas recurrentes sobre el sobreajuste. Secciones: 1. ¿Qué es el sobreajuste? 2. Introducción a la penalización de pesos. 3. Diferencias entre L1 (Lasso) y L2 (Ridge). 4. Implementación práctica en Keras/PyTorch. Respaldo oficial: faq-538 y faq-1974.",
+        "status": "draft",
+        "evidence_ids": [
+          "faq-538",
+          "faq-1974"
+        ],
+        "flow": "faq",
+        "topic": "Sobreajuste"
+      },
+      {
+        "kind": "quick_tutorial",
+        "title": "Cómo funciona el Dropout",
+        "body": "El dropout ayuda a que tu red no dependa de neuronas específicas, mejorando su capacidad de generalización. 1. Durante el entrenamiento, desactiva aleatoriamente una fracción de neuronas. 2. Esto obliga a la red a aprender representaciones robustas. 3. En inferencia, todas las neuronas se activan. Ejemplo: model.add(Dropout(0.5)).",
+        "status": "draft",
+        "evidence_ids": [
+          "faq-2893"
+        ],
+        "flow": "faq",
+        "topic": "Dropout"
+      },
+      {
+        "kind": "weekly_tip",
+        "title": "Tip: Dropout para generalizar",
+        "body": "El dropout es tu mejor aliado contra el sobreajuste: al desactivar neuronas aleatoriamente durante el entrenamiento, obligas a tu red a aprender características más robustas y menos dependientes de ruido en los datos.",
+        "status": "draft",
+        "evidence_ids": [
+          "faq-2893"
+        ],
+        "flow": "faq",
+        "topic": "Dropout"
+      },
+      {
+        "kind": "doc_topic",
+        "title": "Entendiendo el Dropout",
+        "body": "Motivada por dudas sobre cómo el dropout combate el sobreajuste. Secciones: 1. Definición de sobreajuste. 2. Mecánica del Dropout: desactivación aleatoria. 3. Impacto en la generalización. 4. Cuándo aplicar dropout en la arquitectura. Respaldo oficial: faq-2893 y faq-1168.",
+        "status": "draft",
+        "evidence_ids": [
+          "faq-2893",
+          "faq-1168"
+        ],
+        "flow": "faq",
+        "topic": "Dropout"
+      }
+    ],
+    "human_review": {
+      "required": true,
+      "status": "pending"
+    },
+    "storage": {
+      "provider": "local",
+      "status": "stored",
+      "location": "salidas/paquetes/c6551cec-b117-4fc2-98ae-d7d1dc100362.json"
+    },
+    "evidence": [
+      {
+        "record_id": "faq-538",
+        "snippet": "Pregunta: How does regularization prevent overfitting in neural networks?\nRespuesta: Regularization techniques such as L1 and L2 regularization add penalty terms to the neural network's loss function, which discourages overly complex weight configurations and helps prevent overfitting.",
+        "source": "faq:machine-learning-business-professionals",
+        "score": 24.5214
+      },
+      {
+        "record_id": "faq-1974",
+        "snippet": "Pregunta: What is the difference between L1 and L2 regularization?\nRespuesta: L1 regularization (Lasso) adds a penalty term proportional to the absolute value of the weights, encouraging sparsity and feature selection, while L2 regularization (Ridge) adds a penalty term proportional to the square of the weights, encouraging smaller weights and reducing overfitting.",
+        "source": "faq:deep-neural-network",
+        "score": 19.5808
+      },
+      {
+        "record_id": "faq-2893",
+        "snippet": "Pregunta: What is dropout regularization in neural networks?\nRespuesta: Dropout regularization is a technique used to prevent overfitting in neural networks by randomly deactivating (setting to zero) a fraction of neurons in each training iteration, forcing the network to learn more robust and generalizable representations.",
+        "source": "faq:python-for-applied-data-science-ai",
+        "score": 10.282
+      },
+      {
+        "record_id": "faq-1168",
+        "snippet": "Pregunta: What is overfitting in machine learning?\nRespuesta: Overfitting occurs when a model learns the details and noise in the training data to the extent that it negatively impacts its performance on unseen data.",
+        "source": "faq:python-machine-learning",
+        "score": 5.2413
+      }
+    ],
+    "interaction_analysis": [
+      {
+        "id": "interaction-1",
+        "author": "Estudiante_A",
+        "channel": "#dudas-machine-learning",
+        "text": "¿Cómo evito el sobreajuste en mi red neuronal? En entrenamiento me da 99% y en validación 70%. Escríbanme a [EMAIL] si tienen ejemplos.",
+        "sentiment": "neutral",
+        "category": "duda",
+        "relevance": 0.9,
+        "needs_support": true,
+        "topic": "Sobreajuste"
+      },
+      {
+        "id": "interaction-2",
+        "author": "Estudiante_B",
+        "channel": "#dudas-machine-learning",
+        "text": "Alguien me explica para qué sirve el dropout? Leí que ayuda con el overfitting pero no entiendo cómo.",
+        "sentiment": "neutral",
+        "category": "duda",
+        "relevance": 0.8,
+        "needs_support": true,
+        "topic": "Dropout"
+      },
+      {
+        "id": "interaction-3",
+        "author": "Estudiante_C",
+        "channel": "#general",
+        "text": "Mi modelo memoriza los datos de entrenamiento, ¿la regularización L1 o L2 me ayudaría con el sobreajuste?",
+        "sentiment": "neutral",
+        "category": "duda",
+        "relevance": 0.85,
+        "needs_support": true,
+        "topic": "Sobreajuste"
+      }
+    ],
+    "highlights": [
+      "interaction-1",
+      "interaction-3",
+      "interaction-2"
+    ],
+    "members_needing_support": [
+      {
+        "id": "interaction-1",
+        "author": "Estudiante_A",
+        "channel": "#dudas-machine-learning",
+        "category": "duda"
+      },
+      {
+        "id": "interaction-2",
+        "author": "Estudiante_B",
+        "channel": "#dudas-machine-learning",
+        "category": "duda"
+      },
+      {
+        "id": "interaction-3",
+        "author": "Estudiante_C",
+        "channel": "#general",
+        "category": "duda"
+      }
+    ],
+    "discarded": [],
+    "faq_topics": [
+      {
+        "topic": "Sobreajuste",
+        "questions": 2,
+        "interaction_ids": [
+          "interaction-1",
+          "interaction-3"
+        ],
+        "evidence_ids": [
+          "faq-538",
+          "faq-1974"
+        ],
+        "has_official_faq": true
+      },
+      {
+        "topic": "Dropout",
+        "questions": 1,
+        "interaction_ids": [
+          "interaction-2"
+        ],
+        "evidence_ids": [
+          "faq-2893",
+          "faq-1168"
+        ],
+        "has_official_faq": true
+      }
+    ],
+    "warnings": [],
+    "formato_briefing": {
+      "status": "exito",
+      "resumen_comunidad": {
+        "total_interacciones_procesadas": 3,
+        "sentimiento_predominante": "Neutral",
+        "temas_principales": [
+          "Sobreajuste",
+          "Regularización",
+          "Dropout"
+        ]
+      },
+      "activos_distribucion_generados": {
+        "destaque_newsletter_semanal": {
+          "seccion": "Tip de la Semana",
+          "titular": "Tip: Regularización L1 vs L2",
+          "resumen": "Si tu red neuronal memoriza demasiado, usa L2 para reducir el tamaño de los pesos o L1 si necesitas simplificar el modelo mediante esparsidad. ¡Ambas técnicas añaden una penalización a la función de pérdida para evitar configuraciones complejas!"
+        },
+        "sugerencia_contenido_faq": {
+          "tema": "Sobreajuste",
+          "origen": "Duda planteada por Estudiante_A en #dudas-machine-learning (y 1 más)",
+          "status": "respuesta_con_faq_oficial"
+        },
+        "contenido_educativo": [
+          {
+            "tema": "Sobreajuste",
+            "dudas": 2,
+            "tutorial_rapido": {
+              "titulo": "Evitando el sobreajuste con regularización",
+              "contenido": "Si tu modelo memoriza los datos de entrenamiento pero falla en validación, la regularización es clave. 1. Identifica el sobreajuste comparando métricas. 2. Aplica L1 si buscas esparsidad y selección de características. 3. Aplica L2 para penalizar pesos grandes y suavizar el modelo. Ejemplo: model.add(Dense(64, kernel_regularizer=l2(0.01)))."
+            },
+            "tip_semana": "Si tu red neuronal memoriza demasiado, usa L2 para reducir el tamaño de los pesos o L1 si necesitas simplificar el modelo mediante esparsidad. ¡Ambas técnicas añaden una penalización a la función de pérdida para evitar configuraciones complejas!",
+            "tema_documentacion": {
+              "titulo": "Guía de Regularización en Redes Neuronales",
+              "propuesta": "Motivada por 2 dudas recurrentes sobre el sobreajuste. Secciones: 1. ¿Qué es el sobreajuste? 2. Introducción a la penalización de pesos. 3. Diferencias entre L1 (Lasso) y L2 (Ridge). 4. Implementación práctica en Keras/PyTorch. Respaldo oficial: faq-538 y faq-1974."
+            },
+            "respaldo_faq_oficial": [
+              "faq-538",
+              "faq-1974"
+            ],
+            "status": "respuesta_con_faq_oficial"
+          },
+          {
+            "tema": "Dropout",
+            "dudas": 1,
+            "tutorial_rapido": {
+              "titulo": "Cómo funciona el Dropout",
+              "contenido": "El dropout ayuda a que tu red no dependa de neuronas específicas, mejorando su capacidad de generalización. 1. Durante el entrenamiento, desactiva aleatoriamente una fracción de neuronas. 2. Esto obliga a la red a aprender representaciones robustas. 3. En inferencia, todas las neuronas se activan. Ejemplo: model.add(Dropout(0.5))."
+            },
+            "tip_semana": "El dropout es tu mejor aliado contra el sobreajuste: al desactivar neuronas aleatoriamente durante el entrenamiento, obligas a tu red a aprender características más robustas y menos dependientes de ruido en los datos.",
+            "tema_documentacion": {
+              "titulo": "Entendiendo el Dropout",
+              "propuesta": "Motivada por dudas sobre cómo el dropout combate el sobreajuste. Secciones: 1. Definición de sobreajuste. 2. Mecánica del Dropout: desactivación aleatoria. 3. Impacto en la generalización. 4. Cuándo aplicar dropout en la arquitectura. Respaldo oficial: faq-2893 y faq-1168."
+            },
+            "respaldo_faq_oficial": [
+              "faq-2893",
+              "faq-1168"
+            ],
+            "status": "respuesta_con_faq_oficial"
+          }
+        ]
+      },
+      "almacenamiento_oci": {
+        "bucket": null,
+        "ruta_objeto": "salidas/paquetes/c6551cec-b117-4fc2-98ae-d7d1dc100362.json",
+        "status": "guardado_local"
+      }
+    }
+  }
+}

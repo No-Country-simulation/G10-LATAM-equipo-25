@@ -1,0 +1,218 @@
+{
+  "entrada": {
+    "community_source": "Discord_Grupo_ONE_G10",
+    "reference_period": "Semana_04",
+    "interactions": [
+      {
+        "id": null,
+        "author": "Mariana Souza",
+        "channel": "#logros-y-empleos",
+        "type": "testimonio",
+        "text": "Comunidad, quede seleccionada para el puesto de Desarrolladora Junior de IA! El proyecto del curso de LangChain y OCI que construi en mi portfolio marco toda la diferencia en la entrevista tecnica. Muy agradecida con la comunidad por todo el apoyo!"
+      },
+      {
+        "id": null,
+        "author": "Lucas Albuquerque",
+        "channel": "#dudas-langgraph",
+        "type": "pregunta_tecnica",
+        "text": "Tengo dudas sobre como estructurar los nodos condicionales en LangGraph cuando la respuesta del LLM necesita reintento. Alguien tiene un ejemplo practico de router?"
+      }
+    ]
+  },
+  "respuesta": {
+    "status": "success",
+    "request_id": "bc9d68bd-5984-40a7-b771-4dc65912424e",
+    "community_summary": {
+      "total_interactions_processed": 2,
+      "predominant_sentiment": "positive",
+      "main_topics": [
+        "Empleo y logros",
+        "IA generativa y LangGraph",
+        "Oracle Cloud (OCI)",
+        "Comunidad"
+      ]
+    },
+    "insights": [
+      "Posible historia de éxito para validar con la persona",
+      "1 duda(s) que pueden convertirse en FAQ",
+      "1 persona(s) podrían necesitar apoyo o mentoría"
+    ],
+    "routing": {
+      "selected_flow": "success_story",
+      "reason": "Señal de historia de éxito: 1 logro(s) o testimonio(s)",
+      "flows": [
+        "success_story",
+        "faq"
+      ],
+      "reasons": {
+        "success_story": "Señal de historia de éxito: 1 logro(s) o testimonio(s)",
+        "faq": "Señal de pregunta recurrente: 1 duda(s) de la comunidad en 1 tema(s)"
+      }
+    },
+    "generated_assets": [
+      {
+        "kind": "success_story",
+        "title": "Historia de éxito de la comunidad",
+        "body": "Borrador para validar con la persona antes de publicar:\n\n\"Comunidad, quede seleccionada para el puesto de Desarrolladora Junior de IA! El proyecto del curso de LangChain y OCI que construi en mi portfolio marco toda la diferencia en la entrevista tecnica. Muy agradecida con la comunidad por todo el apoyo!\"\n\nTemas: Empleo y logros, IA generativa y LangGraph, Oracle Cloud (OCI), Comunidad.",
+        "status": "draft",
+        "evidence_ids": [],
+        "flow": "success_story",
+        "topic": null
+      },
+      {
+        "kind": "linkedin_post",
+        "title": "De la comunidad al mercado",
+        "body": "¡Nada nos da más orgullo que ver a nuestra comunidad avanzar! 🚀\n\n\"Comunidad, quede seleccionada para el puesto de Desarrolladora Junior de IA! El proyecto del curso de LangChain y OCI que construi en mi portfolio marco toda la diferencia en la entrevista tecnica. Muy agradecida con la comunidad por todo el apoyo!\"\n\nHistorias como esta muestran que construir proyectos reales impulsa la carrera tech. 👏\n\n#ComunidadTech #InteligenciaArtificial #OracleCloud",
+        "status": "draft",
+        "evidence_ids": [],
+        "flow": "success_story",
+        "topic": null
+      },
+      {
+        "kind": "quick_tutorial",
+        "title": "Tutorial rápido: IA generativa y LangGraph",
+        "body": "Duda de la comunidad: «Tengo dudas sobre como estructurar los nodos condicionales en LangGraph cuando la respuesta del LLM necesita reintento. Alguien tiene un ejemplo practico de router?»\n\nTodavía no hay una FAQ oficial sobre este tema. Esqueleto para que un mentor lo complete:\n1. Explicar la idea principal en una frase.\n2. Mostrar un ejemplo mínimo.\n3. Señalar el error más común.\n4. Enlazar el material del curso.",
+        "status": "draft",
+        "evidence_ids": [],
+        "flow": "faq",
+        "topic": "IA generativa y LangGraph"
+      },
+      {
+        "kind": "weekly_tip",
+        "title": "Tip de la semana: IA generativa y LangGraph",
+        "body": "Tip de la semana · IA generativa y LangGraph: si te trabas con este tema, compártelo en el canal; 1 persona(s) preguntaron lo mismo.",
+        "status": "draft",
+        "evidence_ids": [],
+        "flow": "faq",
+        "topic": "IA generativa y LangGraph"
+      },
+      {
+        "kind": "doc_topic",
+        "title": "Tema de documentación: IA generativa y LangGraph",
+        "body": "Por qué hace falta: 1 duda(s) de la comunidad sobre «IA generativa y LangGraph».\nRespaldo: sin FAQ oficial: hay que crear contenido nuevo.\n\nSecciones propuestas:\n1. Qué es y cuándo aparece.\n2. Paso a paso con un ejemplo.\n3. Errores frecuentes.\n4. Preguntas reales de la comunidad:\n   • Tengo dudas sobre como estructurar los nodos condicionales en LangGraph cuando la respuesta del LLM necesita reintento. Alguien tiene un eje",
+        "status": "draft",
+        "evidence_ids": [],
+        "flow": "faq",
+        "topic": "IA generativa y LangGraph"
+      }
+    ],
+    "human_review": {
+      "required": true,
+      "status": "pending"
+    },
+    "storage": {
+      "provider": "local",
+      "status": "stored",
+      "location": "salidas/paquetes/bc9d68bd-5984-40a7-b771-4dc65912424e.json"
+    },
+    "evidence": [],
+    "interaction_analysis": [
+      {
+        "id": "interaction-1",
+        "author": "Mariana Souza",
+        "channel": "#logros-y-empleos",
+        "text": "Comunidad, quede seleccionada para el puesto de Desarrolladora Junior de IA! El proyecto del curso de LangChain y OCI que construi en mi portfolio marco toda la diferencia en la entrevista tecnica. Muy agradecida con la comunidad por todo el apoyo!",
+        "sentiment": "positive",
+        "category": "logro",
+        "relevance": 0.89,
+        "needs_support": false,
+        "topic": "Empleo y logros"
+      },
+      {
+        "id": "interaction-2",
+        "author": "Lucas Albuquerque",
+        "channel": "#dudas-langgraph",
+        "text": "Tengo dudas sobre como estructurar los nodos condicionales en LangGraph cuando la respuesta del LLM necesita reintento. Alguien tiene un ejemplo practico de router?",
+        "sentiment": "neutral",
+        "category": "duda",
+        "relevance": 0.71,
+        "needs_support": true,
+        "topic": "IA generativa y LangGraph"
+      }
+    ],
+    "highlights": [
+      "interaction-1",
+      "interaction-2"
+    ],
+    "members_needing_support": [
+      {
+        "id": "interaction-2",
+        "author": "Lucas Albuquerque",
+        "channel": "#dudas-langgraph",
+        "category": "duda"
+      }
+    ],
+    "discarded": [],
+    "faq_topics": [
+      {
+        "topic": "IA generativa y LangGraph",
+        "questions": 1,
+        "interaction_ids": [
+          "interaction-2"
+        ],
+        "evidence_ids": [],
+        "has_official_faq": false
+      }
+    ],
+    "warnings": [],
+    "formato_briefing": {
+      "status": "exito",
+      "resumen_comunidad": {
+        "total_interacciones_procesadas": 2,
+        "sentimiento_predominante": "Positivo",
+        "temas_principales": [
+          "Empleo y logros",
+          "IA generativa y LangGraph",
+          "Oracle Cloud (OCI)",
+          "Comunidad"
+        ]
+      },
+      "activos_distribucion_generados": {
+        "post_linkedin": {
+          "titulo": "De la comunidad al mercado",
+          "copy": "¡Nada nos da más orgullo que ver a nuestra comunidad avanzar! 🚀\n\n\"Comunidad, quede seleccionada para el puesto de Desarrolladora Junior de IA! El proyecto del curso de LangChain y OCI que construi en mi portfolio marco toda la diferencia en la entrevista tecnica. Muy agradecida con la comunidad por todo el apoyo!\"\n\nHistorias como esta muestran que construir proyectos reales impulsa la carrera tech. 👏\n\n#ComunidadTech #InteligenciaArtificial #OracleCloud",
+          "canal_recomendado": "LinkedIn Oficial",
+          "potencial_engagement": "Alto"
+        },
+        "destaque_newsletter_semanal": {
+          "seccion": "Tip de la Semana",
+          "titular": "Tip de la semana: IA generativa y LangGraph",
+          "resumen": "Tip de la semana · IA generativa y LangGraph: si te trabas con este tema, compártelo en el canal; 1 persona(s) preguntaron lo mismo."
+        },
+        "sugerencia_contenido_faq": {
+          "tema": "IA generativa y LangGraph",
+          "origen": "Duda planteada por Lucas Albuquerque en #dudas-langgraph",
+          "status": "derivado_a_mentoria"
+        },
+        "caso_exito": {
+          "titulo": "Historia de éxito de la comunidad",
+          "origen": "Logro compartido por Mariana Souza en #logros-y-empleos",
+          "borrador": "Borrador para validar con la persona antes de publicar:\n\n\"Comunidad, quede seleccionada para el puesto de Desarrolladora Junior de IA! El proyecto del curso de LangChain y OCI que construi en mi portfolio marco toda la diferencia en la entrevista tecnica. Muy agradecida con la comunidad por todo el apoyo!\"\n\nTemas: Empleo y logros, IA generativa y LangGraph, Oracle Cloud (OCI), Comunidad.",
+          "status": "validar_con_la_persona"
+        },
+        "contenido_educativo": [
+          {
+            "tema": "IA generativa y LangGraph",
+            "dudas": 1,
+            "tutorial_rapido": {
+              "titulo": "Tutorial rápido: IA generativa y LangGraph",
+              "contenido": "Duda de la comunidad: «Tengo dudas sobre como estructurar los nodos condicionales en LangGraph cuando la respuesta del LLM necesita reintento. Alguien tiene un ejemplo practico de router?»\n\nTodavía no hay una FAQ oficial sobre este tema. Esqueleto para que un mentor lo complete:\n1. Explicar la idea principal en una frase.\n2. Mostrar un ejemplo mínimo.\n3. Señalar el error más común.\n4. Enlazar el material del curso."
+            },
+            "tip_semana": "Tip de la semana · IA generativa y LangGraph: si te trabas con este tema, compártelo en el canal; 1 persona(s) preguntaron lo mismo.",
+            "tema_documentacion": {
+              "titulo": "Tema de documentación: IA generativa y LangGraph",
+              "propuesta": "Por qué hace falta: 1 duda(s) de la comunidad sobre «IA generativa y LangGraph».\nRespaldo: sin FAQ oficial: hay que crear contenido nuevo.\n\nSecciones propuestas:\n1. Qué es y cuándo aparece.\n2. Paso a paso con un ejemplo.\n3. Errores frecuentes.\n4. Preguntas reales de la comunidad:\n   • Tengo dudas sobre como estructurar los nodos condicionales en LangGraph cuando la respuesta del LLM necesita reintento. Alguien tiene un eje"
+            },
+            "respaldo_faq_oficial": [],
+            "status": "derivado_a_mentoria"
+          }
+        ]
+      },
+      "almacenamiento_oci": {
+        "bucket": null,
+        "ruta_objeto": "salidas/paquetes/bc9d68bd-5984-40a7-b771-4dc65912424e.json",
+        "status": "guardado_local"
+      }
+    }
+  }
+}

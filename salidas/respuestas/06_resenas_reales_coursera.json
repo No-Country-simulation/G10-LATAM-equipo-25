@@ -1,0 +1,451 @@
+{
+  "entrada": {
+    "community_source": "Coursera_Reseñas_Reales",
+    "reference_period": "Reseñas_2019_2020",
+    "interactions": [
+      {
+        "id": "resena-324",
+        "author": "AKPAN, G E",
+        "channel": "Reseñas Coursera · applied-data-science-capstone",
+        "type": "reseña",
+        "text": "What a wonderful way to complete the '9 courses' IBM Data Science Professional Certificate training! Applied Data Science Capstone is the best way to delve into professional experience."
+      },
+      {
+        "id": "resena-1074",
+        "author": "SHUBHAM E",
+        "channel": "Reseñas Coursera · deep-neural-network",
+        "type": "reseña",
+        "text": "Okay with week 1 and week 3 but you need to improve the motive behind presenting week 2. Also what was the purpose of batch normalization?"
+      },
+      {
+        "id": "resena-1153",
+        "author": "Fabio L d S",
+        "channel": "Reseñas Coursera · open-source-tools-for-data-science",
+        "type": "reseña",
+        "text": "Do we really need to know both Watson studio and Skills network lab?Maybe it would be best to focus on one platform and explore it more in detail"
+      },
+      {
+        "id": "resena-14",
+        "author": "Matthew E",
+        "channel": "Reseñas Coursera · data-science-methodology",
+        "type": "reseña",
+        "text": "The sites have changed so following the directions of this course were very confusing and hard to understand. The update from Data Science Experience to IBM Watson studio did not relate to the video demonstrated in this class"
+      },
+      {
+        "id": "resena-215",
+        "author": "Amiya R B",
+        "channel": "Reseñas Coursera · data-science-methodology",
+        "type": "reseña",
+        "text": "I think the trainer just read out some material prepared by him. concepts are uncleared to me. bad experience"
+      },
+      {
+        "id": "resena-11",
+        "author": "srijanapuri",
+        "channel": "Reseñas Coursera · datasciencemathskills",
+        "type": "reseña",
+        "text": "I learned many new things, ideas, knowledge,and skills from this course.I am very much thankful to both professors for teaching about all of those interesting lessons,providing many more things. now, I am able to give all of the answers frequently which I learned from this beneficial course."
+      },
+      {
+        "id": "resena-16",
+        "author": "Carlo C",
+        "channel": "Reseñas Coursera · multivariate-calculus-machine-learning",
+        "type": "reseña",
+        "text": "Well done!!! The course is interesting and well organized.Lack of Pyton knowledge from my side is sometimes critical to solve some exercises...It's my intention, as soon as I'lI have complete the three couses, to attend a Pyton course to complete my preparation."
+      },
+      {
+        "id": "resena-1796",
+        "author": "Cat-Tuong N",
+        "channel": "Reseñas Coursera · python-machine-learning",
+        "type": "reseña",
+        "text": "Challenging and fun course. The number of topics is on the high side. Maybe break this into 2 courses? The programming assignments are fun. You will need to go to discussion forum to solve often encountered problems."
+      },
+      {
+        "id": "resena-127",
+        "author": "Sebastien C",
+        "channel": "Reseñas Coursera · convolutional-neural-networks",
+        "type": "reseña",
+        "text": "Content was interestind and provided good theoretical overview. Exercices where you just have to fill in some line of codes are not usefull."
+      },
+      {
+        "id": "resena-1900",
+        "author": "Julien P",
+        "channel": "Reseñas Coursera · applied-data-science-capstone",
+        "type": "reseña",
+        "text": "Great to put into action the theoretical knowledge acquired in the previous 8 classes. What could be improved? The peer-rating system can be very slow. A common practice is to go on the forum to beg for a rating by another learner. This can be tiring."
+      }
+    ]
+  },
+  "respuesta": {
+    "status": "success",
+    "request_id": "72706150-1bd6-4c7f-a217-1ddbd51fe17b",
+    "community_summary": {
+      "total_interactions_processed": 10,
+      "predominant_sentiment": "neutral",
+      "main_topics": [
+        "Plataformas y calidad del curso"
+      ]
+    },
+    "insights": [
+      "4 duda(s) que pueden convertirse en FAQ",
+      "4 persona(s) podrían necesitar apoyo o mentoría"
+    ],
+    "routing": {
+      "selected_flow": "faq",
+      "reason": "Señal de pregunta recurrente: 4 duda(s) de la comunidad en 2 tema(s)",
+      "flows": [
+        "faq"
+      ],
+      "reasons": {
+        "faq": "Señal de pregunta recurrente: 4 duda(s) de la comunidad en 2 tema(s)"
+      }
+    },
+    "generated_assets": [
+      {
+        "kind": "quick_tutorial",
+        "title": "Tutorial rápido: Plataformas y calidad del curso",
+        "body": "Duda de la comunidad: «Great to put into action the theoretical knowledge acquired in the previous 8 classes. What could be improved? The peer-rating system can be very slow. A common practice is to go on the forum to beg for a rating by anoth»\n\nPaso a paso (según la FAQ oficial «What is the exploration-exploitation dilemma in reinforcement learning?»):\n1. The exploration-exploitation dilemma refers to the challenge faced by agents in balancing the need to explore new actions or states to discover optimal policies with the desire to exploit known actions or states for immediate rewards, to achieve long-term optimal performance.\n\nPara practicar: aplica estos pasos en tu proyecto y comparte el resultado en el canal.",
+        "status": "draft",
+        "evidence_ids": [
+          "faq-1509"
+        ],
+        "flow": "faq",
+        "topic": "Plataformas y calidad del curso"
+      },
+      {
+        "kind": "weekly_tip",
+        "title": "Tip de la semana: Plataformas y calidad del curso",
+        "body": "Tip de la semana · Plataformas y calidad del curso: The exploration-exploitation dilemma refers to the challenge faced by agents in balancing the need to explore new actions or states to discover optimal policies with the desire to exploit known actions or states for immediate re",
+        "status": "draft",
+        "evidence_ids": [
+          "faq-1509"
+        ],
+        "flow": "faq",
+        "topic": "Plataformas y calidad del curso"
+      },
+      {
+        "kind": "doc_topic",
+        "title": "Tema de documentación: Plataformas y calidad del curso",
+        "body": "Por qué hace falta: 2 duda(s) de la comunidad sobre «Plataformas y calidad del curso».\nRespaldo: FAQ oficial faq-1509 («What is the exploration-exploitation dilemma in reinforcement learning?»).\n\nSecciones propuestas:\n1. Qué es y cuándo aparece.\n2. Paso a paso con un ejemplo.\n3. Errores frecuentes.\n4. Preguntas reales de la comunidad:\n   • Great to put into action the theoretical knowledge acquired in the previous 8 classes. What could be improved? The peer-rating system can be\n   • Do we really need to know both Watson studio and Skills network lab?Maybe it would be best to focus on one platform and explore it more in d",
+        "status": "draft",
+        "evidence_ids": [
+          "faq-1509"
+        ],
+        "flow": "faq",
+        "topic": "Plataformas y calidad del curso"
+      },
+      {
+        "kind": "quick_tutorial",
+        "title": "Tutorial rápido: General",
+        "body": "Duda de la comunidad: «Challenging and fun course. The number of topics is on the high side. Maybe break this into 2 courses? The programming assignments are fun. You will need to go to discussion forum to solve often encountered problems.»\n\nPaso a paso (según la FAQ oficial «What is batch normalization in neural networks?»):\n1. Batch normalization is a technique used to normalize the activations of each layer in a neural network by adjusting and scaling them to have zero mean and unit variance, which can accelerate training and improve model performance.\n\nPara practicar: aplica estos pasos en tu proyecto y comparte el resultado en el canal.",
+        "status": "draft",
+        "evidence_ids": [
+          "faq-2067"
+        ],
+        "flow": "faq",
+        "topic": "General"
+      },
+      {
+        "kind": "weekly_tip",
+        "title": "Tip de la semana: General",
+        "body": "Tip de la semana · General: Batch normalization is a technique used to normalize the activations of each layer in a neural network by adjusting and scaling them to have zero mean and unit variance, which can accelerate training and improve model performance.",
+        "status": "draft",
+        "evidence_ids": [
+          "faq-2067"
+        ],
+        "flow": "faq",
+        "topic": "General"
+      },
+      {
+        "kind": "doc_topic",
+        "title": "Tema de documentación: General",
+        "body": "Por qué hace falta: 2 duda(s) de la comunidad sobre «General».\nRespaldo: FAQ oficial faq-2067 («What is batch normalization in neural networks?»).\n\nSecciones propuestas:\n1. Qué es y cuándo aparece.\n2. Paso a paso con un ejemplo.\n3. Errores frecuentes.\n4. Preguntas reales de la comunidad:\n   • Challenging and fun course. The number of topics is on the high side. Maybe break this into 2 courses? The programming assignments are fun. \n   • Okay with week 1 and week 3 but you need to improve the motive behind presenting week 2. Also what was the purpose of batch normalization?",
+        "status": "draft",
+        "evidence_ids": [
+          "faq-2067"
+        ],
+        "flow": "faq",
+        "topic": "General"
+      }
+    ],
+    "human_review": {
+      "required": true,
+      "status": "pending"
+    },
+    "storage": {
+      "provider": "local",
+      "status": "stored",
+      "location": "salidas/paquetes/72706150-1bd6-4c7f-a217-1ddbd51fe17b.json"
+    },
+    "evidence": [
+      {
+        "record_id": "faq-1509",
+        "snippet": "Pregunta: What is the exploration-exploitation dilemma in reinforcement learning?\nRespuesta: The exploration-exploitation dilemma refers to the challenge faced by agents in balancing the need to explore new actions or states to discover optimal policies with the desire to exploit known actions or states for immediate rewards, to achieve long-term optimal performance.",
+        "source": "faq:machine-learning-duke",
+        "score": 9.6514
+      },
+      {
+        "record_id": "faq-1503",
+        "snippet": "Pregunta: How do you handle missing data in a dataset?\nRespuesta: Missing data can be handled by techniques such as imputation, where missing values are replaced with estimated values based on the remaining data, or by removing rows or columns with missing values.",
+        "source": "faq:machine-learning-duke",
+        "score": 8.3432
+      },
+      {
+        "record_id": "faq-2067",
+        "snippet": "Pregunta: What is batch normalization in neural networks?\nRespuesta: Batch normalization is a technique used to normalize the activations of each layer in a neural network by adjusting and scaling them to have zero mean and unit variance, which can accelerate training and improve model performance.",
+        "source": "faq:neural-networks-deep-learning",
+        "score": 14.6775
+      },
+      {
+        "record_id": "faq-718",
+        "snippet": "Pregunta: What is the difference between batch normalization and layer normalization in neural networks?\nRespuesta: Batch normalization normalizes the activations of each layer across the batch dimension, while layer normalization normalizes the activations across the feature dimension, making it more suitable for recurrent neural networks and other architectures with variable-length sequences.",
+        "source": "faq:machine-learning",
+        "score": 13.2484
+      }
+    ],
+    "interaction_analysis": [
+      {
+        "id": "resena-324",
+        "author": "AKPAN, G E",
+        "channel": "Reseñas Coursera · applied-data-science-capstone",
+        "text": "What a wonderful way to complete the '9 courses' IBM Data Science Professional Certificate training! Applied Data Science Capstone is the best way to delve into professional experience.",
+        "sentiment": "neutral",
+        "category": "comentario",
+        "relevance": 0.42,
+        "needs_support": false,
+        "topic": "General"
+      },
+      {
+        "id": "resena-1074",
+        "author": "SHUBHAM E",
+        "channel": "Reseñas Coursera · deep-neural-network",
+        "text": "Okay with week 1 and week 3 but you need to improve the motive behind presenting week 2. Also what was the purpose of batch normalization?",
+        "sentiment": "neutral",
+        "category": "duda",
+        "relevance": 0.7,
+        "needs_support": true,
+        "topic": "General"
+      },
+      {
+        "id": "resena-1153",
+        "author": "Fabio L d S",
+        "channel": "Reseñas Coursera · open-source-tools-for-data-science",
+        "text": "Do we really need to know both Watson studio and Skills network lab?Maybe it would be best to focus on one platform and explore it more in detail",
+        "sentiment": "neutral",
+        "category": "duda",
+        "relevance": 0.7,
+        "needs_support": true,
+        "topic": "Plataformas y calidad del curso"
+      },
+      {
+        "id": "resena-14",
+        "author": "Matthew E",
+        "channel": "Reseñas Coursera · data-science-methodology",
+        "text": "The sites have changed so following the directions of this course were very confusing and hard to understand. The update from Data Science Experience to IBM Watson studio did not relate to the video demonstrated in this class",
+        "sentiment": "neutral",
+        "category": "comentario",
+        "relevance": 0.43,
+        "needs_support": false,
+        "topic": "Plataformas y calidad del curso"
+      },
+      {
+        "id": "resena-215",
+        "author": "Amiya R B",
+        "channel": "Reseñas Coursera · data-science-methodology",
+        "text": "I think the trainer just read out some material prepared by him. concepts are uncleared to me. bad experience",
+        "sentiment": "neutral",
+        "category": "comentario",
+        "relevance": 0.39,
+        "needs_support": false,
+        "topic": "Plataformas y calidad del curso"
+      },
+      {
+        "id": "resena-11",
+        "author": "srijanapuri",
+        "channel": "Reseñas Coursera · datasciencemathskills",
+        "text": "I learned many new things, ideas, knowledge,and skills from this course.I am very much thankful to both professors for teaching about all of those interesting lessons,providing many more things. now, I am able to give all of the answers frequently which I learned from this beneficial course.",
+        "sentiment": "neutral",
+        "category": "comentario",
+        "relevance": 0.46,
+        "needs_support": false,
+        "topic": "General"
+      },
+      {
+        "id": "resena-16",
+        "author": "Carlo C",
+        "channel": "Reseñas Coursera · multivariate-calculus-machine-learning",
+        "text": "Well done!!! The course is interesting and well organized.Lack of Pyton knowledge from my side is sometimes critical to solve some exercises...It's my intention, as soon as I'lI have complete the three couses, to attend a Pyton course to complete my preparation.",
+        "sentiment": "neutral",
+        "category": "comentario",
+        "relevance": 0.45,
+        "needs_support": false,
+        "topic": "General"
+      },
+      {
+        "id": "resena-1796",
+        "author": "Cat-Tuong N",
+        "channel": "Reseñas Coursera · python-machine-learning",
+        "text": "Challenging and fun course. The number of topics is on the high side. Maybe break this into 2 courses? The programming assignments are fun. You will need to go to discussion forum to solve often encountered problems.",
+        "sentiment": "neutral",
+        "category": "duda",
+        "relevance": 0.73,
+        "needs_support": true,
+        "topic": "General"
+      },
+      {
+        "id": "resena-127",
+        "author": "Sebastien C",
+        "channel": "Reseñas Coursera · convolutional-neural-networks",
+        "text": "Content was interestind and provided good theoretical overview. Exercices where you just have to fill in some line of codes are not usefull.",
+        "sentiment": "neutral",
+        "category": "comentario",
+        "relevance": 0.4,
+        "needs_support": false,
+        "topic": "General"
+      },
+      {
+        "id": "resena-1900",
+        "author": "Julien P",
+        "channel": "Reseñas Coursera · applied-data-science-capstone",
+        "text": "Great to put into action the theoretical knowledge acquired in the previous 8 classes. What could be improved? The peer-rating system can be very slow. A common practice is to go on the forum to beg for a rating by another learner. This can be tiring.",
+        "sentiment": "neutral",
+        "category": "duda",
+        "relevance": 0.74,
+        "needs_support": true,
+        "topic": "Plataformas y calidad del curso"
+      }
+    ],
+    "highlights": [
+      "resena-1900",
+      "resena-1796",
+      "resena-1074"
+    ],
+    "members_needing_support": [
+      {
+        "id": "resena-1074",
+        "author": "SHUBHAM E",
+        "channel": "Reseñas Coursera · deep-neural-network",
+        "category": "duda"
+      },
+      {
+        "id": "resena-1153",
+        "author": "Fabio L d S",
+        "channel": "Reseñas Coursera · open-source-tools-for-data-science",
+        "category": "duda"
+      },
+      {
+        "id": "resena-1796",
+        "author": "Cat-Tuong N",
+        "channel": "Reseñas Coursera · python-machine-learning",
+        "category": "duda"
+      },
+      {
+        "id": "resena-1900",
+        "author": "Julien P",
+        "channel": "Reseñas Coursera · applied-data-science-capstone",
+        "category": "duda"
+      }
+    ],
+    "discarded": [
+      "resena-324",
+      "resena-14",
+      "resena-215",
+      "resena-11",
+      "resena-16",
+      "resena-127"
+    ],
+    "faq_topics": [
+      {
+        "topic": "Plataformas y calidad del curso",
+        "questions": 2,
+        "interaction_ids": [
+          "resena-1900",
+          "resena-1153"
+        ],
+        "evidence_ids": [
+          "faq-1509",
+          "faq-1503"
+        ],
+        "has_official_faq": true
+      },
+      {
+        "topic": "General",
+        "questions": 2,
+        "interaction_ids": [
+          "resena-1796",
+          "resena-1074"
+        ],
+        "evidence_ids": [
+          "faq-2067",
+          "faq-718"
+        ],
+        "has_official_faq": true
+      }
+    ],
+    "warnings": [],
+    "formato_briefing": {
+      "status": "exito",
+      "resumen_comunidad": {
+        "total_interacciones_procesadas": 10,
+        "sentimiento_predominante": "Neutral",
+        "temas_principales": [
+          "Plataformas y calidad del curso"
+        ]
+      },
+      "activos_distribucion_generados": {
+        "destaque_newsletter_semanal": {
+          "seccion": "Tip de la Semana",
+          "titular": "Tip de la semana: Plataformas y calidad del curso",
+          "resumen": "Tip de la semana · Plataformas y calidad del curso: The exploration-exploitation dilemma refers to the challenge faced by agents in balancing the need to explore new actions or states to discover optimal policies with the desire to exploit known actions or states for immediate re"
+        },
+        "sugerencia_contenido_faq": {
+          "tema": "Plataformas y calidad del curso",
+          "origen": "Duda planteada por Julien P en Reseñas Coursera · applied-data-science-capstone (y 1 más)",
+          "status": "respuesta_con_faq_oficial"
+        },
+        "contenido_educativo": [
+          {
+            "tema": "Plataformas y calidad del curso",
+            "dudas": 2,
+            "tutorial_rapido": {
+              "titulo": "Tutorial rápido: Plataformas y calidad del curso",
+              "contenido": "Duda de la comunidad: «Great to put into action the theoretical knowledge acquired in the previous 8 classes. What could be improved? The peer-rating system can be very slow. A common practice is to go on the forum to beg for a rating by anoth»\n\nPaso a paso (según la FAQ oficial «What is the exploration-exploitation dilemma in reinforcement learning?»):\n1. The exploration-exploitation dilemma refers to the challenge faced by agents in balancing the need to explore new actions or states to discover optimal policies with the desire to exploit known actions or states for immediate rewards, to achieve long-term optimal performance.\n\nPara practicar: aplica estos pasos en tu proyecto y comparte el resultado en el canal."
+            },
+            "tip_semana": "Tip de la semana · Plataformas y calidad del curso: The exploration-exploitation dilemma refers to the challenge faced by agents in balancing the need to explore new actions or states to discover optimal policies with the desire to exploit known actions or states for immediate re",
+            "tema_documentacion": {
+              "titulo": "Tema de documentación: Plataformas y calidad del curso",
+              "propuesta": "Por qué hace falta: 2 duda(s) de la comunidad sobre «Plataformas y calidad del curso».\nRespaldo: FAQ oficial faq-1509 («What is the exploration-exploitation dilemma in reinforcement learning?»).\n\nSecciones propuestas:\n1. Qué es y cuándo aparece.\n2. Paso a paso con un ejemplo.\n3. Errores frecuentes.\n4. Preguntas reales de la comunidad:\n   • Great to put into action the theoretical knowledge acquired in the previous 8 classes. What could be improved? The peer-rating system can be\n   • Do we really need to know both Watson studio and Skills network lab?Maybe it would be best to focus on one platform and explore it more in d"
+            },
+            "respaldo_faq_oficial": [
+              "faq-1509",
+              "faq-1503"
+            ],
+            "status": "respuesta_con_faq_oficial"
+          },
+          {
+            "tema": "General",
+            "dudas": 2,
+            "tutorial_rapido": {
+              "titulo": "Tutorial rápido: General",
+              "contenido": "Duda de la comunidad: «Challenging and fun course. The number of topics is on the high side. Maybe break this into 2 courses? The programming assignments are fun. You will need to go to discussion forum to solve often encountered problems.»\n\nPaso a paso (según la FAQ oficial «What is batch normalization in neural networks?»):\n1. Batch normalization is a technique used to normalize the activations of each layer in a neural network by adjusting and scaling them to have zero mean and unit variance, which can accelerate training and improve model performance.\n\nPara practicar: aplica estos pasos en tu proyecto y comparte el resultado en el canal."
+            },
+            "tip_semana": "Tip de la semana · General: Batch normalization is a technique used to normalize the activations of each layer in a neural network by adjusting and scaling them to have zero mean and unit variance, which can accelerate training and improve model performance.",
+            "tema_documentacion": {
+              "titulo": "Tema de documentación: General",
+              "propuesta": "Por qué hace falta: 2 duda(s) de la comunidad sobre «General».\nRespaldo: FAQ oficial faq-2067 («What is batch normalization in neural networks?»).\n\nSecciones propuestas:\n1. Qué es y cuándo aparece.\n2. Paso a paso con un ejemplo.\n3. Errores frecuentes.\n4. Preguntas reales de la comunidad:\n   • Challenging and fun course. The number of topics is on the high side. Maybe break this into 2 courses? The programming assignments are fun. \n   • Okay with week 1 and week 3 but you need to improve the motive behind presenting week 2. Also what was the purpose of batch normalization?"
+            },
+            "respaldo_faq_oficial": [
+              "faq-2067",
+              "faq-718"
+            ],
+            "status": "respuesta_con_faq_oficial"
+          }
+        ]
+      },
+      "almacenamiento_oci": {
+        "bucket": null,
+        "ruta_objeto": "salidas/paquetes/72706150-1bd6-4c7f-a217-1ddbd51fe17b.json",
+        "status": "guardado_local"
+      }
+    }
+  }
+}

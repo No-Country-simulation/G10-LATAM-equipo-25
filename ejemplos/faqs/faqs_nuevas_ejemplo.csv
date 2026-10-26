@@ -1,0 +1,4 @@
+pregunta,respuesta,curso
+"¿Cómo estructuro los nodos condicionales (router) en LangGraph para reintentar cuando falla el LLM?","Usa add_conditional_edges desde el nodo que llama al LLM hacia una función router. El router revisa la respuesta: si es válida, devuelve el nombre del siguiente nodo; si no, devuelve el mismo nodo para reintentar. Guarda un contador de intentos en el estado para cortar después de 2 o 3 reintentos y evitar bucles infinitos.",langgraph
+"¿Qué es OCI Object Storage y para qué lo usamos en el proyecto?","Es el almacenamiento de archivos en la nube de Oracle. En CommunityLab guarda cada paquete de borradores y cada curaduría como un archivo JSON dentro de un bucket, para tener respaldo y trazabilidad de lo que se aprobó.",oracle-cloud
+"What is outlier detection?","Ejemplo de pregunta repetida: ya existe en la base, así que no se agrega de nuevo.",applied-data-science-capstone
