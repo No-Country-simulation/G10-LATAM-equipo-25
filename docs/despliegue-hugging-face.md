@@ -26,7 +26,7 @@ Equipo y jueces ──HTTPS──▶ Hugging Face Space (Docker, gratis)
 - Una cuenta de [Hugging Face](https://huggingface.co/join) (gratis).
 - Acceso a la consola de OCI de la cuenta del equipo, para crear el bucket, la llave de API y el Vault.
 - Una clave de Gemini (y, si se usa la búsqueda inteligente, una de Cohere).
-- Las ramas `feature/backend-ia-orchestration` y `feature/ui-curaduria` subidas a GitHub. El Space descarga el código de ahí.
+- El repositorio en GitHub con todo en `main` (motor y panel). El Space descarga el código de ahí.
 
 ---
 
@@ -187,7 +187,7 @@ Después:
 ## 7. Actualizar el Space
 
 - **Cuando haya commits nuevos en GitHub:** *Settings → Factory rebuild*. El `Dockerfile` detecta los commits nuevos y descarga el código otra vez.
-- **Cuando el equipo apruebe y una todo en `main`:** en el `Dockerfile` del Space cambia `RAMA_MOTOR` y `RAMA_PANEL` a `main`.
+- **Para probar una rama antes de unirla a `main`:** en el `Dockerfile` del Space cambia `RAMA_MOTOR` o `RAMA_PANEL` por el nombre de esa rama.
 - **Para cambiar una clave:** crea una versión nueva del secreto en OCI Vault y reinicia el Space. No hace falta tocar nada más.
 
 ---

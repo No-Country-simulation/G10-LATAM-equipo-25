@@ -20,11 +20,11 @@ ENV HOME=/home/user \
     PYTHONUNBUFFERED=1
 WORKDIR /home/user/app
 
-# Ramas de GitHub que se despliegan. Cuando el equipo apruebe y una todo
-# en main, cambiar las dos a "main".
+# Rama de GitHub que se despliega: main tiene el motor y el panel juntos.
+# Para probar otra rama antes de unirla, cambiar RAMA_MOTOR o RAMA_PANEL.
 ARG REPO=No-Country-simulation/G10-LATAM-equipo-25
-ARG RAMA_MOTOR=feature/backend-ia-orchestration
-ARG RAMA_PANEL=feature/ui-curaduria
+ARG RAMA_MOTOR=main
+ARG RAMA_PANEL=main
 
 # Si hay commits nuevos en GitHub, estas dos lineas obligan a descargar de nuevo
 ADD https://api.github.com/repos/${REPO}/git/refs/heads/${RAMA_MOTOR} /tmp/version-motor.json
